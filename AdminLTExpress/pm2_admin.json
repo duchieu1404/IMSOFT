@@ -1,0 +1,12 @@
+{
+  "apps" : [{
+    "name"        : "FishClub_Admin_3003",
+    "script"      : "bin/www",
+    "args"        : [],
+    "node_args"   : "--harmony --nouse-idle-notification --expose-gc",
+    "merge_logs"  : true,
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }]
+}

@@ -1,0 +1,115 @@
+var BCConstant = {};
+BCConstant.ROOM = {};
+BCConstant.ROOM.ROOM_TYPE = {
+    SINGLE:0,
+    MULTIPLAY:1
+}
+BCConstant.SCREEN = {};
+
+BCConstant.SCREEN.SCREEN_TYPE = {
+    HOME:"HOME",
+    MULTI_PLAY:"MULTI_PLAY",
+    ROOM_LIST:"ROOM_LIST",
+    SINGLE_PLAY:"SINGLE_PLAY"
+}
+
+BCConstant.ACTION = {
+    LOGIN:0,
+    LOGOUT:1,
+    REQUEST_SHOOT:2,  // Bắn đạn
+    ADD_FISH: 3,  // Thêm cá
+    REMOVE_FISH:4, //  Cá chết ( đã bỏ)
+    BOOM_BULLET:5, // Đạn sát thương cá
+    KILLED_FISH:6, // Cá chết
+    ClEAN_FISH:7,  // Xoá cá ( cá không chết )
+
+    REGISTER:8,
+    LOGIN_DEVICE:9,
+    LOGIN_FACEBOOK:10,
+    DISCONNECT:11,
+
+}
+
+BCConstant.MONEY_TYPE = {
+    GOLD:0,
+    DIAMOND:1
+}
+
+BCConstant.MONEY_CHANGE_TYPE = {
+    SHOOT_BULLET:0,
+    CHARGE_CARD:1,
+    CASH_OUT_CARD:2,
+    USE_GIFTCODE :3,
+    EAT_FISH:4,
+    ADMIN_CHANGE:5,
+    DAILY_SHARE:6,
+    DAILY_INVITE:7,
+    CHARGE_SMS:8,
+    CHARGE_IAP:9,
+    DAILY_BONUS:10,
+    INCREASE_BY_OTHER:11,
+    DECREASE_BY_OTHER:12
+}
+
+BCConstant.BROADCAST_TYPE = {
+    REAL:0,
+    FAKE:1
+}
+
+BCConstant.OS_TYPE = {
+    IOS:"IOS",
+    ANDROID:"ANDROID",
+    WEB:"WEB",
+    UNKNOWN:"UNKNOWN"
+}
+
+BCConstant.OS_TYPE_ROOM_NAME = {
+    IOS:"SYS_ROOM_DEVICE_IOS",
+    ANDROID:"SYS_ROOM_DEVICE_ANDROID",
+    WEB:"SYS_ROOM_DEVICE_WEB",
+    UNKNOWN:"SYS_ROOM_DEVICE_UNKOWN"
+}
+
+BCConstant.TELCO_TYPE = {
+    VTT:"VTT",
+    VMS:"VMS",
+    VNP:"VNP",
+    UNKNOWN:"UNKNOWN"
+}
+
+BCConstant.TELCO_TYPE_ROOM_NAME = {
+    VTT:"SYS_ROOM_TELCO_VTT",
+    VMS:"SYS_ROOM_TELCO_VMS",
+    VNP:"SYS_ROOM_TELCO_VNP",
+    UNKNOWN:"SYS_ROOM_TELCO_UNKNOWN"
+}
+
+BCConstant.CHAT_ROOM_NAME = {
+    CHAT_WORLD:"chat_world",
+    XOC_DIA:"chat_xoc_dia"
+};
+
+BCConstant.MINI_GAME_ROOM = {
+     XOC_DIA:"XOC_DIA_ALL"
+    ,XOCDIA_ROOM_GOLD_CANKEO:"XOCDIA_ROOM_GOLD_CANKEO"
+    ,XOCDIA_ROOM_RUBY_CANKEO:"XOCDIA_ROOM_RUBY_CANKEO"
+    ,XOCDIA_ROOM_GOLD:"XOCDIA_ROOM_GOLD"
+    ,XOCDIA_ROOM_RUBY:"XOCDIA_ROOM_RUBY"
+}
+
+BCConstant.XOC_DIA_GAME_MODE = {
+     TABLE_USER : 0
+    ,TABLE_CANKEO : 1
+}
+
+BCConstant.TOP_PRO_RANK_TYPE = {
+    NGAY:0,
+    TUAN:1,
+    THANG:2
+}
+BCConstant.TOP_PRO_TIME_TYPE = {
+    HOM_QUA:1,
+    HOM_NAY:0
+}
+
+module.exports = BCConstant;

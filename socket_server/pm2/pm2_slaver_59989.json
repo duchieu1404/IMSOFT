@@ -1,0 +1,12 @@
+{
+  "apps" : [{
+    "name"        : "Food_Voyage_Server_Master_59989",
+    "script"      : "./../src/index.js",
+    "args"        : [0,59989,0,2],
+    "node_args"   : "--max-old-space-size=8192 --max_old_space_size=8192 --harmony --nouse-idle-notification --expose-gc",
+    "merge_logs"  : true,
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }]
+}

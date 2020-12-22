@@ -1,0 +1,137 @@
+<% include ../partial/admin_header.ejs %>
+<!-- Content Header (Page header)-->
+<section class="content-header">
+  <h1>List Fish Bullet<small>Log</small></h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i>Log</a></li>
+  </ol>
+</section>
+<!-- Main content-->
+<section class="content">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h3>FISH BULLET <small> - LOGS</small></h3>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="x_content">
+        <br />
+        <form id="demo-form2"
+              action="/log/fish_bullet" method="post"
+              data-parsley-validate class="form-horizontal form-label-left">
+
+          <!-- === -->
+
+          <div class="form-group">
+            <label class="control-label col-md-2 col-sm-3 col-xs-4">User ID</label>
+
+            <div class="col-md-3 col-sm-9 col-xs-12">
+              <input id="searchUserId" name="searchUserId"  class="form-control col-md-5 col-xs-10" type="text" value="<%=search_form.user_id%>">
+            </div>
+
+            <label class="control-label col-md-2 col-sm-3 col-xs-4">Full name</label>
+
+            <div class="col-md-4 col-sm-9 col-xs-12">
+              <input id="searchFullName"  name="searchFullName"  type="text" class="form-control  col-md-5 col-xs-10" placeholder=""  value="<%=search_form.fullname%>">
+            </div>
+          </div>
+
+          <!-- === -->
+
+          <div class="form-group">
+            <label class="control-label col-md-2 col-sm-3 col-xs-4">Ngày log <span class="required">*</span></label>
+
+            <div class="col-md-3 col-sm-9 col-xs-12">
+              <input id="searchStartTime" name="searchStartTime" class="date-picker form-control col-md-5 col-xs-10" required="required" type="text">
+            </div>
+
+            <label class="control-label col-md-2 col-sm-3 col-xs-4">Loại tiền</label>
+
+            <div class="col-md-4 col-sm-9 col-xs-12">
+              <select class="form-control" id="searchMoneyType" name="searchMoneyType">
+                <option value="-1" <%=search_form.money_type =="-1"?"selected":""%>>Tất cả</option>
+                <option value="0" <%=search_form.money_type =="0"?"selected":""%>>Gold</option>
+                <option value="1" <%=search_form.money_type =="1"?"selected":""%>>Ruby</option>
+
+              </select>
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <div class="col-md-6 col-sm-9 col-xs-12">
+              <input type="submit" class="btn btn-success" value="Search"/>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="outputPivotTable" style="margin: 30px;"></div>
+
+</section>
+<script type="text/javascript" charset="utf-8">
+  // This example is the most basic usage of pivotUI()
+  var myVar = <%- JSON.stringify(dataCards) %>;
+
+  $(function(){
+    var derivers = $.pivotUtilities.derivers;
+
+    var renderers = $.extend(
+            $.pivotUtilities.renderers,
+            $.pivotUtilities.c3_renderers,
+            $.pivotUtilities.d3_renderers,
+            $.pivotUtilities.export_renderers
+    );
+
+    var sortAs =           $.pivotUtilities.sortAs;
+    var tpl =              $.pivotUtilities.aggregatorTemplates;
+
+
+    $("#outputPivotTable").pivotUI(
+            myVar
+            ,
+            {
+              renderers: renderers,
+              rows: ["change_type","fish_type"],
+              cols: ["bullet_type"],
+              derivedAttributes: {
+//                "Card code": function(mp) {
+//                  return mp["cardCode"] == "VTT" ? "VIETEL" : mp["cardCode"];
+//                }
+              },
+//              aggregators: {
+//                "Tổng rút":
+//                        function() { return tpl.sum()(["cardPrice"])}
+//
+//              },
+              aggregatorName:"Integer Sum",
+              vals:["soluong"]
+
+//              filter:function(obj){return obj.status = 3;}
+            }
+    );
+  });
+</script>
+
+<!-- bootstrap-daterangepicker -->
+<script>
+  $(document).ready(function() {
+    $('#searchStartTime').daterangepicker({
+      singleDatePicker: true,
+      calender_style: "picker_4",
+      startDate: '<%-search_form.date_log %>',
+      locale: {
+        format: 'YYYY-MM-DD 23:59:00'
+      }
+    }, function(start, end, label) {
+      console.log(start.toISOString(), end.toISOString(), label);
+    });
+  });
+</script>
+
+<% include ../partial/admin_footer.ejs %>

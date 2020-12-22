@@ -1,0 +1,181 @@
+<% include ../partial/admin_header.ejs %>
+<!-- Content Header (Page header)-->
+<section class="content-header">
+  <h1>Report<small>Log</small></h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i>Log</a></li>
+  </ol>
+</section>
+<!-- Main content-->
+<section class="content">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_content">
+        <form id="demo-form2"
+              action="/log/report" method="post"
+              data-parsley-validate class="form-horizontal form-label-left">
+
+           <div class="form-group">
+            <label class="control-label col-md-2 col-sm-3 col-xs-4">From <span class="required">*</span></label>
+
+            <div class="col-md-3 col-sm-9 col-xs-12">
+              <input id="searchStartTime" name="searchStartTime" class="date-picker form-control col-md-5 col-xs-10" required="required" type="text">
+            </div>
+
+            <label class="control-label col-md-2 col-sm-3 col-xs-4">To <span class="required">*</span></label>
+
+            <div class="col-md-4 col-sm-9 col-xs-12">
+              <input id="searchEndTime" name="searchEndTime" class="date-picker form-control col-md-5 col-xs-10" required="required" type="text">
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <div class="col-md-6 col-sm-9 col-xs-12">
+              <input type="submit" class="btn btn-success" value="SEARCH"/>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_content">
+        <p class="text-muted font-13 m-b-30">
+        </p>
+        <table id="datatable" class="table table-striped table-bordered">
+          <thead>
+          <tr>
+            <th>Ngày</th>
+            <th>NIU</th>
+            <th>User SMS</th>
+            <th>Số tin SMS</th>
+            <th>Tổng tiền SMS</th>
+            <th>User card</th>
+            <th>Số card</th>
+            <th>Tổng nạp</th>
+            <th>User Cashout</th>
+            <th>Số thẻ Cashout</th>
+            <th>Tổng tiền cardout</th>
+            <th>Tổng phí telco</th>
+            <th>Doanh thu đối tác</th>
+
+          </tr>
+          </thead>
+
+          <tbody>
+          <% dataCards.forEach(function(reportDay) { %>
+          <tr id = "dataServerConfig_<%= reportDay.id %>">
+            <th id = "ds_<%= reportDay.id %>_dts_id"><%= reportDay.id %></th>
+            <th id = "ds_<%= reportDay.niu %>_dts_username"><%= reportDay.niu %></th>
+
+            <th id = "ds_<%= reportDay.id %>sms_count_user"><%= reportDay.sms_count_user %></th>
+            <th id = "ds_<%= reportDay.id %>sms_count"><%= reportDay.sms_count %></th>
+            <th id = "ds_<%= reportDay.id %>sms"><%= reportDay.sms %></th>
+
+            <th id = "ds_<%= reportDay.id %>card_count_user"><%= reportDay.card_count_user %></th>
+            <th id = "ds_<%= reportDay.id %>card_count"><%= reportDay.card_count %></th>
+            <th id = "ds_<%= reportDay.id %>card"><%= reportDay.card %></th>
+
+            <th id = "ds_<%= reportDay.id %>cashout_count_user"><%= reportDay.cashout_count_user %></th>
+            <th id = "ds_<%= reportDay.id %>cashout_count"><%= reportDay.cashout_count %></th>
+            <th id = "ds_<%= reportDay.id %>cashout"><%= reportDay.cashout %></th>
+
+            <th id = "ds_<%= reportDay.id %>telco"><%= reportDay.telco %></th>
+            <th id = "ds_<%= reportDay.id %>revalue"><%= reportDay.revalue %></th>
+          </tr>
+          <% }); %>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!--<div id="outputPivotTable" style="margin: 30px;"></div>-->
+
+</section>
+<script type="text/javascript" charset="utf-8">
+  // This example is the most basic usage of pivotUI()
+  <!--var myVar = <%- JSON.stringify(dataCards) %>;-->
+//
+//  $(function(){
+//    var derivers = $.pivotUtilities.derivers;
+//
+//    var renderers = $.extend(
+//            $.pivotUtilities.renderers,
+//            $.pivotUtilities.c3_renderers,
+//            $.pivotUtilities.d3_renderers,
+//            $.pivotUtilities.export_renderers
+//    );
+//
+//    var sortAs =           $.pivotUtilities.sortAs;
+//    var tpl =              $.pivotUtilities.aggregatorTemplates;
+
+//
+//    $("#outputPivotTable").pivotUI(
+//            myVar
+//            ,
+//            {
+//              renderers: renderers,
+//              rows: ["id","niu","card_count","card_count_user","card","sms_count","sms_count_user","sms","cashout_count","cashout_count_user","cashout"],
+//              cols: [],
+//              derivedAttributes: {
+////                "Card code": function(mp) {
+////                  return mp["cardCode"] == "VTT" ? "VIETEL" : mp["cardCode"];
+////                }
+//              },
+////              aggregators: {
+////                "Tổng rút":
+////                        function() { return tpl.sum()(["cardPrice"])}
+////
+////              },
+//              aggregatorName:"Integer Sum",
+//              vals:["cardPrice"]
+//
+////              filter:function(obj){return obj.status = 3;}
+//            }
+//    );
+//  });
+</script>
+
+<!-- bootstrap-daterangepicker -->
+<script>
+  $(document).ready(function() {
+    $('#searchStartTime').daterangepicker({
+      singleDatePicker: true,
+      calender_style: "picker_4",
+      startDate: '<%-search_form.date_from %>',
+      locale: {
+        format: 'YYYY-MM-DD 00:00:00'
+      }
+    }, function(start, end, label) {
+      console.log(start.toISOString(), end.toISOString(), label);
+    });
+  });
+</script>
+<!-- /bootstrap-daterangepicker -->
+
+<!-- bootstrap-daterangepicker -->
+<script>
+  $(document).ready(function() {
+    $('#searchEndTime').daterangepicker({
+      singleDatePicker: true,
+      calender_style: "picker_4",
+      startDate: '<%-search_form.date_to %>',
+      locale: {
+        format: 'YYYY-MM-DD 23:59:59'
+      }
+    }, function(start, end, label) {
+      console.log(start.toISOString(), end.toISOString(), label);
+    });
+  });
+</script>
+<!-- /bootstrap-daterangepicker -->
+
+
+<% include ../partial/admin_footer.ejs %>

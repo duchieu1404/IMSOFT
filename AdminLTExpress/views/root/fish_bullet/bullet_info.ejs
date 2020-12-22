@@ -1,0 +1,201 @@
+<% include ../../partial/admin_header.ejs %>
+<!-- Content Header (Page header)-->
+<section class="content-header">
+  <h1>Server Config<small>Configuration</small></h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i>Configuration</a></li>
+    <li class="active">Server Config</li>
+  </ol>
+</section>
+<!-- Main content-->
+<section class="content">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_content">
+        <p class="text-muted font-13 m-b-30">
+        </p>
+        <table id="datatable" class="table table-striped table-bordered hover">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>TB_ID</th>
+            <th>Ảnh</th>
+            <th>Tên súng</th>
+            <th>Loại đạn</th>
+            <th>Sát thương</th>
+            <th>Tốc độ bắn</th>
+            <th>Tốc độ đạn</th>
+            <th>Độ xuyên</th>
+            <th>Tầm sát thương</th>
+            <th>Nảy tường</th>
+            <th>Giá</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% dataBullets.forEach(function(dataBullet) { %>
+            <tr id = "dataBullet_<%=dataBullet.id %>"
+                data-toggle="modal"
+                data-target=".bullet_info-modal-lg"
+                onclick="btnEditBulletInfoClicked(<%=dataBullet.id %>, <%=version_id %>, <%= money_type %>)">
+            <input type="hidden" id = "dataBullet_<%=dataBullet.id %>_type" value="<%=dataBullet.type %>">
+              <th id="dataBullet_<%=dataBullet.id %>_id"><%=dataBullet.id %></th>
+              <th id="dataBullet_<%=dataBullet.id %>_tb_id"><%=dataBullet.tb_id %></th>
+              <th id="dataBullet_<%=dataBullet.id %>_img"><img src="/images/bullets/sung<%=dataBullet.id%>.png" alt="BulletImg"/><img src="/images/bullets/bullet_<%=dataBullet.id %>.png" alt="BulletImg"/></th>
+              <th id="dataBullet_<%=dataBullet.id %>_name"><%=dataBullet.name %></th>
+              <th id="dataBullet_<%=dataBullet.id %>_type_name"><%=dataBullet.type_name %></th>
+              <th id="dataBullet_<%=dataBullet.id %>_damm"><%=dataBullet.damm %></th>
+              <th id="dataBullet_<%=dataBullet.id %>_speed_shot"><%=dataBullet.speed_shoot %></th>
+              <th id="dataBullet_<%=dataBullet.id %>_speed_bullet"><%=dataBullet.speed_bullet %></th>
+              <th id="dataBullet_<%=dataBullet.id %>_pierce"><%=dataBullet.pierce %></th>
+              <th id="dataBullet_<%=dataBullet.id %>_damm_range"><%=dataBullet.damm_range %></th>
+              <th id="dataBullet_<%=dataBullet.id %>_reflex_count"><%=dataBullet.reflex_count %></th>
+              <th id="dataBullet_<%=dataBullet.id %>_price"><%=dataBullet.price %></th>
+
+            </tr>
+          <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade bullet_info-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Edit Fish Info</h4>
+        </div>
+        <div class="modal-body">
+
+          <form action="/root/config/fish_bullet/fish_info/save_bullet_info" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+
+            <!-- === -->
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Version Id </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Version Id" id = "edt_Version_Id" name="edt_Version_Id" value="" readonly="readonly">
+              </div>
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Money Type</label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Money Type" id = "edt_Money_Type" name="edt_Money_Type" value = "0" readonly="readonly">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Bullet Id </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Bullet Id" id = "edt_Bullet_Id" name="edt_Bullet_Id" value="" readonly="readonly">
+              </div>
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">TB_ID</label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="TB_ID" id = "edt_Tb_Id" name="edt_Tb_Id" value = "" readonly="readonly">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Tên súng </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Tên súng" id = "edt_TenSung" name="edt_TenSung" value="" >
+              </div>
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Loại đạn</label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Loại đạn Id" id = "edt_LoaiDanId" name="edt_LoaiDanId" value = "" >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Sát thương </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Sát thương" id = "edt_SatThuong" name="edt_SatThuong" value="" >
+              </div>
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Tốc độ bắn</label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Tốc độ bắn" id = "edt_TocDoBan" name="edt_TocDoBan" value = "" >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Tốc độ đạn </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Tốc độ đạn" id = "edt_TocDoDan" name="edt_TocDoDan" value="" >
+              </div>
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Độ xuyên</label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Độ xuyên" id = "edt_DoXuyen" name="edt_DoXuyen" value = "" >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Tầm sát thương </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Tầm sát thương" id = "edt_TamSatThuong" name="edt_TamSatThuong" value="" >
+              </div>
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Nảy tường</label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Nảy tường" id = "edt_NayTuong" name="edt_NayTuong" value = "" >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Giá </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Giá" id = "edt_Gia" name="edt_Gia" value="" >
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <input type="submit" class="btn btn-default" data-dismiss="modal" value="Close">
+              <input type="submit" class="btn btn-primary" value="Save changes">
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</section>
+
+<script type="text/javascript">
+  var btnEditBulletInfoClicked = function(bulletId, versionId, moneyType) {
+    $('#edt_Version_Id').val(versionId);
+    $('#edt_Money_Type').val(moneyType);
+    $('#edt_Bullet_Id').val(bulletId);
+    $('#edt_Tb_Id').val($('#dataBullet_'+bulletId+'_tb_id').html());
+    $('#edt_TenSung').val($('#dataBullet_'+bulletId+'_name').html());
+    $('#edt_LoaiDanId').val($('#dataBullet_'+bulletId+'_type').val());
+    $('#edt_SatThuong').val($('#dataBullet_'+bulletId+'_damm').html());
+    $('#edt_TocDoBan').val($('#dataBullet_'+bulletId+'_speed_shot').html());
+    $('#edt_TocDoDan').val($('#dataBullet_'+bulletId+'_speed_bullet').html());
+    $('#edt_DoXuyen').val($('#dataBullet_'+bulletId+'_pierce').html());
+    $('#edt_TamSatThuong').val($('#dataBullet_'+bulletId+'_damm_range').html());
+    $('#edt_NayTuong').val($('#dataBullet_'+bulletId+'_reflex_count').html());
+    $('#edt_Gia').val($('#dataBullet_'+bulletId+'_price').html());
+  }
+</script>
+
+<% include ../../partial/admin_footer.ejs %>

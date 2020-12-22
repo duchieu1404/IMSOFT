@@ -1,0 +1,202 @@
+<% include ../partial/admin_header.ejs %>
+<!-- Content Header (Page header)-->
+<section class="content-header">
+  <h1>Server Config<small>Configuration</small></h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i>Configuration</a></li>
+    <li class="active">Event popup</li>
+  </ol>
+</section>
+
+
+<!-- Main content-->
+<section class="content">
+
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Search Event Popup Form</h3>
+        </div>
+
+        <div class="box-footer">
+
+          <form role="form">
+
+            <div class="row">
+              <div class="col-sm-2">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>COIN</label>
+                  <input type="text" class="form-control" placeholder="Enter ..." id = "0" name="0" onchange="btnGenerateClicked()">
+                </div>
+              </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                <label>COIN REST_iD</label>
+                <input type="text" class="form-control" placeholder="Enter ..." id="coin_rest_id" name="coin_rest_id" onchange="btnGenerateClicked()">
+              </div>
+            </div>
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label>GEM</label>
+                  <input type="text" class="form-control" placeholder="Enter ..." id = "1" name="1" onchange="btnGenerateClicked()">
+                </div>
+              </div>
+
+              <div class="col-sm-2">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>MONEY_MAKER</label>
+                  <input type="text" class="form-control" placeholder="Enter ..." id = "2" name="2" onchange="btnGenerateClicked()">
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label>TELFON</label>
+                  <input type="text" class="form-control" placeholder="Enter ..." id = "3" name="3" onchange="btnGenerateClicked()">
+                </div>
+              </div>
+
+              <div class="col-sm-2">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>FLASH_FRY</label>
+                  <input type="text" class="form-control" placeholder="Enter ..." id = "4" name="4" onchange="btnGenerateClicked()">
+                </div>
+              </div>
+          
+            </div>
+
+
+
+            <div class="row">
+                  <div class="col-sm-2">
+                    <div class="form-group">
+                      <label>LOLLIPOP</label>
+                      <input type="text" class="form-control" placeholder="Enter ..." id="5" name="5" onchange="btnGenerateClicked()">
+                    </div>
+                  </div>
+              <div class="col-sm-2">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>HAPPY_HOUR</label>
+                  <input type="text" class="form-control" placeholder="Enter ..." id = "6" name="6" onchange="btnGenerateClicked()">
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label>GROCERIES</label>
+                  <input type="text" class="form-control" placeholder="Enter ..." id = "7" name="7" onchange="btnGenerateClicked()">
+                </div>
+              </div>
+            
+              <div class="col-sm-2">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>INFINITE HEART (SECOND)</label>
+                  <input type="text" class="form-control" placeholder="Enter ..." id = "8" name="8" onchange="btnGenerateClicked()">
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label>NMT</label>
+                  <input type="text" class="form-control" placeholder="Enter ..." id = "12" name="12" onchange="btnGenerateClicked()">
+                </div>
+              </div>
+            
+              <div class="col-sm-2">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>NMC</label>
+                  <input type="text" class="form-control" placeholder="Enter ..." id = "13" name="13" onchange="btnGenerateClicked()">
+                </div>
+              </div>
+            </div>
+
+            <div class = "row">
+
+              <div class="col-sm-2">
+                <!-- text input -->
+                <div class="form-group">
+                  <input type="button" data-toggle="modal" data-target=".edit-config-modal-lg" class="btn btn-success "
+                    value="GENERATE" onclick="btnGenerateClicked()" />
+
+                    <input type="button" data-toggle="modal" data-target=".edit-config-modal-lg" class="btn btn-danger " value="RESET"
+                      onclick="btnResetClicked()" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6">
+                  <textarea type="text" class="form-control" rows="5" placeholder="json" id="edt_reward_json" name="edt_reward_json" value=""></textarea>
+            </div>
+            </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+
+  var btnGenerateClicked = function()
+  {
+      console.log("btnGenerateClicked");
+
+      var json = [];
+
+      for(var i = 0; i<20; i++)
+      {
+          var value =  $('#' + i).val();
+
+          value = parseInt(value);
+
+          if(value && value > 0)
+          {
+              var gameRewardItem = null;
+
+              if(i == 0)
+              {
+                var resId =  $('#coin_rest_id').val();
+                gameRewardItem =
+                {
+                  "type": i,
+                  "resId" : resId,
+                  "quantity": parseInt(value)
+                };
+              }
+              else
+              {
+                gameRewardItem =
+                {
+                  "type": i,
+                  "quantity": parseInt(value)
+                };
+              }
+            json.push(gameRewardItem);
+          }
+
+          $('#edt_reward_json').val(JSON.stringify(json));
+      }
+  }
+
+  var btnResetClicked = function()
+  {
+    console.log("btnResetClicked");
+    for(var i = 0; i< 20; i++)
+    {
+        $('#' + i).val('');
+    }
+
+    $('#edt_reward_json').val('');
+  }
+</script>
+
+<% include ../partial/admin_footer.ejs %>

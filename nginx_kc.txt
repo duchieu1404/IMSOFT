@@ -1,0 +1,86 @@
+upstream api_kc_by_foodvoyage_new {
+      server 127.0.0.1:5000;
+}
+ server {
+        listen 80;
+        server_name  apikc_new.imsoft.vn;
+        error_page 502  /errors/502.html;
+        location ~ ^/(file_configs/images/|img/|javascript/|js/|css/|stylesheets/|flash/|media/|static/|robots.txt|humans.txt|favicon.ico) {
+          root /data/CR-Server/server/public;
+          access_log off;
+          expires max;
+        }
+        location /errors {
+          internal;
+          alias /data/CR-Server/server/public/errors;
+        }
+ location / {
+          proxy_redirect off;
+          proxy_set_header   X-Real-IP            $remote_addr;
+          proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+          proxy_set_header   X-Forwarded-Proto $scheme;
+          proxy_set_header   Host                   $http_host;
+          proxy_set_header   X-NginX-Proxy    true;
+          proxy_set_header   Connection "upgrade";
+          proxy_set_header   Upgrade $http_upgrade;
+          proxy_http_version 1.1;
+          proxy_pass         http://api_kc_by_foodvoyage_new;
+        }
+}
+
+upstream cms_kc_by_foodvoyage_new {
+      server 127.0.0.1:5003;
+}
+
+server {
+listen 80;
+        server_name  cmskc_new.imsoft.vn;
+        error_page 502  /errors/502.html;
+location / {
+          proxy_redirect off;
+          proxy_set_header   X-Real-IP            $remote_addr;
+          proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+          proxy_set_header   X-Forwarded-Proto $scheme;
+          proxy_set_header   Host                   $http_host;
+          proxy_set_header   X-NginX-Proxy    true;
+          proxy_set_header   Connection "upgrade";
+          proxy_set_header   Upgrade $http_upgrade;
+          proxy_http_version 1.1;
+          proxy_pass         http://cms_kc_by_foodvoyage_new;
+        }
+}
+upstream socket_kc_by_foodvoyage {
+      server 127.0.0.1:5152;
+}
+server {
+        listen 80;
+        server_name socketkc_new.imsoft.vn;
+                keepalive_timeout 300;
+                add_header Strict-Transport-Security 'max-age=31536000; includeSubDomains';
+                add_header X-Cache $upstream_cache_status;
+        error_page 502  /errors/502.html;
+        location ~ ^/(file_configs/images/|img/|javascript/|js/|css/|stylesheets/|flash/|media/|static/|robots.txt|humans.txt|favicon.ico) {
+          root /data/CR-Server/server/public;
+          access_log off;
+          expires max;
+        }
+        location /errors {
+          internal;
+          alias /data/CR-Server/server/public/errors;
+        }
+        location / {
+          proxy_redirect off;
+          proxy_set_header   X-Real-IP            $remote_addr;
+          proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+          proxy_set_header   X-Forwarded-Proto $scheme;
+          proxy_set_header   Host                   $http_host;
+          proxy_set_header   X-NginX-Proxy    true;
+          proxy_set_header   Connection "upgrade";
+          proxy_set_header   Upgrade $http_upgrade;
+                        proxy_connect_timeout 1m;
+                        proxy_send_timeout 60s;
+                        proxy_read_timeout 60s;
+          proxy_http_version 1.1;
+          proxy_pass         http://socket_kc_by_foodvoyage;
+        }
+}

@@ -1,0 +1,407 @@
+<% include ../../partial/admin_header.ejs %>
+<!-- Content Header (Page header)-->
+<section class="content-header">
+  <h1>Fish Bullet Config<small>Configuration</small></h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i>Configuration</a></li>
+    <li class="active">Fish Bullet Config</li>
+  </ol>
+</section>
+<!-- Main content-->
+<section class="content">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_content">
+        <p class="text-muted font-13 m-b-30">
+        </p>
+        <table id="datatable" class="table table-striped table-bordered hover">
+          <thead>
+          <tr>
+            <th>Thông tin cá</th>
+            <th>Máu cá theo đạn</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% fishInfos.forEach(function(fishInfo) { %>
+            <tr id = "dataFish_<%=fishInfo.id%>">
+              <th data-toggle="modal"
+                  data-target=".fish_info-modal-lg"
+                  onclick="btnEditFishInfoClicked(<%=fishInfo.id%>,<%=version_id%>, <%=money_type%>)">
+
+                <table>
+                  <input type="hidden" id = "dv_<%=fishInfo.id%>_Tb_id"  value="<%=fishInfo.tb_id%>"/>
+                  <tr id = "dv_<%=fishInfo.id%>_id">ID : <%=fishInfo.id%></tr>
+
+                  <tr><img src="/images/fishs/<%=fishInfo.id%>.png" alt="FishImg"/></tr>
+                  <tr> <th id = "dv_<%=fishInfo.id%>_name"><%=fishInfo.name%> </th></tr>
+                  <tr><th class = "fishtype_base_speed" >
+                      Tốc độ bơi <span id = "dv_<%=fishInfo.id%>_base_speed"><%=fishInfo.base_speed%></span> pixels/s
+                    </th></tr>
+                  <tr><th class = "fishtype_decrease_bullet_pierce" id = "dv_<%=fishInfo.id%>_id">
+                      Hệ số chống xuyên <span id = "dv_<%=fishInfo.id%>_decrease_bullet_pierce"><%=fishInfo.decrease_bullet_pierce%></span> lần
+                    </th></tr>
+                  <tr><th class = "fishtype_last_bullet_pierce_damm_ratio" id = "dv_<%=fishInfo.id%>_id">
+                      Sát thương xuyên cuối <span id = "dv_<%=fishInfo.id%>_last_bullet_pierce_damm_ratio"><%=fishInfo.last_bullet_pierce_damm_ratio%> </span> %
+                    </th></tr>
+                  <tr><th class = "fishtype_max_number_in_pool" id = "dv_<%=fishInfo.id%>_id">
+                      Số lượng tối đa <span id = "dv_<%=fishInfo.id%>_max_number_in_pool"><%=fishInfo.max_number_in_pool%></span> con
+                    </th></tr>
+                  <tr><th class = "fishtype_can_group" id = "dv_<%=fishInfo.id%>_id">
+                      <input disabled id = "dv_<%=fishInfo.id%>_can_group" type="checkbox"  <%=fishInfo.can_group ==1?"checked":"" %> />Bơi đàn
+                    </th></tr>
+                  <tr><th class = "fishtype_is_boss" id = "dv_<%=fishInfo.id%>_id">
+                      <input disabled id = "dv_<%=fishInfo.id%>_is_boss" type="checkbox" <%=fishInfo.is_boss ==1?"checked":"" %> />Boss
+                    </th></tr>
+                  <tr><th class = "fishtype_is_active">
+                      <input disabled id = "dv_<%=fishInfo.id%>_is_active"  type="checkbox" <%=fishInfo.is_active ==1?"checked":"" %>>Actived</input>
+                    </th></tr>
+                </table>
+              </th>
+
+              <th>
+                <table class="table table-striped table-bordered ">
+                  <thead>
+                  <tr>
+                    <th>Bullet</th>
+                    <th>Gold</th>
+                    <th>BaseHp</th>
+                    <th>MinHP</th>
+                    <th>MaxHP</th>
+                    <th>Ratio</th>
+                    <th>MinHP_1</th>
+                    <th>MaxHP_1</th>
+                    <th>Ratio_1</th>
+                    <th>MinHP_2</th>
+                    <th>MaxHP_2</th>
+                    <th>Ratio_2</th>
+                  </tr>
+                  </thead>
+
+                  <tbody>
+                  <% for(var ij in fishInfo.hp) {
+                    var fish_bullet_info =   fishInfo.hp[ij];
+                  %>
+                  <input type="hidden" id = "dataBullet_<%=fishInfo.id%>_<%=fish_bullet_info.bullet_id%>_config_id"  value="<%=fish_bullet_info.config_id%>"/>
+                    <tr id = "dv_<%=fishInfo.id%>_name"
+                        data-toggle="modal"
+                        data-target=".fish_bullet_info-modal-lg"
+                        onclick="btnEditFishBulletInfoClicked(<%=fishInfo.id%>,<%=version_id%>, <%=money_type%>, <%=fish_bullet_info.bullet_id%>)"
+                    >
+                      <th id="dataBullet_<%=fishInfo.id%>_<%=fish_bullet_info.bullet_id%>_id"><%=fish_bullet_info.bullet_id%></th>
+                      <th id="dataBullet_<%=fishInfo.id%>_<%=fish_bullet_info.bullet_id%>_gold"><%=fish_bullet_info.gold%></th>
+                      <th id="dataBullet_<%=fishInfo.id%>_<%=fish_bullet_info.bullet_id%>_base_hp"><%=fish_bullet_info.base_hp%></th>
+                      <th id="dataBullet_<%=fishInfo.id%>_<%=fish_bullet_info.bullet_id%>_default_min_hp_ratio"><%=fish_bullet_info.default_min_hp_ratio%></th>
+                      <th id="dataBullet_<%=fishInfo.id%>_<%=fish_bullet_info.bullet_id%>_default_max_hp_ratio"><%=fish_bullet_info.default_max_hp_ratio%></th>
+                      <th id="dataBullet_<%=fishInfo.id%>_<%=fish_bullet_info.bullet_id%>_default_appear_ratio"><%=fish_bullet_info.default_appear_ratio%></th>
+                      <th id="dataBullet_<%=fishInfo.id%>_<%=fish_bullet_info.bullet_id%>_special1_min_hp_ratio"><%=fish_bullet_info.special1_min_hp_ratio%></th>
+                      <th id="dataBullet_<%=fishInfo.id%>_<%=fish_bullet_info.bullet_id%>_special1_max_hp_ratio"><%=fish_bullet_info.special1_max_hp_ratio%></th>
+                      <th id="dataBullet_<%=fishInfo.id%>_<%=fish_bullet_info.bullet_id%>_special1_appear_ratio"><%=fish_bullet_info.special1_appear_ratio%></th>
+                      <th id="dataBullet_<%=fishInfo.id%>_<%=fish_bullet_info.bullet_id%>_special2_min_hp_ratio"><%=fish_bullet_info.special2_min_hp_ratio%></th>
+                      <th id="dataBullet_<%=fishInfo.id%>_<%=fish_bullet_info.bullet_id%>_special2_max_hp_ratio"><%=fish_bullet_info.special2_max_hp_ratio%></th>
+                      <th id="dataBullet_<%=fishInfo.id%>_<%=fish_bullet_info.bullet_id%>_special2_appear_ratio"><%=fish_bullet_info.special2_appear_ratio%></th>
+                    </tr>
+                    <% }; %>
+                  </tbody>
+                </table>
+
+              </th>
+            </tr>
+          <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade fish_info-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Edit Fish Info</h4>
+        </div>
+        <div class="modal-body">
+
+          <form action="/root/config/fish_bullet/fish_info/save_fish_info" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+
+            <!-- === -->
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Version Id </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Version Id" id = "edt_Version_Id" name="edt_Version_Id" value="" readonly="readonly">
+              </div>
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Money Type</label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Money Type" id = "edt_Money_Type" name="edt_Money_Type" value = "" readonly="readonly">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Fish Id </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Fish Id" id = "edt_Fish_Id" name="edt_Fish_Id" value="" readonly="readonly">
+              </div>
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Tb_id</label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Table Id" id = "edt_Tb_id2" name="edt_Tb_id2" value = "" readonly="readonly">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Tên </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Tên" id = "edt_Ten" name="edt_Ten" value="" >
+              </div>
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Tốc độ (pixels/)</label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Tốc độ" id = "edt_TocDo" name="edt_TocDo" value = "0" >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Hệ số chống xuyên </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Hệ số chống xuyên" id = "edt_HeSoChongXuyen" name="edt_HeSoChongXuyen" value="" >
+              </div>
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Đâm xuyên cuối</label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Đâm xuyên cuối" id = "edt_DamXuyenCuoi" name="edt_DamXuyenCuoi" value = "0" >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Số lượng tối đa </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Số lượng tối đa" id = "edt_SoLuongToiDa" name="edt_SoLuongToiDa" value="" >
+              </div>
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Bơi đàn</label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="checkbox" class="form-control"  id = "edt_BoiDan" name="edt_BoiDan"/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Is BOSS </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="checkbox" class="form-control" id = "edt_Is_Boss" name="edt_Is_Boss"/>
+              </div>
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Is Active</label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="checkbox" class="form-control" id = "edt_Is_Active" name="edt_Is_Active"/>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <input type="submit" class="btn btn-default" data-dismiss="modal" value="Close" />
+              <input type="submit" class="btn btn-primary" value="Save Changes"/>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================= popup Fish - Bullet -->
+  <div class="modal fade fish_bullet_info-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Edit Fish - Bullet</h4>
+        </div>
+        <div class="modal-body">
+
+          <form action="/root/config/fish_bullet/fish_info/save_fish_bullet_info" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+
+            <!-- === -->
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Version Id </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Version Id" id = "edt_Version_Id_Bullet" name="edt_Version_Id_Bullet" value="" readonly="readonly">
+              </div>
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Money Type</label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Money Type" id = "edt_Money_Type_Bullet" name="edt_Money_Type_Bullet" value = "" readonly="readonly">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Fish Id </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Fish Id" id = "edt_Fish_Id_Bullet" name="edt_Fish_Id_Bullet" value="" readonly="readonly">
+              </div>
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Bullet_ID</label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Bullet_ID" id = "edt_Bullet_Id" name="edt_Bullet_Id" value = "" readonly="readonly">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Gold </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Gold" id = "edt_Gold" name="edt_Gold" value="" >
+              </div>
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">BaseHp</label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="BaseHp" id = "edt_BaseHp" name="edt_BaseHp" value = "" >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">MinHp </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="MinHp" id = "edt_MinHp" name="edt_MinHp" value="" >
+              </div>
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">MaxHp</label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="MaxHp" id = "edt_MaxHp" name="edt_MaxHp" value = "" >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Ratio </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Ratio" id = "edt_Ratio" name="edt_Ratio" value="" >
+              </div>
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Config_id </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Config_id" id = "edt_Config_id_Bullet" name="edt_Config_id_Bullet" value = "" readonly="readonly">
+              </div>
+
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">MinHp_1 </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="MinHp_1" id = "edt_MinHp_1" name="edt_MinHp_1" value="" >
+              </div>
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">MaxHp_1</label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="MaxHp_1" id = "edt_MaxHp_1" name="edt_MaxHp_1" value = "" >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Ratio_1 </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Ratio_1" id = "edt_Ratio_1" name="edt_Ratio_1" value="" >
+              </div>
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Ratio_2 </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Ratio_2" id = "edt_Ratio_2" name="edt_Ratio_2" value="" >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">MinHp_2 </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="MinHp_2" id = "edt_MinHp_2" name="edt_MinHp_2" value="" >
+              </div>
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">MaxHp_2</label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="MaxHp_2" id = "edt_MaxHp_2" name="edt_MaxHp_2" value = "" >
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <input type="submit" class="btn btn-default" data-dismiss="modal" value="Close" />
+              <input type="submit" class="btn btn-primary" value="Save changes" />
+            </div>
+          </form>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<script type="text/javascript">
+
+  var btnEditFishInfoClicked = function(fishId, versionId, moneyType) {
+    $('#edt_Version_Id').val(versionId);
+    $('#edt_Money_Type').val(moneyType);
+    $('#edt_Fish_Id').val(fishId);
+    $('#edt_Ten').val($('#dv_'+fishId+'_name').html());
+    $('#edt_TocDo').val($('#dv_'+fishId+'_base_speed').html());
+    $('#edt_HeSoChongXuyen').val($('#dv_'+fishId+'_decrease_bullet_pierce').html());
+    $('#edt_DamXuyenCuoi').val($('#dv_'+fishId+'_last_bullet_pierce_damm_ratio').html());
+    $('#edt_SoLuongToiDa').val($('#dv_'+fishId+'_max_number_in_pool').html());
+    $('#edt_BoiDan').prop("checked",$('#dv_'+fishId+'_can_group').is(':checked'));
+    $('#edt_Is_Boss').prop("checked",$('#dv_'+fishId+'_is_boss').is(':checked'));
+    $('#edt_Is_Active').prop("checked",$('#dv_'+fishId+'_is_active').is(':checked'));
+    $('#edt_Tb_id2').val($('#dv_'+fishId+'_Tb_id').val());
+
+  }
+
+  var btnEditFishBulletInfoClicked = function(fishId, versionId, moneyType, bulletId) {
+    $('#edt_Version_Id_Bullet').val(versionId);
+    $('#edt_Money_Type_Bullet').val(moneyType);
+    $('#edt_Fish_Id_Bullet').val(fishId);
+    $('#edt_Bullet_Id').val($('#dataBullet_'+fishId+'_'+bulletId+'_id').html());
+    $('#edt_Gold').val($('#dataBullet_'+fishId+'_'+bulletId+'_gold').html());
+    $('#edt_BaseHp').val($('#dataBullet_'+fishId+'_'+bulletId+'_base_hp').html());
+    $('#edt_MinHp').val($('#dataBullet_'+fishId+'_'+bulletId+'_default_min_hp_ratio').html());
+    $('#edt_MaxHp').val($('#dataBullet_'+fishId+'_'+bulletId+'_default_max_hp_ratio').html());
+    $('#edt_Ratio').val($('#dataBullet_'+fishId+'_'+bulletId+'_default_appear_ratio').html());
+    $('#edt_MinHp_1').val($('#dataBullet_'+fishId+'_'+bulletId+'_special1_min_hp_ratio').html());
+    $('#edt_MaxHp_1').val($('#dataBullet_'+fishId+'_'+bulletId+'_special1_max_hp_ratio').html());
+    $('#edt_Ratio_1').val($('#dataBullet_'+fishId+'_'+bulletId+'_special1_appear_ratio').html());
+    $('#edt_Ratio_2').val($('#dataBullet_'+fishId+'_'+bulletId+'_special2_appear_ratio').html());
+    $('#edt_MaxHp_2').val($('#dataBullet_'+fishId+'_'+bulletId+'_special2_max_hp_ratio').html());
+    $('#edt_MinHp_2').val($('#dataBullet_'+fishId+'_'+bulletId+'_special2_min_hp_ratio').html());
+    $('#edt_Config_id_Bullet').val($('#dataBullet_'+fishId+'_'+bulletId+'_config_id').val());
+  }
+
+</script>
+
+<% include ../../partial/admin_footer.ejs %>
