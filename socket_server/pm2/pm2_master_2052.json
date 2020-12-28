@@ -1,8 +1,8 @@
 {
   "apps" : [{
-    "name"        : "Food_Voyage_Server_Master_5152",
+    "name"        : "Food_Voyage_Server_Master_2752",
     "script"      : "./../src/index.js",
-    "args"        : [1,2152,0],
+    "args"        : [1,2752,0],
     "node_args"   : "--max-old-space-size=8192 --harmony --nouse-idle-notification --expose-gc --max_old_space_size=8192",
     "merge_logs"  : true,
     "env": {

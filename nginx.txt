@@ -1,5 +1,5 @@
 upstream apixlive_imsoftvn_upstream {
-      server 127.0.0.1:3000;
+      server 127.0.0.1:3700;
 }
  server {
         listen 80;
@@ -29,7 +29,7 @@ upstream apixlive_imsoftvn_upstream {
 }
 
 upstream cms_foodvoyagelive_imsoftvn_upstream {
-      server 127.0.0.1:3003;
+      server 127.0.0.1:3703;
 }
 
 server {
@@ -50,7 +50,7 @@ location / {
         }
 }
 upstream socket_foodvoyagelive_imsoftvn_upstream {
-      server 127.0.0.1:2152;
+      server 127.0.0.1:2752;
 }
 
 server {

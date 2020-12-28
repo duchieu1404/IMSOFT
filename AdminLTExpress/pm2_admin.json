@@ -1,12 +1,13 @@
 {
   "apps" : [{
-    "name"        : "FishClub_Admin_3003",
+    "name"        : "FishClub_Admin_3703",
     "script"      : "bin/www",
     "args"        : [],
     "node_args"   : "--harmony --nouse-idle-notification --expose-gc",
     "merge_logs"  : true,
     "env": {
-      "NODE_ENV": "production"
+      "NODE_ENV": "production",
+	  "PORT":3703
     }
   }]
 }
