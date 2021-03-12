@@ -1154,6 +1154,29 @@ router.post('/user_info_get_list', function (req, res, next) {
 });
 
 
+
+router.post('/user_info_get_list_facebook', function (req, res, next) {
+
+    console.log("user_info_get_list_facebook data:", req.body);
+
+    req.app.UserDA.user_info_get_list_facebook(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+                data: []
+            });
+        }
+        return res.json({
+            status: 0,
+            msg: "OK",
+            data: data.data
+        });
+    })
+});
+
+
+
 router.post('/friend_get_all', function (req, res, next) {
 
     console.log("friend_get_all data:", req.body);
