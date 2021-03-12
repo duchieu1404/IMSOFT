@@ -152,7 +152,7 @@ UserDA.prototype.friend_add_facebook_friends = function (data, callback) {
 UserDA.prototype.user_info_get_list = function (data, callback) {
     return this.dbModel.query_callback_object("call user_info_get_list(?)", [data.user_ids], callback);
 }
-UserDA.prototype.user_info_get_list = function (data, callback) {
+UserDA.prototype.user_info_get_list_facebook = function (data, callback) {
     return this.dbModel.query_callback_object("call user_info_get_list_facebook(?)", [data.user_ids], callback);
 }
 
