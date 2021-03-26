@@ -81,74 +81,32 @@ router.post('/email_send', function(req, res) {
     // gift
         let objGift = [];
 
-        if(req.body.edt_email_Gem!=0){
-            objGift.push({
-                "type": 1,
-                "quantity": req.body.edt_email_Gem
-            });
-        }
-
-        for(var coin_i =1; coin_i<=20; coin_i++){
-            if(req.body["edt_email_Coin"+coin_i]!=0 || req.body["edt_email_key_"+coin_i]!=0){
+        for(var key_id =1; key_id<=3; key_id++){
+            if(req.body["edt_email_map_key_"+key_id]!=null && req.body["edt_email_map_key_"+key_id]!=0){
                 objGift.push({
-                    "type": 0,
-                    "quantity": req.body["edt_email_Coin"+coin_i],
-                    "key": req.body["edt_email_key_"+coin_i],
-                    "resId":coin_i
+                    "type": 16,
+                    "quantity": req.body["edt_email_map_key_"+key_id],
+                    "map_id":key_id
+                });
+            }
+
+            if(req.body["edt_email_map_coin_"+key_id]!=null && req.body["edt_email_map_coin_"+key_id]!=0){
+                objGift.push({
+                    "type": 14,
+                    "quantity": req.body["edt_email_map_coin_"+key_id],
+                    "map_id":key_id
                 });
             }
         }
 
-        if(req.body.edt_email_boost_x2!=0){
-            objGift.push( {
-                "type": 2,
-                "quantity": req.body.edt_email_boost_x2
-            });
+        for(var giftId = 0;giftId<20;giftId++){
+            if(req.body["edt_email_gift_"+giftId]!=null && req.body["edt_email_gift_"+giftId]!=0){
+                objGift.push( {
+                    "type": giftId,
+                    "quantity": req.body["edt_email_gift_"+giftId]
+                });
+            }
         }
-
-
-        if(req.body.edt_email_boost_pan!=0){
-            objGift.push( {
-                "type": 3,
-                "quantity": req.body.edt_email_boost_pan
-            });
-        }
-
-        if(req.body.edt_email_boost_time!=0){
-            objGift.push( {
-                "type": 4,
-                "quantity": req.body.edt_email_boost_time
-            });
-        }
-
-        if(req.body.edt_email_boost_cake!=0){
-            objGift.push( {
-                "type": 5,
-                "quantity": req.body.edt_email_boost_cake
-            });
-        }
-
-        if(req.body.edt_email_boost_ice!=0){
-            objGift.push( {
-                "type": 6,
-                "quantity": req.body.edt_email_boost_ice
-            });
-        }
-
-        if(req.body.edt_email_boost_serve!=0){
-            objGift.push( {
-                "type": 7,
-                "quantity": req.body.edt_email_boost_serve
-            });
-        }
-
-        if(req.body.edt_email_infinite_heart!=0){
-            objGift.push( {
-                "type": 8,
-                "quantity": req.body.edt_email_infinite_heart
-            });
-        }
-
 
         dataSend.gift =JSON.stringify(objGift);
 
@@ -157,91 +115,53 @@ router.post('/email_send', function(req, res) {
     {
         if(req.body.edt_MessageType==3 || req.body.edt_MessageType==4){
 
-            let ress = [];
-            for(var i = 1; i<=20; i++){
-                if(req.body["edt_email_Coin"+i]!=null){
+            let map = [];
+            for(var i = 1; i<=3; i++){
+                if(req.body["edt_email_map_unlock_"+i]!=null){
                     let res1 = {
                         "id": i,
-                        "level": req.body["edt_email_levels_"+i],
-                        "coin": req.body["edt_email_Coin"+i],
-                        "lvl_stage": req.body["edt_email_tier_"+i],
-                        "unlock_state":req.body["edt_email_unlock_state_"+i],
-                        "key":req.body["edt_email_key_"+i]
+                        "level": req.body["edt_email_map_level_"+i],
+                        "tier": req.body["edt_email_map_tier_"+i],
+                        "unlock": req.body["edt_email_map_unlock_"+i]
                     };
-                    ress.push(res1);
+                    map.push(res1);
                 }
             }
-            // console.log("ress: " +JSON.stringify(ress));
 
-            let reward = [];
-            if(req.body.edt_email_Gem!=-1){
-                reward.push({
-                    "type": 1,
-                    "quantity": req.body.edt_email_Gem
-                });
+            let objGift = [];
+
+            for(var key_id =1; key_id<=3; key_id++){
+                if(req.body["edt_email_map_key_"+key_id]!=null && req.body["edt_email_map_key_"+key_id]!=0){
+                    objGift.push({
+                        "type": 16,
+                        "quantity": req.body["edt_email_map_key_"+key_id],
+                        "map_id":key_id
+                    });
+                }
+    
+                if(req.body["edt_email_map_coin_"+key_id]!=null && req.body["edt_email_map_coin_"+key_id]!=0){
+                    objGift.push({
+                        "type": 14,
+                        "quantity": req.body["edt_email_map_coin_"+key_id],
+                        "map_id":key_id
+                    });
+                }
+            }
+    
+            for(var giftId = 0;giftId<20;giftId++){
+                if(req.body["edt_email_gift_"+giftId]!=null && req.body["edt_email_gift_"+giftId]!=0){
+                    objGift.push( {
+                        "type": giftId,
+                        "quantity": req.body["edt_email_gift_"+giftId]
+                    });
+                }
             }
 
-
-            if(req.body.edt_email_boost_x2!=-1){
-                reward.push( {
-                    "type": 2,
-                    "quantity": req.body.edt_email_boost_x2
-                });
-            }
-
-
-            if(req.body.edt_email_boost_pan!=-1){
-                reward.push( {
-                    "type": 3,
-                    "quantity": req.body.edt_email_boost_pan
-                });
-            }
-
-            if(req.body.edt_email_boost_time!=-1){
-                reward.push( {
-                    "type": 4,
-                    "quantity": req.body.edt_email_boost_time
-                });
-            }
-
-            if(req.body.edt_email_boost_cake!=-1){
-                reward.push( {
-                    "type": 5,
-                    "quantity": req.body.edt_email_boost_cake
-                });
-            }
-
-            if(req.body.edt_email_boost_ice!=-1){
-                reward.push( {
-                    "type": 6,
-                    "quantity": req.body.edt_email_boost_ice
-                });
-            }
-
-            if(req.body.edt_email_boost_serve!=-1){
-                reward.push( {
-                    "type": 7,
-                    "quantity": req.body.edt_email_boost_serve
-                });
-            }
-
-            if(req.body.edt_email_infinite_heart!=-1){
-                reward.push( {
-                    "type": 8,
-                    "quantity": req.body.edt_email_infinite_heart
-                });
-            }
-
-
-              let  objGiftForcset = {
-                "res":ress,
-                "reward":reward
+            let  objGiftForcset = {
+                "map":map,
+                "reward":objGift
             };
-
-            
-
             dataSend.gift =JSON.stringify(objGiftForcset);
-
         }
     }
 
