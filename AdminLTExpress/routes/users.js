@@ -52,6 +52,7 @@ router.post('/email_send', function(req, res) {
     else
     {
         // need test try parse datetime and format it to server time
+        expireTime= req.body.edt_expire_time;
     }
 
     let arrIds = [];
@@ -75,7 +76,11 @@ router.post('/email_send', function(req, res) {
         content:req.body.edt_Content,
         sent_by:req.body.edt_email_send_name,
         email_type:req.body.edt_MessageType
+       
     };
+    if(expireTime){
+        dataSend.time_expire=expireTime;
+    }
 
     if(req.body.edt_MessageType==1){
     // gift
