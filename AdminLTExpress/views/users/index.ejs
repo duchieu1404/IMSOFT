@@ -107,15 +107,21 @@
             <th>Star</th>
             <th>Card</th>
             <th>Spent $</th>
+            <th>Purchase</th>
             <th>Device Id</th>
+            <th>App version</th>
             <th>Language</th>
             <th>Device Name</th>
             <th>OS</th>
+            <th>OneSignalId</th>
+            <th>OneSignalToken</th>
           </tr>
           </thead>
 
           <tbody>
-          <% listUsers.forEach(function(userInfo) { %>
+          <% listUsers.forEach(function(userInfo) 
+          {
+            %>
           <tr id = "dataServerConfig_<%= userInfo.id %>" value_id = "<%= userInfo.id %>">
             <!--<th><input name = "ckbChoiceUser" class= "ckbChoiceUser" type="checkbox" value="<%= userInfo.id %>" ></th>-->
             <td>
@@ -159,12 +165,14 @@
             <td id = "ds_<%= userInfo.id %>_dts_total_cash_out"><%= userInfo.star %></td>
             <td id = "ds_<%= userInfo.id %>_dts_total_card"><%= userInfo.card %></td>
             <td id = "ds_<%= userInfo.id %>_dts_total_purchase"><%= userInfo.total_purchase %></td>
+            <td id = "ds_<%= userInfo.id %>_dts_purchase"><%= userInfo.count_purchase %></td>
             <td id = "ds_<%= userInfo.id %>_dts_last_device_id"><%= userInfo.last_device_id %></td>
+            <td id="ds_<%= userInfo.id %>_dts_app_version"><%= userInfo.app_version %></td>
             <td id = "ds_<%= userInfo.id %>_dts_damm_ratio"><%= userInfo.language %></td>
             <td id = "ds_<%= userInfo.id %>_dts_damm_ratio"><%= userInfo.device_name %></td>
             <td id = "ds_<%= userInfo.id %>_dts_damm_ratio"><%= userInfo.os %></td>
-
-
+            <td id="ds_<%= userInfo.id %>_dts_onesignal_user_id"><%= userInfo.onesignal_user_id %></td>
+            <td id="ds_<%= userInfo.id %>_dts_onesignal_token"><%= userInfo.onesignal_token %></td>
           </tr>
           <% }); %>
           </tbody>
