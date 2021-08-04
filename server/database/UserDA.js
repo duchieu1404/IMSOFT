@@ -116,7 +116,7 @@ UserDA.prototype.user_info_get_list_facebook = function (data, callback) {
 }
 
 UserDA.prototype.event_fsc_get_event_info_this_week = function(data,callback){
-    return this.dbModel.event_fsc_get_event_info_this_week("call event_fsc_get_event_info_this_week()",[],callback);
+    return this.dbModel.query_callback_object("call event_fsc_get_event_info_this_week()",[],callback);
 }
 
 UserDA.prototype.team_info_get_list = function (data, callback) {
