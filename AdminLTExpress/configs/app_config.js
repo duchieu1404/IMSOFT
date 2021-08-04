@@ -7,7 +7,7 @@ var app_config = {};
 
 app_config.mySQLConfig = {
 
-    host: '14.225.3.138',   //14.225.3.183
+    host: 'localhost',   //14.225.3.183
     port: 3306,
     user: 'foodvoyage',
     password: 'FoodVoyage123$5',
