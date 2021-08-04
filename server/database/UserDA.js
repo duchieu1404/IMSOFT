@@ -96,47 +96,6 @@ UserDA.prototype.user_ref_claim = function (data, callback) {
     return this.dbModel.query_callback_object("call user_ref_claim(?,?,?,?,?)", [data.user_id, data.username, data.login_type, data.device_id, data.user_ref_id], callback);
 }
 
-UserDA.prototype.event_get_event_this_week = function (data, callback) {
-    return this.dbModel.query_callback_object("call event_get_event_this_week()", [], callback);
-}
-
-UserDA.prototype.event_user_send_score = function (data, callback) {
-    return this.dbModel.query_callback_object("call event_user_send_score(?,?,?,?,?,?,?)", [data.user_id, data.username, data.login_type, data.device_id, data.event_id, data.rest_id, data.score], callback);
-}
-
-UserDA.prototype.event_user_send_score_multi = function (data, callback) {
-    return this.dbModel.query_callback_object("call event_user_send_score_multi(?,?,?,?,?)", [data.user_id, data.username, data.login_type, data.device_id, data.scores], callback);
-}
-
-UserDA.prototype.event_rank_get_global_total_score = function (data, callback) {
-    return this.dbModel.query_callback_array("call event_rank_get_global_total_score(?,?,?,?,?,?,?)", [data.user_id, data.username, data.login_type, data.device_id, data.event_id, data.rest_id, data.page || 0], callback);
-}
-UserDA.prototype.event_rank_get_global_best_score = function (data, callback) {
-    return this.dbModel.query_callback_array("call event_rank_get_global_best_score(?,?,?,?,?,?,?)", [data.user_id, data.username, data.login_type, data.device_id, data.event_id, data.rest_id, data.page || 0], callback);
-}
-UserDA.prototype.event_rank_get_team_total_score = function (data, callback) {
-    return this.dbModel.query_callback_array("call event_rank_get_team_total_score(?,?,?,?,?,?,?)", [data.user_id, data.username, data.login_type, data.device_id, data.event_id, data.rest_id, data.page || 0], callback);
-}
-
-UserDA.prototype.event_rank_get_global_total_score_lite = function (data, callback) {
-    return this.dbModel.query_callback_array("call event_rank_get_global_total_score_lite(?,?,?,?,?,?,?)", [data.user_id, data.username, data.login_type, data.device_id, data.event_id, data.rest_id, data.page || 0], callback);
-}
-UserDA.prototype.event_rank_get_global_best_score_lite = function (data, callback) {
-    return this.dbModel.query_callback_array("call event_rank_get_global_best_score_lite(?,?,?,?,?,?,?)", [data.user_id, data.username, data.login_type, data.device_id, data.event_id, data.rest_id, data.page || 0], callback);
-}
-UserDA.prototype.event_rank_get_team_total_score_lite = function (data, callback) {
-    return this.dbModel.query_callback_array("call event_rank_get_team_total_score_lite(?,?,?,?,?,?,?)", [data.user_id, data.username, data.login_type, data.device_id, data.event_id, data.rest_id, data.page || 0], callback);
-}
-
-
-UserDA.prototype.event_rank_get_me = function (data, callback) {
-    return this.dbModel.query_callback_object("call event_rank_get_me(?,?,?,?,?)", [data.user_id, data.username, data.login_type, data.device_id, data.event_id], callback);
-}
-
-UserDA.prototype.event_get_reward = function (data, callback) {
-    return this.dbModel.query_callback_array("call event_get_reward(?,?,?,?,?,?,?)", [data.user_id, data.username, data.login_type, data.device_id, data.event_id, data.rest_id, data.rank_type], callback);
-}
-
 UserDA.prototype.user_trophy_get = function (data, callback) {
     return this.dbModel.query_callback_array("call user_trophy_get(?,?,?,?)", [data.user_id, data.username, data.login_type, data.device_id], callback);
 }
@@ -156,8 +115,9 @@ UserDA.prototype.user_info_get_list_facebook = function (data, callback) {
     return this.dbModel.query_callback_object("call user_info_get_list_facebook(?)", [data.user_ids], callback);
 }
 
-
-
+UserDA.prototype.event_fsc_get_event_info_this_week = function(data.callback){
+    return this.dbModel.event_fsc_get_event_info_this_week("call event_fsc_get_event_info_this_week()",[],callback);
+}
 
 UserDA.prototype.team_info_get_list = function (data, callback) {
     return this.dbModel.query_callback_object("call team_info_get_list(?)", [data.team_ids], callback);
@@ -191,48 +151,6 @@ UserDA.prototype.invite_claim_reward = function (data, callback) {
     return this.dbModel.query_callback_object("call invite_claim_reward(?,?)", [data.user_id, data.list_invited], callback);
 }
 
-UserDA.prototype.event_ct_add_multi = function (data, callback) 
-{
-    return this.dbModel.query_callback_object("call event_ct_add_multi(?,?)", [data.user_id, data.list_score], callback);
-}
-UserDA.prototype.event_ct_set_get_user_rest = function (data, callback) 
-{
-    return this.dbModel.query_callback_object("call event_ct_set_get_user_rest(?,?,?,?)", [data.user_id, data.event_id, data.rest_id, data.force_set], callback);
-}
-UserDA.prototype.event_ct_get_current = function (data, callback) {
-    return this.dbModel.query_callback_object("call event_ct_get_current()", [], callback);
-}
-UserDA.prototype.event_ct_get_leaderboard = function (data, callback) {
-    return this.dbModel.query_callback_array("call event_ct_get_leaderboard(?,?)", [data.user_id, data.event_id], callback);
-}
-
-UserDA.prototype.event_ct_get_leaderboard_champions = function (data, callback) {
-    return this.dbModel.query_callback_array("call event_ct_get_leaderboard_champions(?,?)", [ data.event_id,data.page||0], callback);
-}
-
-UserDA.prototype.event_ct_get_leaderboard_champion_me = function (data, callback) {
-    return this.dbModel.query_callback_object("call event_ct_get_leaderboard_champion_me(?,?)", [data.user_id, data.event_id], callback);
-}
-
-UserDA.prototype.event_ct_get_event_info = function (data, callback) {
-    return this.dbModel.query_callback_object("call event_ct_get_event_info(?)", [data.event_id], callback);
-}
-
-UserDA.prototype.event_ct_get_reward = function (data, callback) {
-    return this.dbModel.query_callback_array("call event_ct_get_reward(?)", [data.event_id], callback);
-}
-UserDA.prototype.event_ct_set_claim_unlock = function (data, callback) {
-    return this.dbModel.query_callback_object("call event_ct_set_claim_unlock(?,?)", [data.user_id, data.event_id], callback);
-}
-UserDA.prototype.event_ct_get_reward_config = function (data, callback) {
-    return this.dbModel.query_callback_array("call event_ct_get_reward_config(?,?)", [data.user_id, data.event_id], callback);
-}
-UserDA.prototype.event_ct_get_reward_events = function (data, callback) {
-    return this.dbModel.query_callback_object("call event_ct_get_reward_events(?)", [data.user_id], callback);
-}
-UserDA.prototype.event_ct_claim_reward_event = function (data, callback) {
-    return this.dbModel.query_callback_object("call event_ct_claim_reward_event(?,?)", [data.user_id, data.event_id], callback);
-}
 UserDA.prototype.team_chat_send_message_system = function (data, callback) {
     return this.dbModel.query_callback_object("call team_chat_send_message_system(?,?,?,?,?)", [data.user_id, data.team_id, data.msg, data.request_type, data.data_ext], callback);
 }
