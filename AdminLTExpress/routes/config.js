@@ -127,188 +127,39 @@ router.post('/delete_tester', function(req, res) {
 
 
 
+//event fsc
 
-router.get('/event_popup', function(req, res) {
-    console.log("get tester ");
-    req.app.ConfigDA.admin_event_popup_get_all({},function admin_event_popup_get_all(err,dataX){
-        console.log(err,dataX);
-        if(err || !dataX)
-        {
-            return res.render('config/event_popup',{dataConfigs:[]});
-        }
-        return res.render('config/event_popup',{dataConfigs:dataX});
-    });
-});
-
-router.post('/event_popup', function(req, res) {
-    req.app.ConfigDA.admin_event_popup_save({
-        id:req.body.edt_id,
-        os_type:req.body.edt_os_type,
-        version:req.body.edt_version,
-        status:req.body.edt_status,
-        show_from:req.body.edt_show_from,
-        show_to:req.body.edt_show_to,
-        check_type:req.body.edt_check_type,
-        force_view:req.body.edt_force_view,
-        asset_url:req.body.edt_asset_url,
-        bundle_name:req.body.edt_bundle_name,
-        note:req.body.edt_note,
-        promote_iap_cnf:req.body.edt_promo_iap,
-        promote_bundle_cnf:req.body.edt_promo_bundle,
-        template_type:req.body.edt_template_type,
-        img_url:req.body.edt_img_url,
-        data:req.body.edt_data,
-        order_by:req.body.edt_order,
-        show_map_count:req.body.edt_show_map_count,
-        only_users:req.body.edt_only_users,
-        ignore_users:req.body.edt_ignore_users,
-        show_condition: req.body.edt_show_condition,
-    },function(errSave,dataSave){
-        return res.redirect('/config/event_popup');
-    });
-});
-
-
-router.post('/delete_event_popup', function(req, res) {
-    console.log(req.body.delete_edt_Id);
-    req.app.ConfigDA.admin_event_popup_delete({
-        event_id : req.body.delete_edt_Id
-    },function(err,data){
-        return res.send(data||{status:1,msg:"err"});
-    });
-});
-
-
-// event gcc api
-
-router.get('/event_gcc', function (req, res) 
-{
-    req.app.ConfigDA.admin_event_gcc_get_all({}, function admin_event_gcc_get_all(err, dataX) 
-    {
+router.get('/event_fsc', function (req, res) {
+    req.app.ConfigDA.admin_event_fsc_get_all({}, function admin_event_fsc_get_all(err, dataX) {
         if (err || !dataX) {
-            return res.render('config/event_gcc', { dataConfigs: [] });
+            return res.render('config/event_fsc', { dataConfigs: [] });
         }
-        return res.render('config/event_gcc', { dataConfigs: dataX });
+        return res.render('config/event_fsc', { dataConfigs: dataX });
     });
 });
 
-router.post('/event_gcc', function (req, res) 
-{
-    req.app.ConfigDA.admin_event_gcc_save({
-        id: req.body.edt_id,
-        time_from: req.body.edt_time_from,
-        time_to: req.body.edt_time_to,
+router.post('/event_fsc', function (req, res) {
+    req.app.ConfigDA.admin_event_fsc_save({
         status: req.body.edt_status,
-        rest_ids: req.body.edt_rest_ids,
-        evt_copy: req.body.edt_evt_copy,
+        id: req.body.edt_id,
+        type: req.body.edt_type,
+        time_from: req.body.edt_time_from,
+        time_to: req.body.edt_time_to
     }, function (errSave, dataSave) {
-        return res.redirect('/config/event_gcc');
+        return res.redirect('/config/event_fsc');
     });
 });
 
 
-router.post('/event_gcc_delete', function (req, res) 
-{
-    req.app.ConfigDA.admin_event_gcc_delete({}, function admin_event_gcc_get_all(err, dataX) {
-        req.app.ConfigDA.admin_event_gcc_delete({
+router.post('/event_fsc_delete', function (req, res) {
+    req.app.ConfigDA.admin_event_fsc_delete({}, function admin_fsc_get_all(err, dataX) {
+        req.app.ConfigDA.admin_event_fsc_delete({
             event_id: req.body.delete_edt_Id
         }, function (err, data) {
             return res.send(data || { status: 1, msg: "err" });
         });
     });
 });
-
-router.post('/event_gcc_insert_test_data', function (req, res) {
-    req.app.ConfigDA.event_gcc_insert_test_data({}, function event_gcc_insert_test_data(err, dataX) 
-    {
-        req.app.ConfigDA.event_gcc_insert_test_data(
-        {
-            event_id: req.body.edt_event_id,
-            rest_id: req.body.edt_rest_id
-        }, function (err, data) 
-        {
-            return res.send(data || { status: 1, msg: "err" });
-        });
-    });
-});
-
-//event ct
-
-router.get('/event_ct', function (req, res) {
-    req.app.ConfigDA.admin_event_ct_get_all({}, function admin_event_ct_get_all(err, dataX) {
-        if (err || !dataX) {
-            return res.render('config/event_ct', { dataConfigs: [] });
-        }
-        return res.render('config/event_ct', { dataConfigs: dataX });
-    });
-});
-
-router.post('/event_ct', function (req, res) {
-    req.app.ConfigDA.admin_event_ct_save({
-        status: req.body.edt_status,
-        id: req.body.edt_id,
-        time_from: req.body.edt_time_from,
-        time_to: req.body.edt_time_to,
-        count_by: req.body.edt_count_by,
-        join_require: req.body.edt_join_require,
-        join_reward: req.body.edt_join_reward,
-        has_all_boost: req.body.edt_has_all_boost,
-        max_rest_id: req.body.edt_max_rest_id,
-        time_show_from: req.body.edt_time_show_from,
-        time_show_to: req.body.edt_time_show_to,
-        evt_popup_copy: req.body.edt_evt_popup_copy,
-        champion_rest: req.body.edt_champion_rest
-    }, function (errSave, dataSave) {
-        return res.redirect('/config/event_ct');
-    });
-});
-
-
-router.post('/event_ct_delete', function (req, res) {
-    req.app.ConfigDA.admin_event_ct_delete({}, function admin_ct_get_all(err, dataX) {
-        req.app.ConfigDA.admin_event_ct_delete({
-            event_id: req.body.delete_edt_Id
-        }, function (err, data) {
-            return res.send(data || { status: 1, msg: "err" });
-        });
-    });
-});
-
-router.post('/event_ct_add_score', function (req, res) {
-    req.app.ConfigDA.admin_event_ct_add_score({}, function admin_event_ct_add_score(err, dataX) {
-
-        var json = [];
-
-        if (!req.body.edt_event_id || !req.body.edt_score)
-        {
-            return;
-        }
-        list_score = 
-        {
-            "event_id" : req.body.edt_event_id,
-            "score": parseInt(req.body.edt_score)
-        }
-        json.push(list_score);
-        req.app.ConfigDA.admin_event_ct_add_score({
-            user_id: req.body.edt_user_id,
-            list_score: JSON.stringify(list_score)
-        }, function (err, data) {
-            return res.send(data || { status: 1, msg: "err" });
-        });
-    });
-});
-
-router.post('/event_ct_insert_test_data', function (req, res) {
-    req.app.ConfigDA.admin_event_ct_insert_test_data({}, function admin_event_ct_insert_test_data(err, dataX) {
-        req.app.ConfigDA.admin_event_ct_insert_test_data({
-            event_id: req.body.edt_event_id,
-            rest_id: req.body.edt_rest_id
-        }, function (err, data) {
-            return res.send(data || { status: 1, msg: "err" });
-        });
-    });
-});
-
 
 //reward json
 
