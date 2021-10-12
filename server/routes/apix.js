@@ -1071,7 +1071,7 @@ router.post('/team_claim_system_gift', function (req, res, next) {
 });
 
 router.post('/user_data_get_list_id', function (req, res, next) {
-    req.app.UserDA.user_data_get_list_id(req, body, function (err, data) {
+    req.app.UserDA.user_data_get_list_id(req.body, function (err, data) {
         if (err || !data) {
             return res.json({
                 status: 1,
