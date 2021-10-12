@@ -585,15 +585,15 @@ router.post('/highscore_level_add_multi', function (req, res, next) {
     // }  );
 
     let md5URL = crypto.md5(JSON.stringify({
-        action:"highscore_level_add_multi",
-        user_id:req.body.user_id,
-        score:req.body.scores
+        action: "highscore_level_add_multi",
+        user_id: req.body.user_id,
+        score: req.body.scores
     }));
 
-    console.log("highscore_level_add_multi" ,md5URL );
+    console.log("highscore_level_add_multi", md5URL);
 
     req.app.RedisPool.get(md5URL, function (err, reply) {
-        if(err || !reply){
+        if (err || !reply) {
 
             req.app.RedisPool.set(md5URL, '1', function (err2) {
                 req.app.RedisPool.expire(md5URL, 10, function (err3) {
@@ -601,24 +601,23 @@ router.post('/highscore_level_add_multi', function (req, res, next) {
                 });
             });
 
-            req.app.UserDA.highscore_level_add_multi(req.body,function(err,data){
-                if(err || !data){
+            req.app.UserDA.highscore_level_add_multi(req.body, function (err, data) {
+                if (err || !data) {
                     return res.json({
-                        status:1,
-                        msg:"ServerMsg/api_fail"
+                        status: 1,
+                        msg: "ServerMsg/api_fail"
                     });
                 }
                 return res.json({
-                    status:0,
-                    msg:"OK",
-                    data:data
+                    status: 0,
+                    msg: "OK",
+                    data: data
                 });
             });
-        }else
-        {
+        } else {
             return res.json({
-                status:1,
-                msg:"DOUBLE REQUEST"
+                status: 1,
+                msg: "DOUBLE REQUEST"
             });
         }
     });
@@ -1071,13 +1070,13 @@ router.post('/team_claim_system_gift', function (req, res, next) {
     })
 });
 
-router.post('/user_data_get_list_id',function(req,res,next){
-    req.app.UserDA.user_data_get_list_id(req,body,function(err,data){
-        if(err || data){
+router.post('/user_data_get_list_id', function (req, res, next) {
+    req.app.UserDA.user_data_get_list_id(req, body, function (err, data) {
+        if (err || !data) {
             return res.json({
-                status:1,
-                msg:"ServerMsg/api_fail",
-                data:[]
+                status: 1,
+                msg: "ServerMsg/api_fail",
+                data: []
             });
         }
         return res.json({
