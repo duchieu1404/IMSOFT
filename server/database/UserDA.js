@@ -157,3 +157,7 @@ UserDA.prototype.team_chat_send_message_system = function (data, callback) {
 UserDA.prototype.team_claim_system_gift = function (data, callback) {
     return this.dbModel.query_callback_object("call team_claim_system_gift(?,?,?)", [data.user_id, data.team_id, data.request_id], callback);
 }
+
+UserDA.prototype.user_data_get_list_id = function(data,callback){
+    return this.dbModel.query_callback_object("call user_data_get_list_id(?)",[data.user_ids],callback);
+}
