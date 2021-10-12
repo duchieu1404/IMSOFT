@@ -1076,12 +1076,11 @@ router.post('/user_data_get_list_id', function (req, res, next) {
             return res.json({
                 status: 1,
                 msg: "ServerMsg/api_fail",
-                data: []
             });
         }
         return res.json({
-            status: 0,
-            msg: "OK",
+            status: data.status,
+            msg: data.msg,
             data: data.data
         });
     })
