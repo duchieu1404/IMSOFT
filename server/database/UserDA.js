@@ -10,14 +10,72 @@ var UserDA = function (app) {
 module.exports = UserDA;
 
 UserDA.prototype.user_login_by_device_id = function (data, callback) {
+
+    try {
+        if (data != null && data.client_info != null) {
+            console.log(JSON.parse(data.client_info));
+
+        }
+
+    } catch (e) {
+        return console.error("User login by device id CLIENT INFO data: " + e + " " + data.client_info);
+
+    }
+
+    try {
+        if (data != null && data.basic_info != null) {
+            console.log(JSON.parse(data.basic_info));
+        }
+
+    } catch (e) {
+
+        return console.error("User login by device id CLIENT INFO data: " + e + " " + data.basic_info);
+    }
     return this.dbModel.query_callback_object("call user_login_by_device_id(?,?,?,?)", [data.device_id, data.user_id, data.client_info, data.basic_info], callback);
 }
 
 UserDA.prototype.user_login_by_cloud_username = function (data, callback) {
+    try {
+        if (data != null && data.client_info != null) {
+            console.log(JSON.parse(data.client_info));
+        }
+
+
+    } catch (e) {
+        return console.error("User login by cloud username CLIENT INFO data " + e + " " + data.client_info);
+    }
+
+    try {
+        if (data != null && data.basic_info != null) {
+            console.log(JSON.parse(data.basic_info));
+        }
+
+    } catch (e) {
+        return console.error("User login by cloud username BASIC INFO data " + e + " " + data.basic_info);
+    }
     return this.dbModel.query_callback_object("call user_login_by_cloud_username(?,?,?,?,?,?,?,?,?)", [data.login_type, data.username, data.fullname, data.token, data.user_id, data.device_id, data.client_info, data.basic_info, data.avatar_url], callback);
 }
 
 UserDA.prototype.user_sync_data = function (data, callback) {
+
+    try {
+        if (data != null && data.client_info != null) {
+            console.log(JSON.parse(data.client_info));
+        }
+
+    } catch (e) {
+        return console.error("User sync data CLIENT INFO data " + e + " " + data.client_info);
+    }
+
+    try {
+        if (data != null && data.data_sync != null) {
+            console.log(JSON.parse(data.data_sync));
+        }
+
+    } catch (e) {
+
+        return console.error("User sync data DATA SYNC data " + e + " " + data.data_sync);
+    }
     return this.dbModel.query_callback_object("call user_sync_data(?,?,?,?,?,?,?,?)", [data.user_id, data.username, data.login_type, data.device_id, data.client_info || '{}', data.data_sync, data.is_force_update || 0, data.last_time_sync], callback);
 }
 
