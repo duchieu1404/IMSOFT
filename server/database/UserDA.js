@@ -161,3 +161,7 @@ UserDA.prototype.team_claim_system_gift = function (data, callback) {
 UserDA.prototype.user_data_get_list_id = function(data,callback){
     return this.dbModel.query_callback_object("call user_data_get_list_id(?)",[data.user_ids],callback);
 }
+
+UserDA.prototype.user_time_iap = function(data,callback){
+    return this.dbModel.query_callback_object("call user_time_iap(?)",[data.user_time],callback);
+}
