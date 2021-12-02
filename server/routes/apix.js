@@ -1091,7 +1091,23 @@ router.post('/user_time_iap', function (req, res, next) {
         if (err || !data) {
             return res.json({
                 status: 1,
-                msg: "ServerMsg/api_fail",
+                msg: "ServerMsg/api_fail"
+            });
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data
+        });
+    })
+});
+
+router.post("/user_update_version", function (req, res, next) {
+    req.app.UserDA.user_update_version(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail"
             });
         }
         return res.json({
