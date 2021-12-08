@@ -1558,4 +1558,20 @@ router.post('/user_data_get_list_id', function (req, res, next) {
         });
     })
 });
+
+router.post("/user_update_version", function (req, res, next) {
+    req.app.UserDA.user_update_version(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail"
+            });
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data
+        });
+    })
+});
 module.exports = router;

@@ -301,3 +301,7 @@ UserDA.prototype.team_claim_system_gift = function (data, callback) {
 UserDA.prototype.user_data_get_list_id = function(data,callback){
     return this.dbModel.query_callback_object("call user_data_get_list_id(?)",[data.user_ids],callback);
 }
+
+UserDA.prototype.user_update_version = function(data,callback){
+    return this.dbModel.query_callback_object("call user_update_version(?,?,?,?)",[data.user_id,data.device_id,data.need_force,data.version],callback);
+}
