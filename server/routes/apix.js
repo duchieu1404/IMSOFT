@@ -727,6 +727,23 @@ router.post('/user_ref_claim', function (req, res, next) {
         });
     })
 });
+// Event CT
+router.post('/event_ct_get_current', function (req, res, next) {
+    req.app.UserDA.event_ct_get_current(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+                data: []
+            });
+        }
+        return res.json({
+            status: 0,
+            msg: "OK",
+            data: data.data
+        });
+    })
+});
 
 //Event FSC
 
