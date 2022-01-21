@@ -70,7 +70,9 @@ UserDA.prototype.highscore_level_add = function (data, callback) {
 UserDA.prototype.highscore_level_get_me = function (data, callback) {
     return this.dbModel.query_callback_object("call highscore_level_get_me(?,?,?,?,?,?,?)", [data.user_id, data.username, data.login_type, data.device_id, data.rest_id, data.tier, data.level], callback);
 }
-
+UserDA.prototype.event_ct_get_current = function (data, callback) {
+    return this.dbModel.query_callback_object("call event_ct_get_current()", [], callback);
+}
 
 UserDA.prototype.highscore_level_add_multi = function (data, callback) {
     return this.dbModel.query_callback_object("call highscore_level_add_multi(?,?,?,?,?)", [data.user_id, data.username, data.login_type, data.device_id, data.scores], callback);
@@ -115,8 +117,8 @@ UserDA.prototype.user_info_get_list_facebook = function (data, callback) {
     return this.dbModel.query_callback_object("call user_info_get_list_facebook(?)", [data.user_ids], callback);
 }
 
-UserDA.prototype.event_fsc_get_event_info_this_week = function(data,callback){
-    return this.dbModel.query_callback_object("call event_fsc_get_event_info_this_week()",[],callback);
+UserDA.prototype.event_fsc_get_event_info_this_week = function (data, callback) {
+    return this.dbModel.query_callback_object("call event_fsc_get_event_info_this_week()", [], callback);
 }
 
 UserDA.prototype.team_info_get_list = function (data, callback) {
@@ -128,7 +130,7 @@ UserDA.prototype.friend_get_all = function (data, callback) {
     return this.dbModel.query_callback_object("call friend_get_all(?,?,?,?)", [data.user_id, data.username, data.login_type, data.device_id], callback);
 }
 
-UserDA.prototype.invite_get_short_link = function(data,callback) {
+UserDA.prototype.invite_get_short_link = function (data, callback) {
     return this.dbModel.query_callback_object("call invite_get_short_link(?)", [data.ref_code], callback);
 }
 
@@ -158,14 +160,14 @@ UserDA.prototype.team_claim_system_gift = function (data, callback) {
     return this.dbModel.query_callback_object("call team_claim_system_gift(?,?,?)", [data.user_id, data.team_id, data.request_id], callback);
 }
 
-UserDA.prototype.user_data_get_list_id = function(data,callback){
-    return this.dbModel.query_callback_object("call user_data_get_list_id(?)",[data.user_ids],callback);
+UserDA.prototype.user_data_get_list_id = function (data, callback) {
+    return this.dbModel.query_callback_object("call user_data_get_list_id(?)", [data.user_ids], callback);
 }
 
-UserDA.prototype.user_time_iap = function(data,callback){
-    return this.dbModel.query_callback_object("call user_time_iap(?)",[data.user_time],callback);
+UserDA.prototype.user_time_iap = function (data, callback) {
+    return this.dbModel.query_callback_object("call user_time_iap(?)", [data.user_time], callback);
 }
 
-UserDA.prototype.user_update_version = function(data,callback){
-    return this.dbModel.query_callback_object("call user_update_version(?,?,?,?)",[data.user_id,data.device_id,data.need_force,data.version],callback);
+UserDA.prototype.user_update_version = function (data, callback) {
+    return this.dbModel.query_callback_object("call user_update_version(?,?,?,?)", [data.user_id, data.device_id, data.need_force, data.version], callback);
 }
