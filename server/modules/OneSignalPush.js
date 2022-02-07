@@ -11,7 +11,7 @@ var OneSiginalPush = function(){
     };
     this.onesignal_client = new OneSignal.Client({
         userAuthKey: "YzE5MGRiNTMtM2U5My00Yjg5LTg4OGItM2I0N2Q0MmM5N2Iw",
-        app: { appAuthKey: "ZWM2Nzk0NmQtNGUzMC00ZGE0LTlkZTMtODVlMzI4MGRjN2M0", appId: "b74b079b-1608-41e9-a028-7cd4c7d8e37c" }
+        app: { appAuthKey: "ZDk0NWZlN2EtN2FmNi00MjZiLThkNDQtMmEyNDBmMWU4MzUx", appId: "439ee958-7264-4aba-8d7d-ee17af9fd67b" }
     });
 }
 module.exports = OneSiginalPush;
