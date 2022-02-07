@@ -79,9 +79,8 @@ ConfigDA.prototype.admin_event_fsc_delete = function (data, callback)
     ], callback);
 }
 ConfigDA.prototype.admin_event_fsc_save = function (data, callback) {
-    return this.dbModel.query_callback_array("call admin_event_fsc_save(?,?,?,?,?)", [
+    return this.dbModel.query_callback_array("call admin_event_fsc_save(?,?,?,?)", [
         data.id,
-        data.type,
         data.status,
         data.time_from,
         data.time_to
