@@ -477,6 +477,19 @@
               </div>
             </div>
 
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4" id ="label_PN" >PN<span class="required">*</span></label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <textarea  class="form-control col-md-5 col-xs-10" required="required"  rows="6" id = "edt_PN" name="edt_PN" placeholder="You have an important message waiting for you." value="">You have an important message waiting for you.</textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4 " id="label_check_PN"  >Send PN<span class="required">?</span></label>
+              <div class="col-md-9 col-sm-9 col-xs-12" style="padding-top:6px">
+                <input class="form-check-input " type="checkbox" value="" id="check_PN" checked>
+              </div>
+            </div>
             <div class="modal-footer">
               <input type="button" class="btn btn-default" data-dismiss="modal" value="Close">
               <input type="button" class="btn btn-primary" value="Send" onclick="btnDoSendEmail()">
@@ -513,6 +526,8 @@
     $('#edt_Id').val($('#ds_'+serverId+'_dts_id').html());
     $('#edt_Fullname').val($('#ds_'+serverId+'_dts_fullname').html());
     $("#emailToNumberUser").val(1);
+    $("#edt_PN").val("You have an important message waiting for you.");
+    $("#check_PN").prop("checked",true);
    }
 
    var showAllIUserData =function(user_id){
@@ -593,17 +608,38 @@
     if(currType==1){
       $('.email_gift_value').show();
       $('.email_force_set_value').hide();
+      $('#label_PN').show();
+      $('#edt_PN').show();
+      $('#label_check_PN').show();
+      $('#check_PN').show();
       reset_add_gift_value();
 
     } else
-    if(currType==3 || currType==4 ){
+    if(currType==3){
       $('.email_gift_value').show();
       $('.email_force_set_value').show();
+      $('#label_PN').show();
+      $('#edt_PN').show();
+      $('#label_check_PN').show();
+      $('#check_PN').show();
+      reset_force_set_value();
+    }
+    else if(currType == 4){
+      $('.email_gift_value').show();
+      $('.email_force_set_value').show();
+      $('#label_PN').hide();
+      $('#edt_PN').hide();
+      $('#label_check_PN').hide();
+      $('#check_PN').hide();
       reset_force_set_value();
     }
     else {
       $('.email_gift_value').hide();
       $('.email_force_set_value').hide();
+      $('#label_PN').show();
+      $('#edt_PN').show();
+      $('#label_check_PN').show();
+      $('#check_PN').show();
     }
   }
 
@@ -616,6 +652,10 @@
     var listUsers = <%- JSON.stringify(listUsers) %>;
 
     console.log(listUsers);
+    var dataOtherInfo = JSON.parse(listUsers[0].other_info);
+    var oneSignalIdUser = dataOtherInfo["onesignal_user_id"];
+    var checkBox = document.getElementById("check_PN");
+    var edtPN = document.getElementById("edt_PN");
 
     var btnDoSendEmail = function(){
 
@@ -638,6 +678,34 @@
       },
       dataType: 'json'
     });
+
+    if(checkBox.checked === true)
+      {
+        if(edtPN.value === null || edtPN.value === ""){
+          edtPN.value = "You have an important message waiting for you.";
+        }
+        console.log(edtPN.value);
+        var url = "https://onesignal.com/api/v1/notifications";
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url);
+
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+              console.log(xhr.responseText);
+          }};
+        
+        console.log("oneSignalIdUser : " +oneSignalIdUser);
+        var message = 
+        { 
+            app_id: "439ee958-7264-4aba-8d7d-ee17af9fd67b",
+            contents: {"en": edtPN.value},
+            include_player_ids: [oneSignalIdUser]
+        };
+        xhr.send(JSON.stringify(message));
+      }
   }
 
   var btnDoDeleteUser = function(){
