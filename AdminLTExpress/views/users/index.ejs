@@ -652,12 +652,13 @@
     var listUsers = <%- JSON.stringify(listUsers) %>;
 
     console.log(listUsers);
-    var dataOtherInfo = JSON.parse(listUsers[0].other_info);
-    var oneSignalIdUser = dataOtherInfo["onesignal_user_id"];
+    var oneSignalIdUser = listUsers[0].onesignal_user_id;
+    console.log(oneSignalIdUser);
     var checkBox = document.getElementById("check_PN");
     var edtPN = document.getElementById("edt_PN");
 
-    var btnDoSendEmail = function(){
+    var btnDoSendEmail = function()
+    {
 
       console.log($( "#demo-form2" ).serialize());
     $.ajax({
