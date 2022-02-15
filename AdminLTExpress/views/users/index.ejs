@@ -314,9 +314,13 @@
 
             <div class="form-group">
               <label class="control-label col-md-2 col-sm-3 col-xs-4">Expire Time<span class="required">*</span></label>
-              <div class="col-md-9 col-sm-9 col-xs-12">
-                <input  class="form-control col-md-5 col-xs-10" type="text" id = "edt_expire_time" name="edt_expire_time" value=""
-                > <!-- noi dung text: val -->
+              <div class="col-md-9 col-sm-9 col-xs-12 ">
+                <div class='input-group date' id='expiretime'>
+                        <input type='text' class="form-control" placeholder="expire_time" id="edt_expire_time" name="edt_expire_time"/>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
               </div>
             </div>
 
@@ -503,6 +507,13 @@
 </section>
 
 <script type="text/javascript">
+
+  $(document).ready(function(){
+    $('#expiretime').datetimepicker({
+      format: 'YYYY/MM/DD HH:mm:ss',
+      defaultDate: new Date()
+    });
+  });
   var container = document.getElementById("jsoneditor");
   var options ={
     mode: 'code',
