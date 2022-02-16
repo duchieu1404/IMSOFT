@@ -164,9 +164,6 @@ router.post('/event_fsc_delete', function (req, res) {
 
 //Version
 
-router.get('/version',function(req,res){
-    return res.render('config/version');
-});
 
 router.get('/version', function (req, res) {
     req.app.ConfigDA.admin_get_update_version({}, function admin_get_update_verison(err, dataX) {
