@@ -164,13 +164,22 @@ router.post('/event_fsc_delete', function (req, res) {
 
 //Version
 
-
 router.get('/version', function (req, res) {
     req.app.ConfigDA.admin_get_update_version({}, function admin_get_update_verison(err, dataX) {
         if (err || !dataX) {
             return res.render('config/version', { dataConfigs: [] });
         }
         return res.render('config/version', { dataConfigs: dataX });
+    });
+});
+
+router.post('/version', function (req, res) {
+    req.app.ConfigDA.admin_update_version_save({
+        id: req.body.edt_id,
+        version_name: req.body.edt_version,
+        status: req.body.edt_status,
+    }, function (errSave, dataSave) {
+        return res.redirect('/config/version');
     });
 });
 
