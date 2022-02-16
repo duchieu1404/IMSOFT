@@ -1,3 +1,4 @@
+const { RSA_NO_PADDING } = require('constants');
 var express = require('express');
 var router = express.Router();
 const fs = require('fs')
@@ -158,6 +159,21 @@ router.post('/event_fsc_delete', function (req, res) {
         }, function (err, data) {
             return res.send(data || { status: 1, msg: "err" });
         });
+    });
+});
+
+//Version
+
+router.get('/version',function(req,res){
+    return res.render('config/version');
+});
+
+router.get('/version', function (req, res) {
+    req.app.ConfigDA.admin_get_update_version({}, function admin_get_update_verison(err, dataX) {
+        if (err || !dataX) {
+            return res.render('config/version', { dataConfigs: [] });
+        }
+        return res.render('config/version', { dataConfigs: dataX });
     });
 });
 
