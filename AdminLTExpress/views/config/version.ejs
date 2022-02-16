@@ -54,8 +54,8 @@
 
               </th>
               <th id="ds_<%= conf.id %>_dts_id"><%= conf.id %></th>
-              <th id="ds_<%= conf.id %>_dts_version"><%= conf.id %></th>
-              <th id="ds_<%= conf.id %>_dts_status"><%= conf.status %></th>
+              <th id="ds_<%= conf.version %>_dts_version"><%= conf.version %></th>
+              <th id="ds_<%= conf.status %>_dts_status"><%= conf.status %></th>
 
             </tr>
             <% }); %>
@@ -106,8 +106,8 @@
               <label class="control-label col-md-2 col-sm-2 col-xs-2">Status</label>
               <div class="col-md-9 col-sm-9 col-xs-12">
                 <select class="form-control" id="edt_status" name="edt_status">
-                  <option value="NO">DISABLE</option>
-                  <option value="YES">ENABLE</option>
+                  <option value="no">NO</option>
+                  <option value="yes">YES</option>
                 </select>
               </div>
             </div>
