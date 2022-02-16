@@ -171,3 +171,7 @@ UserDA.prototype.user_time_iap = function (data, callback) {
 UserDA.prototype.user_update_version = function (data, callback) {
     return this.dbModel.query_callback_object("call user_update_version(?,?,?,?)", [data.user_id, data.device_id, data.need_force, data.version], callback);
 }
+
+UserDA.prototype.user_get_update_version = function(data,callback){
+    return this.dbModel.query_callback_object("call user_get_update_version()",[],callback);
+}
