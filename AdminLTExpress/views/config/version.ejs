@@ -25,14 +25,6 @@
           <h3 class="box-title">Config Version</h3>
         </div>
 
-        <div class="box-footer">
-          <div>
-            <input type="button" data-toggle="modal" data-target=".edit-config-modal-lg" class="btn btn-success"
-              value="Add Event" onclick="onClick_btnAddNewEvent()" />
-
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
@@ -47,14 +39,25 @@
             <tr>
               <th>Action </th>
               <th>Id</th>
-              <th>Status</th>
-              <th>Time From</th>
-              <th>Time To</th>
-
+              <th>Version</th>
             </tr>
           </thead>
           <tbody>
-          
+            <% dataConfigs.forEach(function(conf) 
+          {       
+            %>
+            <tr id="dataServerConfig_<%= conf.id %>">
+              <th>
+                <button type="button" class="btn btn-primary" data-toggle="modal" 
+                  data-target=".edit-config-modal-lg" onclick="btnEditClicked(<%= conf.id %>)">Edit</button>
+
+              </th>
+              <th id="ds_<%= conf.id %>_dts_id"><%= conf.id %></th>
+              <th id="ds_<%= conf.id %>_dts_version"><%= conf.id %></th>
+              <th id="ds_<%= conf.id %>_dts_status"><%= conf.status %></th>
+
+            </tr>
+            <% }); %>
           </tbody>
         </table>
       </div>
@@ -75,7 +78,7 @@
         <div class="modal-body">
 
 
-          <form action="/config/event_fsc" method="post" id="demo-form2" data-parsley-validate
+          <form action="/config/version" method="post" id="demo-form2" data-parsley-validate
             class="form-horizontal form-label-left">
 
             <!-- === -->
@@ -89,41 +92,26 @@
               </div>
             </div>
 
+            <div class="form-group">
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Version</label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Version" id="edt_version" name="edt_version" value=""
+                  readonly="readonly">
+              </div>
+            </div>
+
 
             <div class="form-group">
               <label class="control-label col-md-2 col-sm-2 col-xs-2">status</label>
               <div class="col-md-9 col-sm-9 col-xs-12">
                 <select class="form-control" id="edt_status" name="edt_status">
-                  <option value="0">DISABLE</option>
-                  <option value="1">ENABLE</option>
+                  <option value="NO">DISABLE</option>
+                  <option value="YES">ENABLE</option>
                 </select>
               </div>
             </div>
 
-
-            <div class="form-group">
-              <label class="control-label col-md-2 col-sm-2 col-xs-2">time_from</label>
-              <div class="col-md-9 col-sm-9 col-xs-12 ">
-                <div class='input-group date' id='datetimefrom'>
-                        <input type='text' class="form-control" placeholder="time_from" id="edt_time_from" name="edt_time_from"/>
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-md-2 col-sm-2 col-xs-2">time_to</label>
-              <div class="col-md-9 col-sm-9 col-xs-12">
-                <div class='input-group date' id='datetimeto'>
-                        <input type='text' class="form-control" placeholder="time_to" id="edt_time_to" name="edt_time_to"/>
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-              </div>
-            </div>
 
             <div class="modal-footer">
               <input type="submit" class="btn btn-default" data-dismiss="modal" value="Close">
@@ -183,106 +171,14 @@
 </section>
 
 <script type="text/javascript">
-  $(document).ready(function(){
-    $('#datetimefrom').datetimepicker({
-      format: 'YYYY/MM/DD HH:mm:ss',
-      defaultDate: new Date()
-    });
-    $('#datetimeto').datetimepicker({
-      format: 'YYYY/MM/DD HH:mm:ss',
-      defaultDate: new Date()
-    });
-  });
-  var btnDeleteEvent = function (serverId) {
-    $('#delete_edt_Id').val($('#ds_' + serverId + '_dts_id').html());
-  }
-
-  var btnDoDeleteEvent = function () {
-
-    if ($('#delete_text_confirm').val() != 'delete') {
-      alert("Please type delete to confirm you want to delete that event fsc");
-      $('#delete_text_confirm').focus();
-      return;
-    }
-
-    let user_id_delete = $('#delete_edt_Id').val();
-    $.ajax({
-      type: "POST",
-      url: '/config/event_fsc_delete',
-      data: $("#delete_user-form2").serialize(),
-      success: function (dataResult, textStatus, jqXHR) {
-        console.log(dataResult);
-        if (dataResult.status == 0) {
-          $('#dataServerConfig_' + user_id_delete).remove();
-          $(".delete_user-modal-lg .close").click()
-          alert("Delete success");
-        }
-      },
-      dataType: 'json'
-    });
-  }
 
   var btnEditClicked = function (serverId) {
     $('#edt_id').val($('#ds_' + serverId + '_dts_id').html());
+    $('#edt_version').val($('#ds_' + serverId + '_dts_version').html());
     $('#edt_status').val($('#ds_' + serverId + '_dts_status').html());
-    $('#edt_type').val($('#ds_' + serverId + '_dts_type').html());
-    $('#edt_time_from').val($('#ds_' + serverId + '_dts_time_from').html());
-    $('#edt_time_to').val($('#ds_' + serverId + '_dts_time_to').html());
-
-    $('#edt_status').prop('readonly', status == 2);
 
   }
 
-
-  var onClick_btnAddNewEvent = function () {
-    $('#edt_id').val(-1);
-    $('#edt_status').val('1');
-    $('#edt_type').val('');
-    $('#edt_time_from').val('');
-    $('#edt_time_to').val('');
-
-    $('#edt_status').prop('readonly', false);
-  }
-
-  var btnInsertTestDataClicked = function () {
-    console.log("btnInsertTestDataClicked");
-    $.ajax({
-      type: "POST",
-      url: '/config/event_fsc_insert_test_data',
-      data: $("#event-fsc-insert-test-data-form").serialize(),
-      success: function (dataResult, textStatus, jqXHR) {
-        console.log(dataResult);
-        if (dataResult.status == 0) {
-          $(".event-fsc_insert_test_data-modal-lg .close").click()
-          alert("success");
-        }
-        else {
-          alert("error");
-        }
-      },
-      dataType: 'json'
-    });
-  }
-
-  var btnInsertTestDataMeClicked = function () {
-    console.log("btnInsertTestDataMeClicked");
-    $.ajax({
-      type: "POST",
-      url: '/config/event_fsc_insert_test_data_me',
-      data: $("#event-fsc-insert-test-data-me-form").serialize(),
-      success: function (dataResult, textStatus, jqXHR) {
-        console.log(dataResult);
-        if (dataResult.status == 0) {
-          $(".event-fsc_insert_test_data_me-modal-lg .close").click()
-          alert("success");
-        }
-        else {
-          alert("error");
-        }
-      },
-      dataType: 'json'
-    });
-  }
 </script>
 
 <% include ../partial/admin_footer.ejs %>
