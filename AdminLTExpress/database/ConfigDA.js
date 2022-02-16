@@ -87,6 +87,6 @@ ConfigDA.prototype.admin_event_fsc_save = function (data, callback) {
     ], callback);
 }
 
-ConfigDA.prototype.admin_get_update_Version = function(data,callback){
+ConfigDA.prototype.admin_get_update_version = function(data,callback){
     return this.dbModel.query_callback_array("call admin_get_update_version()",[],callback);
 }
