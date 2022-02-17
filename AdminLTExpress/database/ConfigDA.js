@@ -94,7 +94,7 @@ ConfigDA.prototype.admin_get_update_version = function(data,callback){
 ConfigDA.prototype.admin_update_version_save = function(data,callback){
     return this.dbModel.query_callback_array("call admin_update_version_save(?,?,?)",[
         data.id,
-        data.version_name,
+        data.version,
         data.status
     ],callback);
 }
