@@ -176,7 +176,7 @@ router.get('/version', function (req, res) {
 router.post('/version', function (req, res) {
     req.app.ConfigDA.admin_update_version_save({
         id: req.body.edt_id,
-        version_name: req.body.edt_version,
+        version: req.body.edt_version,
         status: req.body.edt_status,
     }, function (errSave, dataSave) {
         return res.redirect('/config/version');
