@@ -175,3 +175,7 @@ UserDA.prototype.user_update_version = function (data, callback) {
 UserDA.prototype.user_get_update_version = function(data,callback){
     return this.dbModel.query_callback_object("call user_get_update_version()",[],callback);
 }
+
+UserDA.prototype.config_get_time_server = function(data,callback){
+    return this.dbModel.query_callback_object("call config_get_time_server()",[],callback);
+}
