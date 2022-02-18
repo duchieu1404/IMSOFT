@@ -1153,4 +1153,20 @@ router.post("/user_get_update_version", function (req, res, next) {
     })
 });
 
+router.post("/config_get_time_server", function (req, res, next) {
+    req.app.UserDA.config_get_time_server(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail"
+            });
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data
+        });
+    })
+});
+
 module.exports = router;
