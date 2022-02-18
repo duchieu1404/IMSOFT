@@ -68,113 +68,33 @@ ConfigDA.prototype.admin_tester_delete = function(data,callback){
     ], callback);
 }
 
-
-
-ConfigDA.prototype.admin_event_popup_get_all = function(data,callback){
-    return this.dbModel.query_callback_array("call admin_event_popup_get_all()", [], callback);
+ConfigDA.prototype.admin_event_fsc_get_all = function (data, callback) {
+    return this.dbModel.query_callback_array("call admin_event_fsc_get_all()", [], callback);
 }
-
-
-ConfigDA.prototype.admin_event_popup_save = function(data,callback){
-    return this.dbModel.query_callback_array("call admin_event_popup_save(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [
-        data.admin_id,
-        data.id,
-        data.os_type,
-        data.version,
-        data.show_from,
-        data.show_to,
-        data.check_type,
-        data.force_view,
-        data.asset_url,
-        data.bundle_name,
-        data.status,
-        data.note,
-        data.promote_iap_cnf,
-        data.promote_bundle_cnf,
-        data.img_url,
-        data.data,
-        data.template_type,
-        data.order_by,
-        data.show_map_count,
-        data.only_users,
-        data.ignore_users,
-        data.show_condition
-    ], callback);
-}
-
-
-ConfigDA.prototype.admin_event_popup_delete = function(data,callback){
-    return this.dbModel.query_callback_object("call admin_event_popup_delete(?,?)", [
-        data.admin_id,
-        data.event_id
-    ], callback);
-}
-
-ConfigDA.prototype.admin_event_gcc_get_all = function (data, callback) {
-    return this.dbModel.query_callback_array("call admin_event_gcc_get_all()", [], callback);
-}
-ConfigDA.prototype.admin_event_gcc_delete = function (data, callback) 
+ConfigDA.prototype.admin_event_fsc_delete = function (data, callback) 
 {
-    return this.dbModel.query_callback_object("call admin_event_gcc_delete(?,?)", [
+    return this.dbModel.query_callback_object("call admin_event_fsc_delete(?,?)", [
         data.admin_id,
         data.event_id
     ], callback);
 }
-ConfigDA.prototype.admin_event_gcc_save = function (data, callback) {
-    return this.dbModel.query_callback_array("call admin_event_gcc_save(?,?,?,?,?,?)", [
+ConfigDA.prototype.admin_event_fsc_save = function (data, callback) {
+    return this.dbModel.query_callback_array("call admin_event_fsc_save(?,?,?,?)", [
         data.id,
         data.status,
         data.time_from,
-        data.time_to,
-        data.rest_ids,
-        data.evt_copy
+        data.time_to
     ], callback);
 }
 
-ConfigDA.prototype.event_gcc_insert_test_data = function (data, callback) {
-    return this.dbModel.query_callback_object("call event_gcc_insert_test_data(?,?)", [
-        data.event_id,
-        data.rest_id,
-    ], callback);
+ConfigDA.prototype.admin_get_update_version = function(data,callback){
+    return this.dbModel.query_callback_array("call admin_get_update_version()",[],callback);
 }
 
-ConfigDA.prototype.admin_event_ct_get_all = function (data, callback) {
-    return this.dbModel.query_callback_array("call admin_event_ct_get_all()", [], callback);
-}
-ConfigDA.prototype.admin_event_ct_delete = function (data, callback) {
-    return this.dbModel.query_callback_object("call admin_event_ct_delete(?,?)", [
-        data.admin_id,
-        data.event_id
-    ], callback);
-}
-ConfigDA.prototype.admin_event_ct_save = function (data, callback) {
-    return this.dbModel.query_callback_array("call admin_event_ct_save(?,?,?,?,?,?,?,?,?,?,?,?,?)", [
+ConfigDA.prototype.admin_update_version_save = function(data,callback){
+    return this.dbModel.query_callback_array("call admin_update_version_save(?,?,?)",[
         data.id,
-        data.status,
-        data.time_from,
-        data.time_to,
-        data.count_by,
-        data.join_require,
-        data.join_reward,
-        data.has_all_boost,
-        data.max_rest_id,
-        data.time_show_from,
-        data.time_show_to,
-        data.evt_popup_copy,
-        data.champion_rest
-    ], callback);
+        data.version,
+        data.status
+    ],callback);
 }
-
-ConfigDA.prototype.admin_event_ct_add_score = function (data, callback) {
-    return this.dbModel.query_callback_object("call event_ct_add_multi(?,?)", [
-        data.user_id,
-        data.list_score
-    ], callback);
-}
-ConfigDA.prototype.admin_event_ct_insert_test_data = function (data, callback) {
-    return this.dbModel.query_callback_object("call event_ct_insert_test_data(?,?)", [
-        data.event_id,
-        data.rest_id
-    ], callback);
-}
-
