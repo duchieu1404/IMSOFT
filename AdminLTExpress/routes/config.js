@@ -161,7 +161,7 @@ router.post('/event_fsc_delete', function (req, res) {
 });
 
 //Event Food Tour
-router.post('/event_ft', function (req, res) {
+router.get('/event_ft', function (req, res) {
     req.app.ConfigDA.admin_event_ft_get_all({}, function admin_event_ft_get_all(err, dataX) {
         if (err || !dataX) {
             return res.render('config/event_ft', { dataConfigs: [] });
