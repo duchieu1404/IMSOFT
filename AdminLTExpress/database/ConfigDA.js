@@ -9,11 +9,11 @@ var ConfigDA = function (app) {
 
 module.exports = ConfigDA;
 
-ConfigDA.prototype.admin_config_data_sync_type_get_all = function(data,callback){
+ConfigDA.prototype.admin_config_data_sync_type_get_all = function (data, callback) {
     return this.dbModel.query_callback_array("call admin_config_data_sync_type_get_all()", [], callback);
 }
 
-ConfigDA.prototype.admin_config_data_sync_category_save = function(data,callback){
+ConfigDA.prototype.admin_config_data_sync_category_save = function (data, callback) {
     return this.dbModel.query_callback_array("call admin_config_data_sync_category_save(?,?,?,?)", [
         data.admin_id,
         data.id,
@@ -22,13 +22,13 @@ ConfigDA.prototype.admin_config_data_sync_category_save = function(data,callback
     ], callback);
 }
 
-ConfigDA.prototype.admin_config_data_sync_category_get_all = function(data,callback){
+ConfigDA.prototype.admin_config_data_sync_category_get_all = function (data, callback) {
     return this.dbModel.query_callback_array("call admin_config_data_sync_category_get_all()", [], callback);
 }
 
 
 
-ConfigDA.prototype.admin_config_data_sync_type_save = function(data,callback){
+ConfigDA.prototype.admin_config_data_sync_type_save = function (data, callback) {
     return this.dbModel.query_callback_array("call admin_config_data_sync_type_save(?,?,?,?,?,?,?,?,?)", [
         data.admin_id,
         data.id,
@@ -43,12 +43,12 @@ ConfigDA.prototype.admin_config_data_sync_type_save = function(data,callback){
 }
 
 
-ConfigDA.prototype.admin_tester_get_all = function(data,callback){
+ConfigDA.prototype.admin_tester_get_all = function (data, callback) {
     return this.dbModel.query_callback_array("call admin_tester_get_all()", [], callback);
 }
 
 
-ConfigDA.prototype.admin_tester_save = function(data,callback){
+ConfigDA.prototype.admin_tester_save = function (data, callback) {
     return this.dbModel.query_callback_array("call admin_tester_save(?,?,?,?,?,?,?)", [
         data.admin_id,
         data.id,
@@ -61,7 +61,7 @@ ConfigDA.prototype.admin_tester_save = function(data,callback){
 }
 
 
-ConfigDA.prototype.admin_tester_delete = function(data,callback){
+ConfigDA.prototype.admin_tester_delete = function (data, callback) {
     return this.dbModel.query_callback_object("call admin_tester_delete(?,?)", [
         data.admin_id,
         data.tester_id
@@ -71,8 +71,7 @@ ConfigDA.prototype.admin_tester_delete = function(data,callback){
 ConfigDA.prototype.admin_event_fsc_get_all = function (data, callback) {
     return this.dbModel.query_callback_array("call admin_event_fsc_get_all()", [], callback);
 }
-ConfigDA.prototype.admin_event_fsc_delete = function (data, callback) 
-{
+ConfigDA.prototype.admin_event_fsc_delete = function (data, callback) {
     return this.dbModel.query_callback_object("call admin_event_fsc_delete(?,?)", [
         data.admin_id,
         data.event_id
@@ -87,14 +86,36 @@ ConfigDA.prototype.admin_event_fsc_save = function (data, callback) {
     ], callback);
 }
 
-ConfigDA.prototype.admin_get_update_version = function(data,callback){
-    return this.dbModel.query_callback_array("call admin_get_update_version()",[],callback);
+ConfigDA.prototype.admin_get_update_version = function (data, callback) {
+    return this.dbModel.query_callback_array("call admin_get_update_version()", [], callback);
 }
 
-ConfigDA.prototype.admin_update_version_save = function(data,callback){
-    return this.dbModel.query_callback_array("call admin_update_version_save(?,?,?)",[
+ConfigDA.prototype.admin_update_version_save = function (data, callback) {
+    return this.dbModel.query_callback_array("call admin_update_version_save(?,?,?)", [
         data.id,
         data.version,
         data.status
-    ],callback);
+    ], callback);
+}
+
+ConfigDA.prototype.admin_event_ft_get_all = function (data, callback) {
+    return this.dbModel.query_callback_array("call admin_event_ft_get_all()", [], callback);
+}
+
+ConfigDA.prototype.admin_event_ft_save = function (data, callback) {
+    return this.dbModel.query_callback_array("call admin_event_ft_save(?,?,?,?,?,?)", [
+        data.id,
+        data.status,
+        data.time_from,
+        data.time_to,
+        data.time_show_to,
+        data.join_require
+    ], callback);
+}
+
+ConfigDA.prototype.admin_event_ft_delete = function (data, callback) {
+    return this.dbModel.query_callback_object("call admin_event_ft_delete(?,?)", [
+        data.admin_id,
+        data.event_id
+    ], callback);
 }
