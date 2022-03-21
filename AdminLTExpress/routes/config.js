@@ -170,7 +170,7 @@ router.get('/event_ft', function (req, res) {
     });
 });
 
-router.post('event_ft', function (req, res) {
+router.post('/event_ft', function (req, res) {
     req.app.ConfigDA.admin_event_ft_save({
         id: req.body.edt_id,
         status: req.body.edt_status,
@@ -183,7 +183,7 @@ router.post('event_ft', function (req, res) {
     });
 });
 
-router.post('event_ft_delete', function (req, res) {
+router.post('/event_ft_delete', function (req, res) {
     req.app.ConfigDA.admin_event_ft_delete({}, function admin_event_ft_get_all(err, dataX) {
         req.app.ConfigDA.admin_event_ft_delete({
             event_id: req.body.delete_edt_Id
