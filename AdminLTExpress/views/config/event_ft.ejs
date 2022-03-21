@@ -4,7 +4,7 @@
   <h1>Server Config<small>Configuration</small></h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i>Configuration</a></li>
-    <li class="active">Event Food Tour Challenge</li>
+    <li class="active">Event Food Serve Challenge</li>
   </ol>
 </section>
 
@@ -52,7 +52,7 @@
               <th>Time To</th>
               <th>Time Show To</th>
               <th>Time Will Reward</th>
-              <th>Join Require</th>
+              <th>Join require</th>
 
             </tr>
           </thead>
@@ -76,8 +76,7 @@
               <th id="ds_<%= conf.id %>_dts_time_show_to"><%= conf.time_show_to %></th>
               <th id="ds_<%= conf.id %>_dts_time_will_reward"><%= conf.time_will_reward %></th>
               <th id="ds_<%= conf.id %>_dts_join_require"><%= conf.join_require %></th>
-              
-              
+
             </tr>
             <% }); %>
           </tbody>
@@ -100,7 +99,7 @@
         <div class="modal-body">
 
 
-          <form action="/config/event_fsc" method="post" id="demo-form2" data-parsley-validate
+          <form action="/config/event_ft" method="post" id="demo-form2" data-parsley-validate
             class="form-horizontal form-label-left">
 
             <!-- === -->
@@ -161,7 +160,7 @@
                     </div>
               </div>
             </div>
-
+            
             <div class="form-group">
               <label class="control-label col-md-2 col-sm-2 col-xs-2">join_require</label>
               <div class="col-md-9 col-sm-9 col-xs-12">
@@ -255,7 +254,7 @@
     let user_id_delete = $('#delete_edt_Id').val();
     $.ajax({
       type: "POST",
-      url: '/config/event_fsc_delete',
+      url: '/config/event_ft_delete',
       data: $("#delete_user-form2").serialize(),
       success: function (dataResult, textStatus, jqXHR) {
         console.log(dataResult);
@@ -276,6 +275,7 @@
     $('#edt_time_to').val($('#ds_' + serverId + '_dts_time_to').html());
     $('#edt_time_show_to').val($('#ds_' + serverId + '_dts_time_show_to').html());
     $('#edt_join_require').val($('#ds_' + serverId + '_dts_join_require').html());
+
     $('#edt_status').prop('readonly', status == 2);
 
   }
