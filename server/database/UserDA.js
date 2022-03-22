@@ -121,6 +121,10 @@ UserDA.prototype.event_fsc_get_event_info_this_week = function (data, callback) 
     return this.dbModel.query_callback_object("call event_fsc_get_event_info_this_week()", [], callback);
 }
 
+UserDA.prototype.event_ft_get_current = function (data, callback) {
+    return this.dbModel.query_callback_object("call event_ft_get_current()", [], callback);
+}
+
 UserDA.prototype.team_info_get_list = function (data, callback) {
     return this.dbModel.query_callback_object("call team_info_get_list(?)", [data.team_ids], callback);
 }
@@ -172,10 +176,10 @@ UserDA.prototype.user_update_version = function (data, callback) {
     return this.dbModel.query_callback_object("call user_update_version(?,?,?,?)", [data.user_id, data.device_id, data.need_force, data.version], callback);
 }
 
-UserDA.prototype.user_get_update_version = function(data,callback){
-    return this.dbModel.query_callback_object("call user_get_update_version()",[],callback);
+UserDA.prototype.user_get_update_version = function (data, callback) {
+    return this.dbModel.query_callback_object("call user_get_update_version()", [], callback);
 }
 
-UserDA.prototype.config_get_time_server = function(data,callback){
-    return this.dbModel.query_callback_object("call config_get_time_server()",[],callback);
+UserDA.prototype.config_get_time_server = function (data, callback) {
+    return this.dbModel.query_callback_object("call config_get_time_server()", [], callback);
 }
