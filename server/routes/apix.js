@@ -786,6 +786,25 @@ router.post('/event_ft_get_current', function (req, res, next) {
 
 });
 
+router.post('/event_ft_add_multi', function (req, res, next) {
+    console.log("event_ft_add_multi: ", req.body);
+
+    req.app.UserDA.event_ft_add_multi(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+                data: []
+            });
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data || "{}"
+        })
+    });
+});
+
 router.post('/user_trophy_get', function (req, res, next) {
 
     console.log("user_trophy_get data:", req.body);
