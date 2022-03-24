@@ -129,6 +129,15 @@ UserDA.prototype.event_ft_add_multi = function (data, callback) {
     return this.dbModel.query_callback_object("call event_ft_add_multi(?,?)", [data.user_id, data.list_score], callback);
 }
 
+UserDA.prototype.event_ft_get_leaderboard = function(data,callback){
+    return this.dbModel.query_callback_array("call event_ft_get_leaderboard(?,?)",[data.event_id,data.user_id],callback);
+}
+
+UserDA.prototype.event_ft_get_leaderboard_me = function(data,callback){
+    return this.dbModel.query_callback_object("call event_ft_get_leaderboard_me(?,?)",[data.event_id,data.user_id],callback);
+}
+
+
 UserDA.prototype.team_info_get_list = function (data, callback) {
     return this.dbModel.query_callback_object("call team_info_get_list(?)", [data.team_ids], callback);
 }
