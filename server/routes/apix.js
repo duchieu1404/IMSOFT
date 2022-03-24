@@ -805,6 +805,40 @@ router.post('/event_ft_add_multi', function (req, res, next) {
     });
 });
 
+router.post('/event_ft_get_leaderboard', function (req, res, next) {
+
+    req.app.UserDA.event_ft_get_leaderboard(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+                data: []
+            });
+        }
+        return res.json({
+            status: 0,
+            msg: "OK",
+            data: data
+        })
+    });
+});
+
+router.post('/event_ft_get_leaderboard_me', function (req, res, next) {
+    req.app.UserDA.event_ft_get_leaderboard_me(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+            });
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data
+        })
+    });
+});
+
 router.post('/user_trophy_get', function (req, res, next) {
 
     console.log("user_trophy_get data:", req.body);
