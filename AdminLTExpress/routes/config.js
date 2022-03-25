@@ -177,6 +177,7 @@ router.post('/event_ft', function (req, res) {
         time_from: req.body.edt_time_from,
         time_to: req.body.edt_time_to,
         time_show_to: req.body.edt_time_show_to,
+        time_will_reward: req.body.edt_time_will_reward,
         join_require: req.body.edt_join_require
     }, function (errSave, dataSave) {
         return res.redirect('/config/event_ft');
