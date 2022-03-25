@@ -161,6 +161,18 @@
                     </div>
               </div>
             </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-2 col-xs-2">time_will_reward</label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <div class='input-group date' id='datetimewillreward'>
+                        <input type='text' class="form-control" placeholder="time_will_reward" id="edt_time_will_reward" name="edt_time_will_reward"/>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+              </div>
+            </div>
             
             <div class="form-group">
               <label class="control-label col-md-2 col-sm-2 col-xs-2">join_require</label>
@@ -240,6 +252,10 @@
       format: 'YYYY/MM/DD HH:mm:ss',
       defaultDate: new Date()
     });
+    $('#datetimewillreward').datetimepicker({
+      format: 'YYYY/MM/DD HH:mm:ss',
+      defaultDate: new Date()
+    });
   });
   var btnDeleteEvent = function (serverId) {
     $('#delete_edt_Id').val($('#ds_' + serverId + '_dts_id').html());
@@ -276,6 +292,7 @@
     $('#edt_time_from').val($('#ds_' + serverId + '_dts_time_from').html());
     $('#edt_time_to').val($('#ds_' + serverId + '_dts_time_to').html());
     $('#edt_time_show_to').val($('#ds_' + serverId + '_dts_time_show_to').html());
+    $('#edt_time_will_reward').val($('#ds_' + serverId + '_dts_time_will_reward').html());
     $('#edt_join_require').val($('#ds_' + serverId + '_dts_join_require').html());
 
     $('#edt_status').prop('readonly', status == 2);
