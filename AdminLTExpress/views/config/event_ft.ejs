@@ -51,7 +51,6 @@
               <th>Time From</th>
               <th>Time To</th>
               <th>Time Show To</th>
-              <th>Time Will Reward</th>
               <th>Join require</th>
 
             </tr>
@@ -74,7 +73,6 @@
               <th id="ds_<%= conf.id %>_dts_time_from"><%= conf.time_from %></th>
               <th id="ds_<%= conf.id %>_dts_time_to"><%= conf.time_to %></th>
               <th id="ds_<%= conf.id %>_dts_time_show_to"><%= conf.time_show_to %></th>
-              <th id="ds_<%= conf.id %>_dts_time_will_reward"><%= conf.time_will_reward %></th>
               <th id="ds_<%= conf.id %>_dts_join_require"><%= conf.join_require %></th>
 
             </tr>
@@ -161,18 +159,6 @@
                     </div>
               </div>
             </div>
-
-            <div class="form-group">
-              <label class="control-label col-md-2 col-sm-2 col-xs-2">time_will_reward</label>
-              <div class="col-md-9 col-sm-9 col-xs-12">
-                <div class='input-group date' id='datetimewillreward'>
-                        <input type='text' class="form-control" placeholder="time_will_reward" id="edt_time_will_reward" name="edt_time_will_reward"/>
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-              </div>
-            </div>
             
             <div class="form-group">
               <label class="control-label col-md-2 col-sm-2 col-xs-2">join_require</label>
@@ -249,10 +235,6 @@
       defaultDate: new Date()
     });
     $('#datetimeshowto').datetimepicker({
-      format: 'YYYY/MM/DD HH:mm:ss',
-      defaultDate: new Date()
-    });
-    $('#datetimewillreward').datetimepicker({
       format: 'YYYY/MM/DD HH:mm:ss',
       defaultDate: new Date()
     });
