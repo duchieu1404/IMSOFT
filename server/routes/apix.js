@@ -857,6 +857,27 @@ router.post('/event_ft_get_reward', function (req, res, next) {
     });
 });
 
+router.post('/event_ft_claiming_reward', function (req, res, next) {
+    req.app.UserDA.event_ft_claiming_reward(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+                data: []
+            });
+
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data,
+        })
+    });
+});
+
+
+
+
 router.post('/user_trophy_get', function (req, res, next) {
 
     console.log("user_trophy_get data:", req.body);

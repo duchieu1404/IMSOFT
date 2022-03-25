@@ -142,6 +142,11 @@ UserDA.prototype.event_ft_get_reward = function (data, callback) {
 }
 
 
+UserDA.prototype.event_ft_claiming_reward = function (data, callback) {
+    return this.dbModel.query_callback_object("call event_ft_claiming_reward()", [data.event_id,data.user_id], callback);
+}
+
+
 UserDA.prototype.team_info_get_list = function (data, callback) {
     return this.dbModel.query_callback_object("call team_info_get_list(?)", [data.team_ids], callback);
 }
