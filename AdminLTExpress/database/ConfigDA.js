@@ -109,6 +109,7 @@ ConfigDA.prototype.admin_event_ft_save = function (data, callback) {
         data.time_from,
         data.time_to,
         data.time_show_to,
+        data.time_will_reward,
         data.join_require
     ], callback);
 }
