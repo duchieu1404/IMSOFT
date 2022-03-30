@@ -177,7 +177,12 @@ router.post('/event_ft', function (req, res) {
         time_from: req.body.edt_time_from,
         time_to: req.body.edt_time_to,
         time_show_to: req.body.edt_time_show_to,
-        join_require: req.body.edt_join_require
+        join_require: req.body.edt_join_require,
+        rank1 : req.body.edt_rank1,
+        rank2 : req.body.edt_rank2,
+        rank3 : req.body.edt_rank3,
+        rank_to7 : req.body.edt_rank_to7,
+        rank_to20 : req.body.edt_rank_to20,
     }, function (errSave, dataSave) {
         return res.redirect('/config/event_ft');
     });
