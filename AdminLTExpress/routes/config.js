@@ -178,11 +178,11 @@ router.post('/event_ft', function (req, res) {
         time_to: req.body.edt_time_to,
         time_show_to: req.body.edt_time_show_to,
         join_require: req.body.edt_join_require,
-        rank1 : req.body.edt_rank1,
-        rank2 : req.body.edt_rank2,
-        rank3 : req.body.edt_rank3,
-        rank_to7 : req.body.edt_rank_to7,
-        rank_to20 : req.body.edt_rank_to20,
+        rank1: req.body.edt_rank1,
+        rank2: req.body.edt_rank2,
+        rank3: req.body.edt_rank3,
+        rank_to7: req.body.edt_rank_to7,
+        rank_to20: req.body.edt_rank_to20,
     }, function (errSave, dataSave) {
         return res.redirect('/config/event_ft');
     });
@@ -198,6 +198,16 @@ router.post('/event_ft_delete', function (req, res) {
     });
 });
 
+
+router.post('/event_ft_insert_test_data', function (req, res) {
+    req.app.ConfigDA.event_ft_insert_test_data({}, function event_ft_insert_test_data(err, dataX) {
+        req.app.ConfigDA.event_ft_insert_test_data({
+            event_id: req.body.edt_event_id
+        }, function (err, data) {
+            return res.send(data || { status: 1, msg: "err" });
+        });
+    });
+});
 //Version
 
 router.get('/version', function (req, res) {

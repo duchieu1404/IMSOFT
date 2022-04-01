@@ -29,6 +29,8 @@
           <div>
             <input type="button" data-toggle="modal" data-target=".edit-config-modal-lg" class="btn btn-success"
               value="Add Event" onclick="onClick_btnAddNewEvent()" />
+            <input type="button" data-toggle="model" data-target=".event-ft-insert-test-data-modal-lg" class="btn-btn-info"
+              value="Insert Test Data" />
 
           </div>
         </div>
@@ -222,6 +224,36 @@
     </div>
   </div>
 
+  <div class ="model fade event-ft-insert-test-data-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="model-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="model"><span aria-hidden="true"></span>
+          </button>
+          <h4 class="modal-title" id="myModelLabel">Insert Test Data</h4>
+        </div>
+        <div class="modal-body">
+          <form action="/config/event_ft_insert_test_data" method="post" id="event-ft-insert-test-data-form" data-parsley-validate
+          class="form-horizontal form-label-left">
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">event_id</label>
+
+              <div class="col-md-6 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="event_id" id="edt_event_id" name="edt_event_id"
+                value="">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <input type="button" class="btn btn-primary" value="Add" onclick="btnInsertTestDataClicked()">
+              <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <div class="modal fade delete_user-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -352,12 +384,12 @@
     console.log("btnInsertTestDataClicked");
     $.ajax({
       type: "POST",
-      url: '/config/event_fsc_insert_test_data',
-      data: $("#event-fsc-insert-test-data-form").serialize(),
+      url: '/config/event_ft_insert_test_data',
+      data: $("#event-ft-insert-test-data-form").serialize(),
       success: function (dataResult, textStatus, jqXHR) {
         console.log(dataResult);
         if (dataResult.status == 0) {
-          $(".event-fsc_insert_test_data-modal-lg .close").click()
+          $(".event-ft_insert_test_data-modal-lg .close").click()
           alert("success");
         }
         else {

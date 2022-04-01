@@ -125,3 +125,10 @@ ConfigDA.prototype.admin_event_ft_delete = function (data, callback) {
         data.event_id
     ], callback);
 }
+
+
+ConfigDA.prototype.event_ft_insert_test_data = function (data, callback) {
+    return this.dbModel.query_callback_object("call event_ft_insert_test_data(?)", [
+        data.event_id
+    ], callback);
+}
