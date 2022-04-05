@@ -845,14 +845,14 @@ router.post('/event_ft_get_reward', function (req, res, next) {
             return res.json({
                 status: 1,
                 msg: "ServerMsg/api_fail",
-                data: []
+                data: {}
             });
 
         }
         return res.json({
-            status: 0,
-            msg: "OK",
-            data: data,
+            status: data.status,
+            msg: data.msg,
+            data: data.data
         })
     });
 });
