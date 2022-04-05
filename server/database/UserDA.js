@@ -138,7 +138,7 @@ UserDA.prototype.event_ft_get_leaderboard_me = function (data, callback) {
 }
 
 UserDA.prototype.event_ft_get_reward = function (data, callback) {
-    return this.dbModel.query_callback_array("call event_ft_get_reward()", [], callback);
+    return this.dbModel.query_callback_array("call event_ft_get_reward(?)", [data.event_id], callback);
 }
 
 
