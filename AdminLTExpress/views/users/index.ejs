@@ -550,11 +550,12 @@
          console.log(dataResult);
          if(dataResult.status ==0){
             var dataObj = JSON.parse(dataResult.data||{});
+            console.log(dataObj);
            var dt = {};
            for(var ii in dataObj){
              dt[ii] = JSON.parse(dataObj[ii])
            }
-           console.log(dataObj);
+           
            editor.set(dt);
 
          }
