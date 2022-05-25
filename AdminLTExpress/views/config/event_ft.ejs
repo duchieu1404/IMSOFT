@@ -31,6 +31,8 @@
               value="Add Event" onclick="onClick_btnAddNewEvent()" />
             <input type="button" data-toggle="modal" data-target=".event-ft-insert-test-data-modal-lg" class="btn btn-info"
               value="Insert Test Data" />
+            <input type="button" data-toggle="modal" data-target=".event-ft-insert-test-event-data-modal-lg" class="btn btn-info"
+            value="Insert Test Event" onclick="onClick_btnAddNewEventTest()" />
 
           </div>
         </div>
@@ -378,6 +380,10 @@
     $('#edt_rank_to20').val('');
 
     $('#edt_status').prop('readonly', false);
+  }
+
+  var onClick_btnAddNewEventTest = function() {
+    
   }
 
   var btnInsertTestDataClicked = function () {
