@@ -188,6 +188,12 @@ router.post('/event_ft', function (req, res) {
     });
 });
 
+router.post('/event_ft', function (req, res) {
+    req.app.ConfigDA.admin_event_ft_save({}, function (errSave, dataSave) {
+        return res.redirect('/config/event_ft');
+    });
+});
+
 router.post('/event_ft_delete', function (req, res) {
     req.app.ConfigDA.admin_event_ft_delete({}, function admin_event_ft_get_all(err, dataX) {
         req.app.ConfigDA.admin_event_ft_delete({

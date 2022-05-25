@@ -119,6 +119,12 @@ ConfigDA.prototype.admin_event_ft_save = function (data, callback) {
     ], callback);
 }
 
+ConfigDA.prototype.admin_event_ft_save_test = function (data, callback) {
+    return this.dbModel.query_callback_array("call admin_event_ft_save()", [
+    ], callback);
+}
+
+
 ConfigDA.prototype.admin_event_ft_delete = function (data, callback) {
     return this.dbModel.query_callback_object("call admin_event_ft_delete(?,?)", [
         data.admin_id,
