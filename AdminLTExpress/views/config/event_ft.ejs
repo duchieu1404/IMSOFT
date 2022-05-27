@@ -383,7 +383,20 @@
   }
 
   var onClick_btnAddNewEventTest = function() {
-    
+    console.log("btnAddNewEventTest");
+    $.ajax({
+      type: "POST",
+      url: '/config/event_ft_test_event',
+      success: function (data) {
+        if (data.status == 0) {
+          alert("success");
+        }
+        else {
+          alert("error");
+        }
+      },
+      dataType: 'json'
+    });
   }
 
   var btnInsertTestDataClicked = function () {
@@ -395,7 +408,6 @@
       success: function (dataResult, textStatus, jqXHR) {
         console.log(dataResult);
         if (dataResult.status == 0) {
-          $(".event-ft_insert_test_data-modal-lg .close").click()
           alert("success");
         }
         else {
