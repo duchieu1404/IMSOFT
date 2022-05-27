@@ -120,7 +120,7 @@ ConfigDA.prototype.admin_event_ft_save = function (data, callback) {
 }
 
 ConfigDA.prototype.admin_event_ft_save_test = function (data, callback) {
-    return this.dbModel.query_callback_array("call admin_event_ft_save()", [
+    return this.dbModel.query_callback_array("call admin_event_ft_save_test()", [
     ], callback);
 }
 

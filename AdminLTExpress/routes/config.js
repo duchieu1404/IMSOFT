@@ -188,7 +188,7 @@ router.post('/event_ft', function (req, res) {
     });
 });
 
-router.post('/event_ft_test_event', function (req, res) {
+router.post('/admin_event_ft_save_test', function (req, res) {
     req.app.ConfigDA.admin_event_ft_save_test({}, function (errSave, dataSave) {
         return res.redirect('/config/event_ft');
     });
