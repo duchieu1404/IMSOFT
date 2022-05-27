@@ -388,12 +388,8 @@
       type: "POST",
       url: '/config/admin_event_ft_save_test',
       success: function (data) {
-        if (data.status == 0) {
-          alert("success");
-        }
-        else {
-          alert("error");
-        }
+        alert('success');
+        window.location.reload();
       },
       dataType: 'json'
     });
