@@ -133,8 +133,8 @@ UserDA.prototype.event_ft_get_leaderboard = function (data, callback) {
     return this.dbModel.query_callback_array("call event_ft_get_leaderboard(?,?)", [data.event_id, data.user_id], callback);
 }
 
-UserDA.prototype.event_ft_get_leaderboard_me = function (data, callback) {
-    return this.dbModel.query_callback_object("call event_ft_get_leaderboard_me(?,?)", [data.event_id, data.user_id], callback);
+UserDA.prototype.event_ft_get_leaderboard_final = function (data, callback) {
+    return this.dbModel.query_callback_array("call event_ft_get_leaderboard_final(?,?)", [data.event_id, data.user_id], callback);
 }
 
 UserDA.prototype.event_ft_get_reward = function (data, callback) {
