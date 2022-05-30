@@ -823,8 +823,8 @@ router.post('/event_ft_get_leaderboard', function (req, res, next) {
     });
 });
 
-router.post('/event_ft_get_leaderboard_me', function (req, res, next) {
-    req.app.UserDA.event_ft_get_leaderboard_me(req.body, function (err, data) {
+router.post('/event_ft_get_leaderboard_final', function (req, res, next) {
+    req.app.UserDA.event_ft_get_leaderboard_final(req.body, function (err, data) {
         if (err || !data) {
             return res.json({
                 status: 1,
@@ -832,9 +832,9 @@ router.post('/event_ft_get_leaderboard_me', function (req, res, next) {
             });
         }
         return res.json({
-            status: data.status,
-            msg: data.msg,
-            data: data.data
+            status: 0,
+            msg: "OK",
+            data: data
         })
     });
 });
