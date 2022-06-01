@@ -56,6 +56,7 @@
               <th>Time To</th>
               <th>Time Show To</th>
               <th>Join require</th>
+              <th>Max User(Leaderboard)</th>
               <th>Rank1</th>
               <th>Rank2</th>
               <th>Rank3</th>
@@ -83,6 +84,7 @@
               <th id="ds_<%= conf.id %>_dts_time_to"><%= conf.time_to %></th>
               <th id="ds_<%= conf.id %>_dts_time_show_to"><%= conf.time_show_to %></th>
               <th id="ds_<%= conf.id %>_dts_join_require"><%= conf.join_require %></th>
+              <th id="ds_<%= conf.id %>_dts_max_user"><%= conf.max_user %></th>
               <th id="ds_<%= conf.id %>_dts_rank1"><%= conf.rank1 %></th>
               <th id="ds_<%= conf.id %>_dts_rank2"><%= conf.rank2 %></th>
               <th id="ds_<%= conf.id %>_dts_rank3"><%= conf.rank3 %></th>
@@ -178,6 +180,13 @@
               <label class="control-label col-md-2 col-sm-2 col-xs-2">join_require</label>
               <div class="col-md-9 col-sm-9 col-xs-12">
                 <input type="text" class="form-control" placeholder="join_require" id="edt_join_require" name="edt_join_require" value="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-2 col-xs-2">max_user</label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="max_user" id="edt_max_user" name="edt_max_user" value="">
               </div>
             </div>
 
@@ -355,6 +364,7 @@
     $('#edt_time_show_to').val($('#ds_' + serverId + '_dts_time_show_to').html());
     $('#edt_time_will_reward').val($('#ds_' + serverId + '_dts_time_will_reward').html());
     $('#edt_join_require').val($('#ds_' + serverId + '_dts_join_require').html());
+    $('#edt_max_user').val($('#ds_' + serverId + '_dts_max_user').html());
     $('#edt_rank1').val($('#ds_' + serverId + '_dts_rank1').html());
     $('#edt_rank2').val($('#ds_' + serverId + '_dts_rank2').html());
     $('#edt_rank3').val($('#ds_' + serverId + '_dts_rank3').html());
@@ -373,6 +383,7 @@
     $('#edt_time_to').val('');
     $('#edt_time_show_to').val('');
     $('#edt_join_require').val('');
+    $('#edt_max_user').val('');
     $('#edt_rank1').val('');
     $('#edt_rank2').val('');
     $('#edt_rank3').al('');
