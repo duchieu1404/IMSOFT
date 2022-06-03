@@ -184,6 +184,7 @@ router.post('/event_ft', function (req, res) {
         rank3: req.body.edt_rank3,
         rank_to7: req.body.edt_rank_to7,
         rank_to20: req.body.edt_rank_to20,
+        rank_to40: req.body.edt_rank_to40
     }, function (errSave, dataSave) {
         return res.redirect('/config/event_ft');
     });
