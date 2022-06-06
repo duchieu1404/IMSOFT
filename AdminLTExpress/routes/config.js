@@ -177,7 +177,6 @@ router.post('/event_ft', function (req, res) {
         time_from: req.body.edt_time_from,
         time_to: req.body.edt_time_to,
         time_show_to: req.body.edt_time_show_to,
-        join_require: req.body.edt_join_require,
         max_user : req.body.edt_max_user,
         rank1: req.body.edt_rank1,
         rank2: req.body.edt_rank2,
