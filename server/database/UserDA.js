@@ -121,6 +121,32 @@ UserDA.prototype.event_fsc_get_event_info_this_week = function (data, callback) 
     return this.dbModel.query_callback_object("call event_fsc_get_event_info_this_week()", [], callback);
 }
 
+UserDA.prototype.event_ft_get_current = function (data, callback) {
+    return this.dbModel.query_callback_object("call event_ft_get_current()", [], callback);
+}
+
+UserDA.prototype.event_ft_add_multi = function (data, callback) {
+    return this.dbModel.query_callback_object("call event_ft_add_multi(?,?)", [data.user_id, data.list_score], callback);
+}
+
+UserDA.prototype.event_ft_get_leaderboard = function (data, callback) {
+    return this.dbModel.query_callback_array("call event_ft_get_leaderboard(?,?)", [data.event_id, data.user_id], callback);
+}
+
+UserDA.prototype.event_ft_get_leaderboard_final = function (data, callback) {
+    return this.dbModel.query_callback_array("call event_ft_get_leaderboard_final(?,?)", [data.event_id, data.user_id], callback);
+}
+
+UserDA.prototype.event_ft_get_reward = function (data, callback) {
+    return this.dbModel.query_callback_object("call event_ft_get_reward(?)", [data.event_id], callback);
+}
+
+
+UserDA.prototype.event_ft_claiming_reward = function (data, callback) {
+    return this.dbModel.query_callback_object("call event_ft_claiming_reward(?,?)", [data.event_id,data.user_id], callback);
+}
+
+
 UserDA.prototype.team_info_get_list = function (data, callback) {
     return this.dbModel.query_callback_object("call team_info_get_list(?)", [data.team_ids], callback);
 }
@@ -173,10 +199,11 @@ UserDA.prototype.event_ct_get_reward_events = function (data, callback) {
 }
 
 
+
 UserDA.prototype.user_update_version = function(data,callback){
     return this.dbModel.query_callback_object("call user_update_version(?,?,?,?)",[data.user_id,data.device_id,data.need_force,data.version],callback);
 }
 
-UserDA.prototype.config_get_time_server = function(data,callback){
-    return this.dbModel.query_callback_object("call config_get_time_server()",[],callback);
+UserDA.prototype.config_get_time_server = function (data, callback) {
+    return this.dbModel.query_callback_object("call config_get_time_server()", [], callback);
 }

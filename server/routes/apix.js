@@ -766,6 +766,117 @@ router.post('/event_fsc_get_event_info_this_week', function (req, res, next) {
     })
 });
 
+//Event FT
+router.post('/event_ft_get_current', function (req, res, next) {
+    console.log("event_ft_get_current: ", req.body);
+
+    req.app.UserDA.event_ft_get_current(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail"
+            });
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data
+        });
+    });
+
+});
+
+router.post('/event_ft_add_multi', function (req, res, next) {
+    console.log("event_ft_add_multi: ", req.body);
+
+    req.app.UserDA.event_ft_add_multi(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+                data: []
+            });
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data || "{}"
+        })
+    });
+});
+
+router.post('/event_ft_get_leaderboard', function (req, res, next) {
+
+    req.app.UserDA.event_ft_get_leaderboard(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+                data: []
+            });
+        }
+        return res.json({
+            status: 0,
+            msg: "OK",
+            data: data
+        })
+    });
+});
+
+router.post('/event_ft_get_leaderboard_final', function (req, res, next) {
+    req.app.UserDA.event_ft_get_leaderboard_final(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+            });
+        }
+        return res.json({
+            status: 0,
+            msg: "OK",
+            data: data
+        })
+    });
+});
+
+router.post('/event_ft_get_reward', function (req, res, next) {
+    req.app.UserDA.event_ft_get_reward(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+                data: {}
+            });
+
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data
+        })
+    });
+});
+
+router.post('/event_ft_claiming_reward', function (req, res, next) {
+    req.app.UserDA.event_ft_claiming_reward(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+                data: []
+            });
+
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data,
+        })
+    });
+});
+
+
+
 
 router.post('/user_trophy_get', function (req, res, next) {
 
