@@ -9,8 +9,8 @@ var UserDA = function (app) {
 
 module.exports = UserDA;
 
-UserDA.prototype.admin_search_user = function(data,callback){
-    return this.dbModel.query_callback_array("call admin_search_user_with_spent(?,?,?,?,?,?,?)", [
+UserDA.prototype.admin_search_user = async function(data,callback){
+    return await this.dbModel.query_callback_array("call admin_search_user_with_spent(?,?,?,?,?,?,?)", [
         data.admin_id,
         data.user_id,
         data.fullname,
@@ -23,8 +23,8 @@ UserDA.prototype.admin_search_user = function(data,callback){
 
 
 
-UserDA.prototype.admin_delete_user = function(data,callback){
-    return this.dbModel.query_callback_object("call admin_delete_user(?,?)", [
+UserDA.prototype.admin_delete_user = async function(data,callback){
+    return await this.dbModel.query_callback_object("call admin_delete_user(?,?)", [
         data.admin_id,
         data.user_id
     ], callback);
@@ -32,22 +32,22 @@ UserDA.prototype.admin_delete_user = function(data,callback){
 
 
 
-UserDA.prototype.admin_list_email = function(data,callback){
-    return this.dbModel.query_callback_object("call admin_list_email(?,?)", [
+UserDA.prototype.admin_list_email = async function(data,callback){
+    return await this.dbModel.query_callback_object("call admin_list_email(?,?)", [
         data.admin_id,
         data.user_id
     ], callback);
 }
 
-UserDA.prototype.admin_delete_email = function(data,callback){
-    return this.dbModel.query_callback_object("call admin_delete_email(?,?)", [
+UserDA.prototype.admin_delete_email = async function(data,callback){
+    return await this.dbModel.query_callback_object("call admin_delete_email(?,?)", [
         data.admin_id,
         data.user_id
     ], callback);
 }
 
-UserDA.prototype.admin_send_email = function(data,callback){
-    return this.dbModel.query_callback_object("call admin_send_email(?,?,?,?,?,?,?,?)", [
+UserDA.prototype.admin_send_email = async function(data,callback){
+    return await this.dbModel.query_callback_object("call admin_send_email(?,?,?,?,?,?,?,?)", [
         data.admin_id,
         data.user_id,
         data.title,
@@ -59,8 +59,8 @@ UserDA.prototype.admin_send_email = function(data,callback){
     ], callback);
 }
 
-UserDA.prototype.admin_send_email_multi = function(data,callback){
-    return this.dbModel.query_callback_object("call admin_send_email_multi(?,?,?,?,?,?,?,?)", [
+UserDA.prototype.admin_send_email_multi = async function(data,callback){
+    return await this.dbModel.query_callback_object("call admin_send_email_multi(?,?,?,?,?,?,?,?)", [
         data.admin_id,
         data.user_ids,
         data.title,
@@ -73,28 +73,29 @@ UserDA.prototype.admin_send_email_multi = function(data,callback){
 }
 
 
-UserDA.prototype.admin_user_gem_log  = function(data,callback){
-    return this.dbModel.query_callback_array("call admin_user_gem_log(?,?,?)", [
+UserDA.prototype.admin_user_gem_log  = async function(data,callback){
+    return await this.dbModel.query_callback_array("call admin_user_gem_log(?,?,?)", [
         data.admin_id,
         data.user_id,
         data.page ||0
     ], callback);
 }
 
-UserDA.prototype.admin_email_list_get = function(data,callback){
-    return this.dbModel.query_callback_array("call admin_email_list_get(?,?,?)", [
+UserDA.prototype.admin_email_list_get = async function(data,callback){
+    return await this.dbModel.query_callback_array("call admin_email_list_get(?,?,?)", [
         data.admin_id,
         data.user_id,
         data.page ||0
     ], callback);
 }
 
-UserDA.prototype.admin_get_all_user_data = function(data,callback){
-    return this.dbModel.query_callback_object("call admin_get_all_user_data(?,?)", [
+UserDA.prototype.admin_get_all_user_data = async function(data,callback){
+    return await this.dbModel.query_callback_object("call admin_get_all_user_data(?,?)", [
         data.admin_id,
         data.user_id
     ], callback);
 }
+
 
 
 
