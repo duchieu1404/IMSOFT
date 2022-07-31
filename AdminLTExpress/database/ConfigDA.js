@@ -103,13 +103,12 @@ ConfigDA.prototype.admin_event_ft_get_all = function (data, callback) {
 }
 
 ConfigDA.prototype.admin_event_ft_save = function (data, callback) {
-    return this.dbModel.query_callback_array("call admin_event_ft_save(?,?,?,?,?,?,?,?,?,?,?,?,?)", [
+    return this.dbModel.query_callback_array("call admin_event_ft_save(?,?,?,?,?,?,?,?,?,?,?,?)", [
         data.id,
         data.status,
         data.time_from,
         data.time_to,
         data.time_show_to,
-        data.join_require,
         data.max_user,
         data.rank1,
         data.rank2,
