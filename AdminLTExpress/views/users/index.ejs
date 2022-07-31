@@ -149,6 +149,13 @@
                       onclick="showAllIUserData(<%= userInfo.id %>)"
               >UserData</button>
 
+              <Button type="button"
+                      class="btn btn-warning"
+                      data-toggle="modal"
+                      data-target=".ban_userFT-modal-lg"
+                      onclick="btnBanUserFT(<%= userInfo.id%>)"
+              >Ban User FT</Button> 
+
               <button type="button"
               class="btn btn-danger"
               data-toggle="modal"
