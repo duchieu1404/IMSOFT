@@ -11,9 +11,9 @@ router.get('/', function (req, res) {
 });
 
 /* GET home page. */
-router.get('/sync_category', function (req, res) {
+router.get('/sync_category',async  function (req, res) {
     console.log("get sync_category ");
-    req.app.ConfigDA.admin_config_data_sync_category_get_all({}, function admin_config_data_sync_type_get_all(err, dataX) {
+    await req.app.ConfigDA.admin_config_data_sync_category_get_all({}, function admin_config_data_sync_type_get_all(err, dataX) {
         console.log(err, dataX);
         if (err || !dataX) {
             return res.render('config/sync_category', { dataConfigs: [] });
@@ -22,8 +22,8 @@ router.get('/sync_category', function (req, res) {
     });
 });
 
-router.post('/sync_category', function (req, res) {
-    req.app.ConfigDA.admin_config_data_sync_category_save({
+router.post('/sync_category', async function (req, res) {
+    await req.app.ConfigDA.admin_config_data_sync_category_save({
         id: req.body.edt_Id,
         name: req.body.edt_Name,
         description: req.body.edt_Description
@@ -32,8 +32,8 @@ router.post('/sync_category', function (req, res) {
     });
 });
 
-router.get('/sync_type', function (req, res) {
-    req.app.ConfigDA.admin_config_data_sync_type_get_all({}, function admin_config_data_sync_type_get_all(err, dataX) {
+router.get('/sync_type',async function (req, res) {
+    await req.app.ConfigDA.admin_config_data_sync_type_get_all({}, function admin_config_data_sync_type_get_all(err, dataX) {
         if (err || !dataX) {
             console.log(err, dataX);
             return res.render('config/sync_type', { dataConfigs: [] });
@@ -44,8 +44,8 @@ router.get('/sync_type', function (req, res) {
 
 
 
-router.post('/sync_type', function (req, res) {
-    req.app.ConfigDA.admin_config_data_sync_type_save({
+router.post('/sync_type',async function (req, res) {
+    await req.app.ConfigDA.admin_config_data_sync_type_save({
         id: req.body.edt_Id,
         key: req.body.edt_Key,
         code: req.body.edt_Code,
@@ -90,9 +90,9 @@ router.get('/refresh_sync_type_file', function (req, res) {
 
 
 
-router.get('/tester', function (req, res) {
+router.get('/tester',async function (req, res) {
     console.log("get tester ");
-    req.app.ConfigDA.admin_tester_get_all({}, function admin_config_data_sync_type_get_all(err, dataX) {
+    await req.app.ConfigDA.admin_tester_get_all({}, function admin_config_data_sync_type_get_all(err, dataX) {
         console.log(err, dataX);
         if (err || !dataX) {
             return res.render('config/tester', { dataConfigs: [] });
@@ -101,8 +101,8 @@ router.get('/tester', function (req, res) {
     });
 });
 
-router.post('/tester', function (req, res) {
-    req.app.ConfigDA.admin_tester_save({
+router.post('/tester',async function (req, res) {
+    await req.app.ConfigDA.admin_tester_save({
         id: req.body.edt_id,
         device_id: req.body.edt_device_id,
         os_type: req.body.edt_os_type,
@@ -115,9 +115,9 @@ router.post('/tester', function (req, res) {
 });
 
 
-router.post('/delete_tester', function (req, res) {
+router.post('/delete_tester',async function (req, res) {
     console.log(req.body.delete_edt_Id);
-    req.app.ConfigDA.admin_tester_delete({
+    await req.app.ConfigDA.admin_tester_delete({
         tester_id: req.body.delete_edt_Id
     }, function (err, data) {
         return res.send(data || { status: 1, msg: "err" });
@@ -128,8 +128,8 @@ router.post('/delete_tester', function (req, res) {
 
 //event fsc
 
-router.get('/event_fsc', function (req, res) {
-    req.app.ConfigDA.admin_event_fsc_get_all({}, function admin_event_fsc_get_all(err, dataX) {
+router.get('/event_fsc',async function (req, res) {
+    await req.app.ConfigDA.admin_event_fsc_get_all({}, function admin_event_fsc_get_all(err, dataX) {
         if (err || !dataX) {
             return res.render('config/event_fsc', { dataConfigs: [] });
         }
@@ -137,8 +137,8 @@ router.get('/event_fsc', function (req, res) {
     });
 });
 
-router.post('/event_fsc', function (req, res) {
-    req.app.ConfigDA.admin_event_fsc_save({
+router.post('/event_fsc',async function (req, res) {
+    await req.app.ConfigDA.admin_event_fsc_save({
         status: req.body.edt_status,
         id: req.body.edt_id,
         type: req.body.edt_type,
@@ -150,8 +150,8 @@ router.post('/event_fsc', function (req, res) {
 });
 
 
-router.post('/event_fsc_delete', function (req, res) {
-    req.app.ConfigDA.admin_event_fsc_delete({}, function admin_fsc_get_all(err, dataX) {
+router.post('/event_fsc_delete',async function (req, res) {
+    await req.app.ConfigDA.admin_event_fsc_delete({}, function admin_fsc_get_all(err, dataX) {
         req.app.ConfigDA.admin_event_fsc_delete({
             event_id: req.body.delete_edt_Id
         }, function (err, data) {
@@ -161,8 +161,8 @@ router.post('/event_fsc_delete', function (req, res) {
 });
 
 //Event Food Tour
-router.get('/event_ft', function (req, res) {
-    req.app.ConfigDA.admin_event_ft_get_all({}, function admin_event_ft_get_all(err, dataX) {
+router.get('/event_ft',async function (req, res) {
+    await req.app.ConfigDA.admin_event_ft_get_all({}, function admin_event_ft_get_all(err, dataX) {
         if (err || !dataX) {
             return res.render('config/event_ft', { dataConfigs: [] });
         }
@@ -170,13 +170,14 @@ router.get('/event_ft', function (req, res) {
     });
 });
 
-router.post('/event_ft', function (req, res) {
-    req.app.ConfigDA.admin_event_ft_save({
+router.post('/event_ft',async function (req, res) {
+    await req.app.ConfigDA.admin_event_ft_save({
         id: req.body.edt_id,
         status: req.body.edt_status,
         time_from: req.body.edt_time_from,
         time_to: req.body.edt_time_to,
         time_show_to: req.body.edt_time_show_to,
+        join_require: req.body.edt_join_require,
         max_user : req.body.edt_max_user,
         rank1: req.body.edt_rank1,
         rank2: req.body.edt_rank2,
@@ -189,14 +190,14 @@ router.post('/event_ft', function (req, res) {
     });
 });
 
-router.post('/admin_event_ft_save_test', function (req, res) {
-    req.app.ConfigDA.admin_event_ft_save_test({}, function (errSave, dataSave) {
+router.post('/admin_event_ft_save_test', async function (req, res) {
+    await req.app.ConfigDA.admin_event_ft_save_test({}, function (errSave, dataSave) {
         return res.redirect('/config/event_ft');
     });
 });
 
-router.post('/event_ft_delete', function (req, res) {
-    req.app.ConfigDA.admin_event_ft_delete({}, function admin_event_ft_get_all(err, dataX) {
+router.post('/event_ft_delete',async function (req, res) {
+    await req.app.ConfigDA.admin_event_ft_delete({}, function admin_event_ft_get_all(err, dataX) {
         req.app.ConfigDA.admin_event_ft_delete({
             event_id: req.body.delete_edt_Id
         }, function (err, data) {
@@ -206,8 +207,8 @@ router.post('/event_ft_delete', function (req, res) {
 });
 
 
-router.post('/event_ft_insert_test_data', function (req, res) {
-    req.app.ConfigDA.event_ft_insert_test_data({}, function event_ft_insert_test_data(err, dataX) {
+router.post('/event_ft_insert_test_data',async function (req, res) {
+    await req.app.ConfigDA.event_ft_insert_test_data({}, function event_ft_insert_test_data(err, dataX) {
         req.app.ConfigDA.event_ft_insert_test_data({
             event_id: req.body.edt_event_id
         }, function (err, data) {
@@ -217,8 +218,8 @@ router.post('/event_ft_insert_test_data', function (req, res) {
 });
 //Version
 
-router.get('/version', function (req, res) {
-    req.app.ConfigDA.admin_get_update_version({}, function admin_get_update_verison(err, dataX) {
+router.get('/version',async function (req, res) {
+    await req.app.ConfigDA.admin_get_update_version({}, function admin_get_update_verison(err, dataX) {
         if (err || !dataX) {
             return res.render('config/version', { dataConfigs: [] });
         }
@@ -226,8 +227,8 @@ router.get('/version', function (req, res) {
     });
 });
 
-router.post('/version', function (req, res) {
-    req.app.ConfigDA.admin_update_version_save({
+router.post('/version',async function (req, res) {
+    await req.app.ConfigDA.admin_update_version_save({
         id: req.body.edt_id,
         version: req.body.edt_version,
         status: req.body.edt_status,
