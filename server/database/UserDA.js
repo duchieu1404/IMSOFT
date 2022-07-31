@@ -208,5 +208,4 @@ UserDA.prototype.user_get_update_version = async function (data, callback) {
 
 UserDA.prototype.config_get_time_server = async function (data, callback) {
     return await this.dbModel.query_callback_object("call config_get_time_server()", [], callback);
->>>>>>> 0b016cc9bccaa5cadc5b6a519fdceb0712621e83
 }
