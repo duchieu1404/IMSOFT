@@ -1215,10 +1215,6 @@ router.post('/team_claim_system_gift',async function (req, res, next) {
     })
 });
 
-<<<<<<< HEAD
-router.post("/user_get_update_version", function (req, res, next) {
-    req.app.UserDA.user_get_update_version(req.body, function (err, data) {
-=======
 router.post('/user_data_get_list_id',async function (req, res, next) {
     await req.app.UserDA.user_data_get_list_id(req.body, function (err, data) {
         if (err || !data) {
@@ -1271,7 +1267,7 @@ module.exports = router;
 
 router.post("/user_get_update_version",async function (req, res, next) {
     await req.app.UserDA.user_get_update_version(req.body, function (err, data) {
->>>>>>> 0b016cc9bccaa5cadc5b6a519fdceb0712621e83
+
         if (err || !data) {
             return res.json({
                 status: 1,
@@ -1301,36 +1297,4 @@ router.post("/config_get_time_server",async function (req, res, next) {
         });
     })
 });
-router.post('/user_data_get_list_id', function (req, res, next) {
-    req.app.UserDA.user_data_get_list_id(req.body, function (err, data) {
-        if (err || !data) {
-            return res.json({
-                status: 1,
-                msg: "ServerMsg/api_fail",
-            });
-        }
-        return res.json({
-            status: data.status,
-            msg: data.msg,
-            data: data.data
-        });
-    })
-});
-
-router.post("/user_update_version", function (req, res, next) {
-    req.app.UserDA.user_update_version(req.body, function (err, data) {
-        if (err || !data) {
-            return res.json({
-                status: 1,
-                msg: "ServerMsg/api_fail"
-            });
-        }
-        return res.json({
-            status: data.status,
-            msg: data.msg,
-            data: data.data
-        });
-    })
-});
-
 module.exports = router;

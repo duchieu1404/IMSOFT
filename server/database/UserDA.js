@@ -194,34 +194,16 @@ UserDA.prototype.user_data_get_list_id = async function (data, callback) {
     return await this.dbModel.query_callback_object("call user_data_get_list_id(?)", [data.user_ids], callback);
 }
 
-<<<<<<< HEAD
-UserDA.prototype.user_time_iap = async function (data, callback) {
-    return await this.dbModel.query_callback_object("call user_time_iap(?)", [data.user_time], callback);
-=======
-UserDA.prototype.user_get_update_version = function(data,callback){
-    return this.dbModel.query_callback_object("call user_get_update_version()",[],callback);
->>>>>>> cc399695c8256cce63c55f7c3539ef5808ff08b5
+
+UserDA.prototype.user_get_update_version = async function(data,callback){
+    return await this.dbModel.query_callback_object("call user_get_update_version()",[],callback);
 }
 
 UserDA.prototype.user_update_version = async function (data, callback) {
     return await this.dbModel.query_callback_object("call user_update_version(?,?,?,?)", [data.user_id, data.device_id, data.need_force, data.version], callback);
 }
 
-<<<<<<< HEAD
-UserDA.prototype.user_get_update_version = async function (data, callback) {
-    return await this.dbModel.query_callback_object("call user_get_update_version()", [], callback);
-}
-
 UserDA.prototype.config_get_time_server = async function (data, callback) {
     return await this.dbModel.query_callback_object("call config_get_time_server()", [], callback);
-=======
 
-
-UserDA.prototype.user_update_version = function(data,callback){
-    return this.dbModel.query_callback_object("call user_update_version(?,?,?,?)",[data.user_id,data.device_id,data.need_force,data.version],callback);
-}
-
-UserDA.prototype.config_get_time_server = function (data, callback) {
-    return this.dbModel.query_callback_object("call config_get_time_server()", [], callback);
->>>>>>> cc399695c8256cce63c55f7c3539ef5808ff08b5
 }
