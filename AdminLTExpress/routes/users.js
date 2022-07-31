@@ -46,7 +46,7 @@ router.post("/ban_user_ft", async function (req, res) {
       user_id: req.body.ban_ft_edt_Id,
     },
     function (err, data) {
-      return res.send(data || { status: 1, msg: "err" });
+      return res.send({data} || { status: 1, msg: "err" });
     }
   );
 });
