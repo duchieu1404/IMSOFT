@@ -4,7 +4,7 @@
   <h1>Server Config<small>Configuration</small></h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i>Configuration</a></li>
-    <li class="active">Event Food Fest</li>
+    <li class="active">Event Food Tour Challenge</li>
   </ol>
 </section>
 
@@ -22,13 +22,17 @@
 
       <div class="box box-info">
         <div class="box-header with-border">
-          <h3 class="box-title">Event Food Fest</h3>
+          <h3 class="box-title">Event Food Tour Challenge</h3>
         </div>
 
         <div class="box-footer">
           <div>
             <input type="button" data-toggle="modal" data-target=".edit-config-modal-lg" class="btn btn-success"
               value="Add Event" onclick="onClick_btnAddNewEvent()" />
+            <input type="button" data-toggle="modal" data-target=".event-ft-insert-test-data-modal-lg" class="btn btn-info"
+              value="Insert Test Data" />
+            <input type="button" data-toggle="modal" data-target=".event-ft-insert-test-event-data-modal-lg" class="btn btn-info"
+            value="Insert Test Event" onclick="onClick_btnAddNewEventTest()" />
 
           </div>
         </div>
@@ -50,6 +54,14 @@
               <th>Status</th>
               <th>Time From</th>
               <th>Time To</th>
+              <th>Time Show To</th>
+              <th>Max User(Leaderboard)</th>
+              <th>Rank1</th>
+              <th>Rank2</th>
+              <th>Rank3</th>
+              <th>Rank_to7</th>
+              <th>Rank_to20</th>
+              <th>Rank_to40</th>
 
             </tr>
           </thead>
@@ -70,6 +82,14 @@
               <th id="ds_<%= conf.id %>_dts_status"><%= conf.status %></th>
               <th id="ds_<%= conf.id %>_dts_time_from"><%= conf.time_from %></th>
               <th id="ds_<%= conf.id %>_dts_time_to"><%= conf.time_to %></th>
+              <th id="ds_<%= conf.id %>_dts_time_show_to"><%= conf.time_show_to %></th>
+              <th id="ds_<%= conf.id %>_dts_max_user"><%= conf.max_user %></th>
+              <th id="ds_<%= conf.id %>_dts_rank1"><%= conf.rank1 %></th>
+              <th id="ds_<%= conf.id %>_dts_rank2"><%= conf.rank2 %></th>
+              <th id="ds_<%= conf.id %>_dts_rank3"><%= conf.rank3 %></th>
+              <th id="ds_<%= conf.id %>_dts_rank_to7"><%= conf.rank_to7 %></th>
+              <th id="ds_<%= conf.id %>_dts_rank_to20"><%= conf.rank_to20 %></th>
+              <th id="ds_<%= conf.id %>_dts_rank_to40"><%= conf.rank_to40 %></th>
 
             </tr>
             <% }); %>
@@ -93,7 +113,7 @@
         <div class="modal-body">
 
 
-          <form action="/config/event_fsc" method="post" id="demo-form2" data-parsley-validate
+          <form action="/config/event_ft" method="post" id="demo-form2" data-parsley-validate
             class="form-horizontal form-label-left">
 
             <!-- === -->
@@ -114,6 +134,7 @@
                 <select class="form-control" id="edt_status" name="edt_status">
                   <option value="0">DISABLE</option>
                   <option value="1">ENABLE</option>
+                  <option value="2">REWARDED</option>
                 </select>
               </div>
             </div>
@@ -143,6 +164,67 @@
               </div>
             </div>
 
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-2 col-xs-2">time_show_to</label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <div class='input-group date' id='datetimeshowto'>
+                        <input type='text' class="form-control" placeholder="time_show_to" id="edt_time_show_to" name="edt_time_show_to"/>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-2 col-xs-2">max_user</label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="max_user" id="edt_max_user" name="edt_max_user" value="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-2 col-xs-2">rank1</label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="[]" id="edt_rank1" name="edt_rank1" value="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-2 col-xs-2">rank2</label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="[]" id="edt_rank2" name="edt_rank2" value="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-2 col-xs-2">rank3</label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="[]" id="edt_rank3" name="edt_rank3" value="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-2 col-xs-2">rank_to7</label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="[]" id="edt_rank_to7" name="edt_rank_to7" value="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-2 col-xs-2">rank_to20</label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="[]" id="edt_rank_to20" name="edt_rank_to20" value="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-2 col-xs-2">rank_to40</label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="[]" id="edt_rank_to40" name="edt_rank_to40" value="">
+              </div>
+            </div>
+
             <div class="modal-footer">
               <input type="submit" class="btn btn-default" data-dismiss="modal" value="Close">
               <input type="submit" class="btn btn-primary" value="Save changes">
@@ -152,6 +234,36 @@
       </div>
     </div>
   </div>
+
+  <div class ="modal fade event-ft-insert-test-data-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="model"><span aria-hidden="true"></span>
+          </button>
+          <h4 class="modal-title" id="myModelLabel">Insert Test Data</h4>
+        </div>
+        <div class="modal-body">
+          <form action="/config/event_ft_insert_test_data" method="post" id="event-ft-insert-test-data-form" data-parsley-validate
+          class="form-horizontal form-label-left">
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">event_id</label>
+
+              <div class="col-md-6 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="event_id" id="edt_event_id" name="edt_event_id"
+                value="">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <input type="button" class="btn btn-primary" value="Add" onclick="btnInsertTestDataClicked()">
+              <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <div class="modal fade delete_user-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-lg">
@@ -210,6 +322,10 @@
       format: 'YYYY/MM/DD HH:mm:ss',
       defaultDate: new Date()
     });
+    $('#datetimeshowto').datetimepicker({
+      format: 'YYYY/MM/DD HH:mm:ss',
+      defaultDate: new Date()
+    });
   });
   var btnDeleteEvent = function (serverId) {
     $('#delete_edt_Id').val($('#ds_' + serverId + '_dts_id').html());
@@ -226,7 +342,7 @@
     let user_id_delete = $('#delete_edt_Id').val();
     $.ajax({
       type: "POST",
-      url: '/config/event_fsc_delete',
+      url: '/config/event_ft_delete',
       data: $("#delete_user-form2").serialize(),
       success: function (dataResult, textStatus, jqXHR) {
         console.log(dataResult);
@@ -243,10 +359,17 @@
   var btnEditClicked = function (serverId) {
     $('#edt_id').val($('#ds_' + serverId + '_dts_id').html());
     $('#edt_status').val($('#ds_' + serverId + '_dts_status').html());
-    $('#edt_type').val($('#ds_' + serverId + '_dts_type').html());
     $('#edt_time_from').val($('#ds_' + serverId + '_dts_time_from').html());
     $('#edt_time_to').val($('#ds_' + serverId + '_dts_time_to').html());
-
+    $('#edt_time_show_to').val($('#ds_' + serverId + '_dts_time_show_to').html());
+    $('#edt_time_will_reward').val($('#ds_' + serverId + '_dts_time_will_reward').html());
+    $('#edt_max_user').val($('#ds_' + serverId + '_dts_max_user').html());
+    $('#edt_rank1').val($('#ds_' + serverId + '_dts_rank1').html());
+    $('#edt_rank2').val($('#ds_' + serverId + '_dts_rank2').html());
+    $('#edt_rank3').val($('#ds_' + serverId + '_dts_rank3').html());
+    $('#edt_rank_to7').val($('#ds_' + serverId + '_dts_rank_to7').html());
+    $('#edt_rank_to20').val($('#ds_' + serverId + '_dts_rank_to20').html());
+    $('#edt_rank_to40').val($('#ds_' + serverId + '_dts_rank_to40').html());
     $('#edt_status').prop('readonly', status == 2);
 
   }
@@ -255,23 +378,42 @@
   var onClick_btnAddNewEvent = function () {
     $('#edt_id').val(-1);
     $('#edt_status').val('1');
-    $('#edt_type').val('');
     $('#edt_time_from').val('');
     $('#edt_time_to').val('');
+    $('#edt_time_show_to').val('');
+    $('#edt_max_user').val('50');
+    $('#edt_rank1').val('');
+    $('#edt_rank2').val('');
+    $('#edt_rank3').val('');
+    $('#edt_rank_to7').val('');
+    $('#edt_rank_to20').val('');
+    $('#edt_rank_to40').val('');
 
     $('#edt_status').prop('readonly', false);
+  }
+
+  var onClick_btnAddNewEventTest = function() {
+    console.log("btnAddNewEventTest");
+    $.ajax({
+      type: "POST",
+      url: '/config/admin_event_ft_save_test',
+      success: function (data) {
+        alert('success');
+        location.reload(true);
+      },
+      dataType: 'json'
+    });
   }
 
   var btnInsertTestDataClicked = function () {
     console.log("btnInsertTestDataClicked");
     $.ajax({
       type: "POST",
-      url: '/config/event_fsc_insert_test_data',
-      data: $("#event-fsc-insert-test-data-form").serialize(),
+      url: '/config/event_ft_insert_test_data',
+      data: $("#event-ft-insert-test-data-form").serialize(),
       success: function (dataResult, textStatus, jqXHR) {
         console.log(dataResult);
         if (dataResult.status == 0) {
-          $(".event-fsc_insert_test_data-modal-lg .close").click()
           alert("success");
         }
         else {

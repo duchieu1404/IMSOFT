@@ -9,12 +9,12 @@ var ConfigDA = function (app) {
 
 module.exports = ConfigDA;
 
-ConfigDA.prototype.admin_config_data_sync_type_get_all = function(data,callback){
-    return this.dbModel.query_callback_array("call admin_config_data_sync_type_get_all()", [], callback);
+ConfigDA.prototype.admin_config_data_sync_type_get_all = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call admin_config_data_sync_type_get_all()", [], callback);
 }
 
-ConfigDA.prototype.admin_config_data_sync_category_save = function(data,callback){
-    return this.dbModel.query_callback_array("call admin_config_data_sync_category_save(?,?,?,?)", [
+ConfigDA.prototype.admin_config_data_sync_category_save = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call admin_config_data_sync_category_save(?,?,?,?)", [
         data.admin_id,
         data.id,
         data.name,
@@ -22,14 +22,14 @@ ConfigDA.prototype.admin_config_data_sync_category_save = function(data,callback
     ], callback);
 }
 
-ConfigDA.prototype.admin_config_data_sync_category_get_all = function(data,callback){
-    return this.dbModel.query_callback_array("call admin_config_data_sync_category_get_all()", [], callback);
+ConfigDA.prototype.admin_config_data_sync_category_get_all = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call admin_config_data_sync_category_get_all()", [], callback);
 }
 
 
 
-ConfigDA.prototype.admin_config_data_sync_type_save = function(data,callback){
-    return this.dbModel.query_callback_array("call admin_config_data_sync_type_save(?,?,?,?,?,?,?,?,?)", [
+ConfigDA.prototype.admin_config_data_sync_type_save = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call admin_config_data_sync_type_save(?,?,?,?,?,?,?,?,?)", [
         data.admin_id,
         data.id,
         data.key,
@@ -43,13 +43,13 @@ ConfigDA.prototype.admin_config_data_sync_type_save = function(data,callback){
 }
 
 
-ConfigDA.prototype.admin_tester_get_all = function(data,callback){
-    return this.dbModel.query_callback_array("call admin_tester_get_all()", [], callback);
+ConfigDA.prototype.admin_tester_get_all = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call admin_tester_get_all()", [], callback);
 }
 
 
-ConfigDA.prototype.admin_tester_save = function(data,callback){
-    return this.dbModel.query_callback_array("call admin_tester_save(?,?,?,?,?,?,?)", [
+ConfigDA.prototype.admin_tester_save = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call admin_tester_save(?,?,?,?,?,?,?)", [
         data.admin_id,
         data.id,
         data.device_id,
@@ -61,24 +61,23 @@ ConfigDA.prototype.admin_tester_save = function(data,callback){
 }
 
 
-ConfigDA.prototype.admin_tester_delete = function(data,callback){
-    return this.dbModel.query_callback_object("call admin_tester_delete(?,?)", [
+ConfigDA.prototype.admin_tester_delete = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call admin_tester_delete(?,?)", [
         data.admin_id,
         data.tester_id
     ], callback);
 }
 
-ConfigDA.prototype.admin_event_fsc_get_all = function (data, callback) {
-    return this.dbModel.query_callback_array("call admin_event_fsc_get_all()", [], callback);
+ConfigDA.prototype.admin_event_fsc_get_all = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call admin_event_fsc_get_all()", [], callback);
 }
-ConfigDA.prototype.admin_event_fsc_delete = function (data, callback) 
-{
-    return this.dbModel.query_callback_object("call admin_event_fsc_delete(?,?)", [
+ConfigDA.prototype.admin_event_fsc_delete = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call admin_event_fsc_delete(?,?)", [
         data.admin_id,
         data.event_id
     ], callback);
 }
-ConfigDA.prototype.admin_event_fsc_save = function (data, callback) {
+ConfigDA.prototype.admin_event_fsc_save = async function (data, callback) {
     return this.dbModel.query_callback_array("call admin_event_fsc_save(?,?,?,?)", [
         data.id,
         data.status,
@@ -87,14 +86,56 @@ ConfigDA.prototype.admin_event_fsc_save = function (data, callback) {
     ], callback);
 }
 
-ConfigDA.prototype.admin_get_update_version = function(data,callback){
-    return this.dbModel.query_callback_array("call admin_get_update_version()",[],callback);
+ConfigDA.prototype.admin_get_update_version = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call admin_get_update_version()", [], callback);
 }
 
-ConfigDA.prototype.admin_update_version_save = function(data,callback){
-    return this.dbModel.query_callback_array("call admin_update_version_save(?,?,?)",[
+ConfigDA.prototype.admin_update_version_save = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call admin_update_version_save(?,?,?)", [
         data.id,
         data.version,
         data.status
-    ],callback);
+    ], callback);
+}
+
+ConfigDA.prototype.admin_event_ft_get_all = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call admin_event_ft_get_all()", [], callback);
+}
+
+ConfigDA.prototype.admin_event_ft_save = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call admin_event_ft_save(?,?,?,?,?,?,?,?,?,?,?,?)", [
+        data.id,
+        data.status,
+        data.time_from,
+        data.time_to,
+        data.time_show_to,
+        data.max_user,
+        data.rank1,
+        data.rank2,
+        data.rank3,
+        data.rank_to7,
+        data.rank_to20,
+        data.rank_to40
+
+    ], callback);
+}
+
+ConfigDA.prototype.admin_event_ft_save_test = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call admin_event_ft_save_test()", [
+    ], callback);
+}
+
+
+ConfigDA.prototype.admin_event_ft_delete = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call admin_event_ft_delete(?,?)", [
+        data.admin_id,
+        data.event_id
+    ], callback);
+}
+
+
+ConfigDA.prototype.event_ft_insert_test_data = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call event_ft_insert_test_data(?)", [
+        data.event_id
+    ], callback);
 }

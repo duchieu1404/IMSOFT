@@ -149,6 +149,13 @@
                       onclick="showAllIUserData(<%= userInfo.id %>)"
               >UserData</button>
 
+              <Button type="button"
+                      class="btn btn-warning"
+                      data-toggle="modal"
+                      data-target=".ban_userFT-modal-lg"
+                      onclick="btnBanUserFT(<%= userInfo.id%>)"
+              >Ban User FT</Button> 
+
               <button type="button"
               class="btn btn-danger"
               data-toggle="modal"
@@ -223,6 +230,46 @@
             </div>
           </form>
 
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade ban_userFT-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Do you want to ban this user (Event FT)?</h4>
+        </div>
+        <div class="modal-body">
+
+          <form action="/users/ban_user_event_ft" method="post" id="ban_userft-form2" data-parsley-validate class="form-horizontal form-label-left">
+
+            <!-- === -->
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">User Id </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Version Id" id = "ban_ft_edt_Id" name="ban_ft_edt_Id" value="" readonly="readonly">
+              </div>
+
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Fullname</label>
+
+              <div class="col-md-3 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Money Type" id = "ban_ft_edt_Fullname" name="ban_ft_edt_Fullname" value = "0" readonly="readonly">
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <input type="button" class="btn btn-default" data-dismiss="modal" value="Close" id = "modalBanFT">
+              <input type="button" class="btn btn-danger" value="Ban" onclick="btnDoBanUserFT()">
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -569,6 +616,11 @@
     $('#delete_edt_Fullname').val($('#ds_'+serverId+'_dts_fullname').html());
   }
 
+  var btnBanUserFT = function(serverId){
+    $('#ban_ft_edt_Id').val($('#ds_'+serverId+'_dts_id').html());
+    $('#ban_ft_edt_Fullname').val($('#ds_'+serverId+'_dts_fullname').html());
+  }
+
   var reset_add_gift_value= function(){
     $("#edt_email_Gem").val(0);
    
@@ -742,6 +794,21 @@
       },
       dataType: 'json'
     });
+  }
+
+  var btnDoBanUserFT = function(){
+    $.ajax({
+      type:"POST",
+      url:'/users/ban_user_ft',
+      data:$("#ban_userft-form2").serialize(),
+      success: function(dataResult,textStatus,jqXHR){
+        console.log(dataResult);
+        if(dataResult.status == 0 ){
+          $(".ban_userFT-modal-lg .close").click()
+          alert("Ban success")
+        }
+      }
+    })
   }
 
     $(document).ready(function() {

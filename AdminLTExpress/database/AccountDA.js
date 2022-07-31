@@ -9,8 +9,8 @@ var AccountDA = function (app) {
 
 module.exports = AccountDA;
 
-AccountDA.prototype.admin_login = function(data,callback){
-    return this.dbModel.query_callback_object("call admin_login(?,?,?)", [
+AccountDA.prototype.admin_login = async function(data,callback){
+    return await this.dbModel.query_callback_object("call admin_login(?,?,?)", [
         data.username,
         data.password,
         data.client_data
