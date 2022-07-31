@@ -40,10 +40,10 @@ router.post("/delete_user", async function (req, res) {
 });
 
 router.post("/ban_user_ft", async function (req, res) {
-  console.log(req.body.delete_edt_Id);
+  console.log(req.body.ban_ft_edt_Id);
   await req.app.UserDA.admin_ban_user_ft(
     {
-      user_id: req.body.delete_edt_Id,
+      user_id: req.body.ban_ft_edt_Id,
     },
     function (err, data) {
       return res.send(data || { status: 1, msg: "err" });
