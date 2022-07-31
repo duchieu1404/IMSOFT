@@ -236,7 +236,7 @@
   </div>
 
 
-  <div class="modal fade delete_user-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade ban_userFT-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
 
@@ -788,6 +788,22 @@
       },
       dataType: 'json'
     });
+  }
+
+  var btnDoBanUserFT = function(){
+    let user_id_delete = $('#ban_ft_edt_Id').val();
+    $.ajax({
+      type:"POST",
+      url:'/users/ban_user_ft',
+      data:$("#ban_userft-form2").serialize(),
+      success: function(dataResult,textStatus,jqXHR){
+        console.log(dataResult);
+        if(dataResult.status == 0 ){
+          $(".ban_userFT-modal-lg .close").click()
+          alert("Ban success")
+        }
+      }
+    })
   }
 
     $(document).ready(function() {
