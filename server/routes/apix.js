@@ -875,6 +875,23 @@ router.post('/event_ft_claiming_reward',async function (req, res, next) {
     });
 });
 
+router.post('/event_ft_check_ban_user_ft',async function (req, res, next) {
+    await req.app.UserDA.event_ft_check_ban_user_ft(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+                data: {}
+            });
+
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data,
+        })
+    });
+});
 
 
 

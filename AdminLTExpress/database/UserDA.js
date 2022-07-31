@@ -31,6 +31,14 @@ UserDA.prototype.admin_delete_user = async function(data,callback){
 }
 
 
+UserDA.prototype.admin_ban_user_ft = async function(data,callback){
+    return await this.dbModel.query_callback_object("call admin_ban_user_ft(?,?)", [
+        data.admin_id,
+        data.user_id
+    ], callback);
+}
+
+
 
 UserDA.prototype.admin_list_email = async function(data,callback){
     return await this.dbModel.query_callback_object("call admin_list_email(?,?)", [

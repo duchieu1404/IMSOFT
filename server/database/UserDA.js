@@ -146,6 +146,10 @@ UserDA.prototype.event_ft_claiming_reward = async function (data, callback) {
     return await this.dbModel.query_callback_object("call event_ft_claiming_reward(?,?)", [data.event_id,data.user_id], callback);
 }
 
+UserDA.prototype.event_ft_check_ban_user_ft = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call event_ft_check_ban_user_ft(?,?)", [data.event_id,data.user_id], callback);
+}
+
 
 UserDA.prototype.team_info_get_list = async function (data, callback) {
     return await this.dbModel.query_callback_object("call team_info_get_list(?)", [data.team_ids], callback);
