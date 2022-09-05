@@ -86,6 +86,25 @@ ConfigDA.prototype.admin_event_fsc_save = async function (data, callback) {
     ], callback);
 }
 
+
+ConfigDA.prototype.admin_event_ssp_get_all = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call admin_event_ssp_get_all()", [], callback);
+}
+ConfigDA.prototype.admin_event_ssp_delete = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call admin_event_ssp_delete(?,?)", [
+        data.admin_id,
+        data.event_id
+    ], callback);
+}
+ConfigDA.prototype.admin_event_ssp_save = async function (data, callback) {
+    return this.dbModel.query_callback_array("call admin_event_ssp_save(?,?,?,?)", [
+        data.id,
+        data.status,
+        data.time_from,
+        data.time_to
+    ], callback);
+}
+
 ConfigDA.prototype.admin_get_update_version = async function (data, callback) {
     return await this.dbModel.query_callback_array("call admin_get_update_version()", [], callback);
 }
