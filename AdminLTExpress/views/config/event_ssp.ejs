@@ -4,7 +4,7 @@
   <h1>Server Config<small>Configuration</small></h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i>Configuration</a></li>
-    <li class="active">Event Food Fest</li>
+    <li class="active">Event Season pass</li>
   </ol>
 </section>
 
@@ -68,6 +68,10 @@
               </th>
               <th id="ds_<%= conf.id %>_dts_id"><%= conf.id %></th>
               <th id="ds_<%= conf.id %>_dts_status"><%= conf.status %></th>
+              <th id="ds_<%= conf.id %>_dts_id_ssp"><%= conf.id_ssp %></th>
+              <th id="ds_<%= conf.id %>_dts_id_bundle"><%= conf.id_bundle %></th>
+              <th id="ds_<%= conf.id %>_dts_link_download"><%= conf.link_download %></th>
+              
               <th id="ds_<%= conf.id %>_dts_time_from"><%= conf.time_from %></th>
               <th id="ds_<%= conf.id %>_dts_time_to"><%= conf.time_to %></th>
 
@@ -118,7 +122,25 @@
               </div>
             </div>
 
-
+            <div class="form-group">
+                <label class="control-label col-md-2 col-sm-2 col-xs-2">Id Season pass</label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <input type="number" class="form-control" id ="edt_id_ssp" name ="edt_id_ssp">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2 col-sm-2 col-xs-2">Id bundle</label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <input type="number" class="form-control" id ="edt_id_bundle" name ="edt_id_bundle">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2 col-sm-2 col-xs-2">Link download</label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <input type="text" class="form-control" id="edt_link_download" name ="edt_link_download">
+                </div>
+            </div>
+  
             <div class="form-group">
               <label class="control-label col-md-2 col-sm-2 col-xs-2">time_from</label>
               <div class="col-md-9 col-sm-9 col-xs-12 ">
@@ -248,7 +270,9 @@
     $('#edt_time_to').val($('#ds_' + serverId + '_dts_time_to').html());
 
     $('#edt_status').prop('readonly', status == 2);
-
+    $(`#edt_link_download`).val($('#ds_' + serverId + '_dts_link_download').html());
+    $(`#edt_id_ssp`).val($('#ds_' + serverId + '_dts_id_ssp').html());
+    $(`#edt_id_bundle`).val($('#ds_' + serverId + '_dts_id_bundle').html());
   }
 
 

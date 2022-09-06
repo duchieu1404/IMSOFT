@@ -176,7 +176,10 @@ router.post('/event_ssp',async function (req, res) {
         id: req.body.edt_id,
         type: req.body.edt_type,
         time_from: req.body.edt_time_from,
-        time_to: req.body.edt_time_to
+        time_to: req.body.edt_time_to,
+        id_ssp : req.body.edt_id_ssp,
+        id_bundle : req.body.edt_id_bundle,
+        link_download : req.body.edt_link_download
     }, function (errSave, dataSave) {
         return res.redirect('/config/event_ssp');
     });
