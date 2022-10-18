@@ -213,3 +213,7 @@ UserDA.prototype.config_get_time_server = async function (data, callback) {
 UserDA.prototype.event_getall_config_ssp = async function (data, callback) {
     return await this.dbModel.query_callback_object("call event_getall_config_ssp()", [], callback);
 }
+
+UserDA.prototype.event_getall_config_ssp_v2 = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call event_getall_config_ssp_v2()", [], callback);
+}
