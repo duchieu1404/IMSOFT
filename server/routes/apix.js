@@ -1339,6 +1339,25 @@ router.post('/event_getall_config_ssp_v2',async function (req, res, next) {
         });
     })
 });
+router.post('/event_getall_config_ssp_v3',async function (req, res, next) {
+
+    console.log("event_getall_config_ssp_v3 data:", req.body);
+
+    await req.app.UserDA.event_getall_config_ssp_v3(req.body, function (err, data) {
+        if (err || !data) {
+            console.log(Date.now(),"error event_getall_config_ssp_v3");
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail"
+            });
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data
+        });
+    })
+});
 
 
 module.exports = router;
