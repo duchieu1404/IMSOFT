@@ -122,7 +122,7 @@ UserDA.prototype.event_fsc_get_event_info_this_week = async function (data, call
 }
 
 UserDA.prototype.event_ft_get_current = async function (data, callback) {
-    return await this.dbModel.query_callback_object("call event_ft_get_current()", [], callback);
+    return await this.dbModel.query_callback_object("call event_ft_get_current(?,?)", [data.event_id,data.user_id], callback);
 }
 
 UserDA.prototype.event_ft_add_multi = async function (data, callback) {
