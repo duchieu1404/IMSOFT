@@ -279,5 +279,81 @@ router.post('/version',async function (req, res) {
 router.get('/reward_json', function (req, res) {
     return res.render('config/reward_json');
 });
+ 
 
+// Event Seson pass
+
+router.get('/event_ssp',async function (req, res) {
+    await req.app.ConfigDA.admin_event_ssp_get_all({}, function admin_event_ssp_get_all(err, dataX) {
+        if (err || !dataX) {
+            return res.render('config/event_ssp', { dataConfigs: [] });
+        }
+        return res.render('config/event_ssp', { dataConfigs: dataX });
+    });
+});
+
+router.post('/event_ssp',async function (req, res) {
+    await req.app.ConfigDA.admin_event_ssp_save({
+        status: req.body.edt_status,
+        id: req.body.edt_id,
+        type: req.body.edt_type,
+        time_from: req.body.edt_time_from,
+        time_to: req.body.edt_time_to,
+        id_ssp : req.body.edt_id_ssp,
+        id_bundle : req.body.edt_id_bundle,
+        link_download : req.body.edt_link_download
+    }, function (errSave, dataSave) {
+        return res.redirect('/config/event_ssp');
+    });
+});
+
+
+router.post('/event_ssp_delete',async function (req, res) {
+    await req.app.ConfigDA.admin_event_ssp_delete({}, function admin_ssp_get_all(err, dataX) {
+        req.app.ConfigDA.admin_event_ssp_delete({
+            event_id: req.body.delete_edt_Id
+        }, function (err, data) {
+            return res.send(data || { status: 1, msg: "err" });
+        });
+    });
+});
+// data bonus data
+
+router.get('/event_bonus_data',async function (req, res) {
+    await req.app.ConfigDA.admin_event_bonus_data_get_all({}, function admin_event_bonus_data_get_all(err, dataX) {
+        if (err || !dataX) {
+            return res.render('config/event_bonus_data', { dataConfigs: [] });
+        }
+        return res.render('config/event_bonus_data', { dataConfigs: dataX });
+    });
+});
+
+router.post('/event_bonus_data',async function (req, res) {
+    await req.app.ConfigDA.admin_event_bonus_data_save({
+        status: req.body.edt_status,
+        id: req.body.edt_id,
+        type: req.body.edt_type,
+        time_from: req.body.edt_time_from,
+        time_to: req.body.edt_time_to,
+        id_ssp : req.body.edt_id_ssp,
+        id_bundle : req.body.edt_id_bundle,
+        link_download : req.body.edt_link_download,
+        data_pass : req.body.edt_data_pass
+    }, function (errSave, dataSave) {
+        return res.redirect('/config/event_bonus_data');
+    });
+});
+
+
+router.post('/delete_bonus_data',async function (req, res) {
+    await req.app.ConfigDA.admin_bonus_data_delete({}, function admin_ssp_get_all(err, dataX) {
+        req.app.ConfigDA.admin_bonus_data_delete({
+            event_id: req.body.delete_edt_Id
+        }, function (err, data) {
+            return res.send(data || { status: 1, msg: "err" });
+        });
+    });
+});
+
+ 
 module.exports = router;
