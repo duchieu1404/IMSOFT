@@ -338,7 +338,10 @@ router.post('/event_bonus_data',async function (req, res) {
         id_ssp : req.body.edt_id_ssp,
         id_bundle : req.body.edt_id_bundle,
         link_download : req.body.edt_link_download,
-        data_pass : req.body.edt_data_pass
+        key_download :  req.body.key_download,
+        data_pass : req.body.edt_data_pass,
+        point_plus : req.body.edt_point_plus,
+        level_x3 : req.body.edt_level_x3
     }, function (errSave, dataSave) {
         return res.redirect('/config/event_bonus_data');
     });
