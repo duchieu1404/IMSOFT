@@ -122,7 +122,7 @@ UserDA.prototype.event_fsc_get_event_info_this_week = async function (data, call
 }
 
 UserDA.prototype.event_ft_get_current = async function (data, callback) {
-    return await this.dbModel.query_callback_object("call event_ft_get_current()", [], callback);
+    return await this.dbModel.query_callback_object("call event_ft_get_current(?)", [data.user_id], callback);
 }
 
 UserDA.prototype.event_ft_add_multi = async function (data, callback) {
@@ -206,4 +206,19 @@ UserDA.prototype.user_update_version = async function (data, callback) {
 UserDA.prototype.config_get_time_server = async function (data, callback) {
     return await this.dbModel.query_callback_object("call config_get_time_server()", [], callback);
 
+}
+
+UserDA.prototype.event_getall_config_ssp = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call event_getall_config_ssp()", [], callback);
+}
+
+UserDA.prototype.event_getall_config_ssp_v2 = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call event_getall_config_ssp_v2()", [], callback);
+}
+UserDA.prototype.event_getall_config_ssp_v3 = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call event_getall_config_ssp_v3()", [], callback);
+}
+UserDA.prototype.event_getall_bonus_pass = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call event_getall_bonus_pass()", [], callback);
+ 
 }

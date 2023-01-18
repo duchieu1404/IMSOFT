@@ -47,12 +47,17 @@ NND.query = function(sql,args,cb)
                 ) {
                     console.log('Re-connecting lost connection: ' + err.stack);
                     _pool.release(client);
+                    _pool.delete(client);
+                    
+                    throw err;
                 }
 
                 console.error("========================query error==========================================");
             }
             _pool.release(client);
+            _pool.delete(client);
             cb(err,res);
+
         });
     });
 };

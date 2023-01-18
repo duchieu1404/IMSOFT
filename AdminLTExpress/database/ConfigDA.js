@@ -86,6 +86,28 @@ ConfigDA.prototype.admin_event_fsc_save = async function (data, callback) {
     ], callback);
 }
 
+
+ConfigDA.prototype.admin_event_ssp_get_all = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call admin_event_ssp_get_all()", [], callback);
+}
+ConfigDA.prototype.admin_event_ssp_delete = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call admin_event_ssp_delete(?,?)", [
+        data.admin_id,
+        data.event_id
+    ], callback);
+}
+ConfigDA.prototype.admin_event_ssp_save = async function (data, callback) {
+    return this.dbModel.query_callback_array("call admin_event_ssp_save(?,?,?,?,?,?,?)", [
+        data.id,
+        data.status,
+        data.time_from,
+        data.time_to,
+        data.id_ssp,
+        data.id_bundle,
+        data.link_download
+    ], callback);
+}
+
 ConfigDA.prototype.admin_get_update_version = async function (data, callback) {
     return await this.dbModel.query_callback_array("call admin_get_update_version()", [], callback);
 }
@@ -139,3 +161,31 @@ ConfigDA.prototype.event_ft_insert_test_data = async function (data, callback) {
         data.event_id
     ], callback);
 }
+ 
+
+ConfigDA.prototype.admin_event_bonus_data_get_all = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call admin_event_bonus_data_get_all()", [], callback);
+}
+ConfigDA.prototype.admin_bonus_data_delete = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call admin_bonus_data_delete(?,?)", [
+        data.admin_id,
+        data.event_id
+    ], callback);
+}
+ConfigDA.prototype.admin_event_bonus_data_save = async function (data, callback) {
+    return this.dbModel.query_callback_array("call admin_event_bonus_data_save(?,?,?,?,?,?,?,?,?,?,?)", [
+        data.id,
+        data.status,
+        data.time_from,
+        data.time_to,
+        data.id_ssp,
+        data.id_bundle,
+        data.link_download,
+        
+        data.data_pass,
+        data.key_download,
+        data.point_plus,
+        data.level_x3
+    ], callback);
+}
+ 
