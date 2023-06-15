@@ -55,7 +55,7 @@ NND.query = function(sql,args,cb)
                 console.error("========================query error==========================================");
             }
             _pool.release(client);
-            _pool.delete(client);
+           
             cb(err,res);
 
         });
