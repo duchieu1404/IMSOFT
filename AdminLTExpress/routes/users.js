@@ -82,6 +82,18 @@ router.post("/email_send", async function (req, res) {
         return value != "";
       });
   }
+  const dataExtention = {
+    disable_interstitial : req.body.disable_interstitial ?? '',
+    total_money_spent : req.body.total_money_spent ?? '',
+    buy_in_app_count : req.body.buy_in_app_count ?? '',
+}
+
+
+for (const key in dataExtention) {
+    if (!dataExtention[key]) {
+    delete dataExtention[key];
+    }
+}
   console.log(arrIds);
   var dataSend = (dataSend = {
     user_ids: JSON.stringify(arrIds),
@@ -89,6 +101,7 @@ router.post("/email_send", async function (req, res) {
     content: req.body.edt_Content,
     sent_by: req.body.edt_email_send_name,
     email_type: req.body.edt_MessageType,
+    data_ext : JSON.stringify(dataExtention)
   });
   if (expireTime) {
     dataSend.time_expire = expireTime;

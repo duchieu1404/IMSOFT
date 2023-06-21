@@ -31,6 +31,7 @@ NND.query = function(sql,args,cb)
             console.error("========================acquire error==========================================");
             console.error(err2);
             console.error("========================acquire error==========================================");
+            _pool.release(client);
             return;
         }
         client.query(sql,args,function(err,res){

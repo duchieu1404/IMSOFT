@@ -68,7 +68,7 @@ UserDA.prototype.admin_send_email = async function(data,callback){
 }
 
 UserDA.prototype.admin_send_email_multi = async function(data,callback){
-    return await this.dbModel.query_callback_object("call admin_send_email_multi(?,?,?,?,?,?,?,?)", [
+    return await this.dbModel.query_callback_object("call admin_send_email_multi(?,?,?,?,?,?,?,?,)", [
         data.admin_id,
         data.user_ids,
         data.title,
@@ -76,7 +76,8 @@ UserDA.prototype.admin_send_email_multi = async function(data,callback){
         data.sent_by,
         data.gift,
         data.email_type,
-        data.time_expire
+        data.time_expire,
+        data.data_ext
     ], callback);
 }
 
