@@ -84,8 +84,8 @@ router.post("/email_send", async function (req, res) {
   }
   const dataExtention = {
     disable_interstitial : req.body.disable_interstitial  ?  req.body.disable_interstitial : "",
-    total_money_spent : req.body.total_money_spent ?? "",
-    buy_in_app_count : req.body.buy_in_app_count ?? "",
+    total_money_spent : req.body.total_money_spent ? req.body.total_money_spent : "" ,
+    buy_in_app_count : req.body.buy_in_app_count ? req.body.buy_in_app_count  : "",
 }
 
 
