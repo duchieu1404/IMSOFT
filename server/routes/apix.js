@@ -783,13 +783,13 @@ router.post('/event_ct_get_current',async function (req, res, next) {
     })
 });
 
-//Event FSC
+//Event pharmacy
 
-router.post('/event_fsc_get_event_info_this_week',async function (req, res, next) {
+router.post('/event_pharmacy_get_event_info_this_week',async function (req, res, next) {
 
-    console.log("event_fsc_get_event_info_this_week:", req.body);
+    console.log("event_pharmacy_get_event_info_this_week:", req.body);
 
-    await req.app.UserDA.event_fsc_get_event_info_this_week(req.body, function (err, data) {
+    await req.app.UserDA.event_pharmacy_get_event_info_this_week(req.body, function (err, data) {
         if (err || !data) {
             return res.json({
                 status: 1,

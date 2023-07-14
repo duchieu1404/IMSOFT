@@ -117,8 +117,8 @@ UserDA.prototype.user_info_get_list_facebook = async function (data, callback) {
     return await this.dbModel.query_callback_object("call user_info_get_list_facebook(?)", [data.user_ids], callback);
 }
 
-UserDA.prototype.event_fsc_get_event_info_this_week = async function (data, callback) {
-    return await this.dbModel.query_callback_object("call event_fsc_get_event_info_this_week()", [], callback);
+UserDA.prototype.event_pharmacy_get_event_info_this_week = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call event_pharmacy_get_event_info_this_week()", [], callback);
 }
 
 UserDA.prototype.event_ft_get_current = async function (data, callback) {
