@@ -71,3 +71,7 @@ TeamDA.prototype.team_request_cancel = function(data,callback){
     return this.dbModel.query_callback_object("call team_request_cancel(?,?,?,?,?)", [data.user_id, data.username,data.login_type, data.device_id,data.team_id], callback);
 }
 
+TeamDA.prototype.User_get_rank_team = function(data,callback){
+    return this.dbModel.query_callback_object("call User_get_rank_team(?,?)", [data.user_id, data.idArea], callback);
+}
+

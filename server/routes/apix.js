@@ -783,13 +783,13 @@ router.post('/event_ct_get_current',async function (req, res, next) {
     })
 });
 
-//Event FSC
+//Event pharmacy
 
-router.post('/event_fsc_get_event_info_this_week',async function (req, res, next) {
+router.post('/event_pharmacy_get_event_info_this_week',async function (req, res, next) {
 
-    console.log("event_fsc_get_event_info_this_week:", req.body);
+    console.log("event_pharmacy_get_event_info_this_week:", req.body);
 
-    await req.app.UserDA.event_fsc_get_event_info_this_week(req.body, function (err, data) {
+    await req.app.UserDA.event_pharmacy_get_event_info_this_week(req.body, function (err, data) {
         if (err || !data) {
             return res.json({
                 status: 1,
@@ -1397,6 +1397,10 @@ router.post('/event_getall_config_ssp_v3',async function (req, res, next) {
         });
     })
 });
+
+
+
+
 router.post('/event_getall_bonus_pass',async function (req, res, next) {
 
     console.log("event_getall_bonus_pass data:", req.body);
@@ -1416,6 +1420,24 @@ router.post('/event_getall_bonus_pass',async function (req, res, next) {
         });
     })
 });
+router.post('/User_get_rank_team',async function (req, res, next) {
 
+    console.log("User_get_rank_team data:", req.body);
+
+    await req.app.TeamDA.User_get_rank_team(req.body, function (err, data) {
+        if (err || !data) {
+            console.log(Date.now(),"error User_get_rank_team");
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail"
+            });
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data
+        });
+    })
+});
 
 module.exports = router;
