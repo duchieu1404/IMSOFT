@@ -43,8 +43,10 @@ router.post('/user_login_by_cloud_username', async function (req, res, next) {
 
 router.post('/user_sync_data', async function (req, res, next) {
     console.log("user_sync_data data:", req.body);
+   
     await req.app.UserDA.user_sync_data(req.body, function (err, data) {
         if (err || !data) {
+        console.log(err);
             return res.json({
                 status: 1,
                 msg: "ServerMsg/api_fail"
@@ -259,6 +261,24 @@ router.post('/team_create', async function (req, res, next) {
     })
 });
 
+router.post('/team_change_leader', async function (req, res, next) {
+
+    console.log("team_change_leader data:", req.body);
+
+    await req.app.TeamDA.team_change_leader(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail"
+            });
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data
+        });
+    })
+});
 
 
 router.post('/team_edit', async function (req, res, next) {
@@ -321,6 +341,24 @@ router.post('/team_search', async function (req, res, next) {
     })
 });
 
+router.post('/team_get_achievement_by_user',async  function (req, res, next) {
+
+    console.log("team_get_achievement_by_user data:", req.body);
+
+    await req.app.TeamDA.team_get_achievement_by_user(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail"
+            });
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data
+        });
+    })
+});
 
 router.post('/team_join',async  function (req, res, next) {
 
