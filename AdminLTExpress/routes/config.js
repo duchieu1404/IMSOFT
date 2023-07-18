@@ -126,33 +126,33 @@ router.post('/delete_tester',async function (req, res) {
 
 
 
-//event fsc
+//event pharmacy
 
-router.get('/event_fsc',async function (req, res) {
-    await req.app.ConfigDA.admin_event_fsc_get_all({}, function admin_event_fsc_get_all(err, dataX) {
+router.get('/event_pharmacy',async function (req, res) {
+    await req.app.ConfigDA.admin_event_pharmacy_get_all({}, function admin_event_pharmacy_get_all(err, dataX) {
         if (err || !dataX) {
-            return res.render('config/event_fsc', { dataConfigs: [] });
+            return res.render('config/event_pharmacy', { dataConfigs: [] });
         }
-        return res.render('config/event_fsc', { dataConfigs: dataX });
+        return res.render('config/event_pharmacy', { dataConfigs: dataX });
     });
 });
 
-router.post('/event_fsc',async function (req, res) {
-    await req.app.ConfigDA.admin_event_fsc_save({
+router.post('/event_pharmacy',async function (req, res) {
+    await req.app.ConfigDA.admin_event_pharmacy_save({
         status: req.body.edt_status,
         id: req.body.edt_id,
         type: req.body.edt_type,
         time_from: req.body.edt_time_from,
         time_to: req.body.edt_time_to
     }, function (errSave, dataSave) {
-        return res.redirect('/config/event_fsc');
+        return res.redirect('/config/event_pharmacy');
     });
 });
 
 
-router.post('/event_fsc_delete',async function (req, res) {
-    await req.app.ConfigDA.admin_event_fsc_delete({}, function admin_fsc_get_all(err, dataX) {
-        req.app.ConfigDA.admin_event_fsc_delete({
+router.post('/event_pharmacy_delete',async function (req, res) {
+    await req.app.ConfigDA.admin_event_pharmacy_delete({}, function admin_pharmacy_get_all(err, dataX) {
+        req.app.ConfigDA.admin_event_pharmacy_delete({
             event_id: req.body.delete_edt_Id
         }, function (err, data) {
             return res.send(data || { status: 1, msg: "err" });

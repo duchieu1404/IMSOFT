@@ -22,7 +22,7 @@
 
       <div class="box box-info">
         <div class="box-header with-border">
-          <h3 class="box-title">Event Food Fest</h3>
+          <h3 class="box-title">Event Pharmacy</h3>
         </div>
 
         <div class="box-footer">
@@ -93,7 +93,7 @@
         <div class="modal-body">
 
 
-          <form action="/config/event_fsc" method="post" id="demo-form2" data-parsley-validate
+          <form action="/config/event_pharmacy" method="post" id="demo-form2" data-parsley-validate
             class="form-horizontal form-label-left">
 
             <!-- === -->
@@ -164,7 +164,7 @@
         </div>
         <div class="modal-body">
 
-          <form action="/config/delete_event_fsc" method="post" id="delete_user-form2" data-parsley-validate
+          <form action="/config/delete_event_pharmacy" method="post" id="delete_user-form2" data-parsley-validate
             class="form-horizontal form-label-left">
 
             <!-- === -->
@@ -218,7 +218,7 @@
   var btnDoDeleteEvent = function () {
 
     if ($('#delete_text_confirm').val() != 'delete') {
-      alert("Please type delete to confirm you want to delete that event fsc");
+      alert("Please type delete to confirm you want to delete that event pharmacy");
       $('#delete_text_confirm').focus();
       return;
     }
@@ -226,7 +226,7 @@
     let user_id_delete = $('#delete_edt_Id').val();
     $.ajax({
       type: "POST",
-      url: '/config/event_fsc_delete',
+      url: '/config/event_pharmacy_delete',
       data: $("#delete_user-form2").serialize(),
       success: function (dataResult, textStatus, jqXHR) {
         console.log(dataResult);
@@ -266,12 +266,12 @@
     console.log("btnInsertTestDataClicked");
     $.ajax({
       type: "POST",
-      url: '/config/event_fsc_insert_test_data',
-      data: $("#event-fsc-insert-test-data-form").serialize(),
+      url: '/config/event_pharmacy_insert_test_data',
+      data: $("#event-pharmacy-insert-test-data-form").serialize(),
       success: function (dataResult, textStatus, jqXHR) {
         console.log(dataResult);
         if (dataResult.status == 0) {
-          $(".event-fsc_insert_test_data-modal-lg .close").click()
+          $(".event-pharmacy_insert_test_data-modal-lg .close").click()
           alert("success");
         }
         else {
@@ -286,12 +286,12 @@
     console.log("btnInsertTestDataMeClicked");
     $.ajax({
       type: "POST",
-      url: '/config/event_fsc_insert_test_data_me',
-      data: $("#event-fsc-insert-test-data-me-form").serialize(),
+      url: '/config/event_pharmacy_insert_test_data_me',
+      data: $("#event-pharmacy-insert-test-data-me-form").serialize(),
       success: function (dataResult, textStatus, jqXHR) {
         console.log(dataResult);
         if (dataResult.status == 0) {
-          $(".event-fsc_insert_test_data_me-modal-lg .close").click()
+          $(".event-pharmacy_insert_test_data_me-modal-lg .close").click()
           alert("success");
         }
         else {
