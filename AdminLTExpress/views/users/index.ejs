@@ -395,7 +395,8 @@
                   {"id":51,"name":"DECO"},
                   {"id":52,"name":"POINT_SSP"},
                   {"id":53,"name":"RANK_SSP"},
-                  {"id":61,"name":"DOLA"}
+                  {"id":62,"name":"SMILE"},
+                  {"id":63,"name":"KEY"},
   
                 ];
   
@@ -434,9 +435,9 @@
                     <thead>
                     <tr>
                       <th>Map</th>
-                      <th>Unlock</th>
+                      
                       <th>Level</th>
-                      <th>Tier</th>
+                    
                       <th>Key</th>
                       <th>Coin</th>
                     </tr>
@@ -454,16 +455,10 @@
                       <tr>
                         <td>
                           <b><%= mapInfo.id %>. <%= mapInfo.name %></b>
-                        </td>
-                        <td>
-                          <input  class = "input_number_forceset"  type="text" id = "edt_email_map_unlock_<%= mapInfo.id %>" name="edt_email_map_unlock_<%= mapInfo.id %>" value="0">
-                        </td>
+                        </td> 
                         <td>
                           <input  class = "input_number_forceset"  type="text" id = "edt_email_map_level_<%= mapInfo.id %>" name="edt_email_map_level_<%= mapInfo.id %>" value="0">
-                        </td>
-                        <td>
-                          <input  class = "input_number_forceset"  type="text" id = "edt_email_map_tier_<%= mapInfo.id %>" name="edt_email_map_tier_<%= mapInfo.id %>" value="0">
-                        </td>
+                        </td> 
                         <td>
                           <input  class = "input_number_forceset"  type="text" id = "edt_email_map_key_<%= mapInfo.id %>" name="edt_email_map_key_<%= mapInfo.id %>" value="0">
                         </td>

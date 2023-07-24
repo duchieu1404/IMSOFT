@@ -135,7 +135,7 @@ for (const key in dataExtention) {
       }
     }
 
-    for (var giftId = 0; giftId < 20; giftId++) {
+    for (var giftId = 0; giftId < 64; giftId++) {
       if (
         req.body["edt_email_gift_" + giftId] != null &&
         req.body["edt_email_gift_" + giftId] != 0
@@ -189,7 +189,7 @@ for (const key in dataExtention) {
         }
       }
 
-      for (var giftId = 0; giftId < 20; giftId++) {
+      for (var giftId = 0; giftId < 64; giftId++) {
         if (
           req.body["edt_email_gift_" + giftId] != null &&
           req.body["edt_email_gift_" + giftId] != 0
