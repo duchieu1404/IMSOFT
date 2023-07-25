@@ -608,7 +608,7 @@
 
 
   var btnDeleteUser = function(serverId){
-    $('#delete_edt_Id').val($('#ds_'+serverId+'_dts_id').html());
+    $('#delete_edt_Id').val(serverId);
     $('#delete_edt_Fullname').val($('#ds_'+serverId+'_dts_fullname').html());
   }
 
@@ -774,8 +774,9 @@
       $('#delete_text_confirm').focus();
       return;
     }
-
+  
     let user_id_delete =  $('#delete_edt_Id').val();
+      alert(user_id_delete);
     $.ajax({
       type: "POST",
       url: '/users/delete_user',
