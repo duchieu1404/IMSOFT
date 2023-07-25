@@ -180,7 +180,9 @@ router.post('/event_racing',async function (req, res) {
         id_event:req.body.edt_id_event,
         type: req.body.edt_type,
         time_from: req.body.edt_time_from,
-        time_to: req.body.edt_time_to
+        time_to: req.body.edt_time_to,
+        time_show_to:req.body.edt_time_show_to,
+        max_user:req.body.edt_max_user
     }, function (errSave, dataSave) {
         return res.redirect('/config/event_racing');
     });
