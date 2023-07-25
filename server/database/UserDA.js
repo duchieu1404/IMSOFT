@@ -122,7 +122,7 @@ UserDA.prototype.event_pharmacy_get_event_info_this_week = async function (data,
 }
 
 UserDA.prototype.event_racing_get_current = async function (data, callback) {
-    return await this.dbModel.query_callback_object("call event_racing_get_current()", [], callback);
+    return await this.dbModel.query_callback_object("call event_racing_get_current(?)",  [data.user_id], callback);
 }
 
 UserDA.prototype.event_ft_get_current = async function (data, callback) {
