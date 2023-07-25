@@ -804,6 +804,26 @@ router.post('/event_pharmacy_get_event_info_this_week',async function (req, res,
     })
 });
 
+
+router.post('/event_racing_get_current',async function (req, res, next) {
+
+    console.log("event_racing_get_current:", req.body);
+
+    await req.app.UserDA.event_racing_get_current(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail"
+            });
+        }
+        return res.json({
+            status: 0,
+            msg: "OK",
+            data: data.data
+        });
+    })
+});
+
 //Event FT
 router.post('/event_ft_get_current',async function (req, res, next) {
     console.log("event_ft_get_current: ", req.body);
