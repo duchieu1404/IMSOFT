@@ -97,11 +97,13 @@ ConfigDA.prototype.admin_event_racing_delete = async function (data, callback) {
     ], callback);
 }
 ConfigDA.prototype.admin_event_racing_save = async function (data, callback) {
-    return this.dbModel.query_callback_array("call admin_event_racing_save(?,?,?,?,?)", [
+    return this.dbModel.query_callback_array("call admin_event_racing_save(?,?,?,?,?,?,?)", [
         data.id,
         data.status,
         data.time_from, 
         data.time_to,
+        data.time_show_to,
+        data.max_user,
         data.id_event
     ], callback);
 }
