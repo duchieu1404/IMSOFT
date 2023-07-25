@@ -159,6 +159,44 @@ router.post('/event_pharmacy_delete',async function (req, res) {
         });
     });
 });
+
+
+
+
+// event racing
+router.get('/event_racing',async function (req, res) {
+    await req.app.ConfigDA.admin_event_racing_get_all({}, function admin_event_racing_get_all(err, dataX) {
+        if (err || !dataX) {
+            return res.render('config/event_racing', { dataConfigs: [] });
+        }
+        return res.render('config/event_racing', { dataConfigs: dataX });
+    });
+});
+
+router.post('/event_racing',async function (req, res) {
+    await req.app.ConfigDA.admin_event_racing_save({
+        status: req.body.edt_status,
+        id: req.body.edt_id,
+        id_event:req.body.edt_id_event,
+        type: req.body.edt_type,
+        time_from: req.body.edt_time_from,
+        time_to: req.body.edt_time_to
+    }, function (errSave, dataSave) {
+        return res.redirect('/config/event_racing');
+    });
+});
+
+
+router.post('/event_racing_delete',async function (req, res) {
+    await req.app.ConfigDA.admin_event_racing_delete({}, function admin_racing_get_all(err, dataX) {
+        req.app.ConfigDA.admin_event_racing_delete({
+            event_id: req.body.delete_edt_Id
+        }, function (err, data) {
+            return res.send(data || { status: 1, msg: "err" });
+        });
+    });
+});
+
 // Event Seson pass
 
 router.get('/event_ssp',async function (req, res) {
