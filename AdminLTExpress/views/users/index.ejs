@@ -577,7 +577,7 @@
   }
 
   var btnSendEmail = function(serverId){
-    $('#edt_Id').val($('#ds_'+serverId+'_dts_id').html());
+    $('#edt_Id').val(serverId);
     $('#edt_Fullname').val($('#ds_'+serverId+'_dts_fullname').html());
     $("#emailToNumberUser").val(1);
     $("#edt_PN").val("You have an important message waiting for you.");
@@ -608,7 +608,7 @@
 
 
   var btnDeleteUser = function(serverId){
-    $('#delete_edt_Id').val($('#ds_'+serverId+'_dts_id').html());
+    $('#delete_edt_Id').val(serverId);
     $('#delete_edt_Fullname').val($('#ds_'+serverId+'_dts_fullname').html());
   }
 
