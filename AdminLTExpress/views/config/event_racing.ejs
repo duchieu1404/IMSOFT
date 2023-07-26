@@ -51,7 +51,9 @@
               <th>Status</th>
               <th>Time From</th>
               <th>Time To</th>
-
+              <th>Time Show to</th>
+              <th>Time Show from</th>
+              <th>Max user</th>
             </tr>
           </thead>
           <tbody>
@@ -72,6 +74,9 @@
               <th id="ds_<%= conf.id %>_dts_status"><%= conf.status %></th>
               <th id="ds_<%= conf.id %>_dts_time_from"><%= conf.time_from %></th>
               <th id="ds_<%= conf.id %>_dts_time_to"><%= conf.time_to %></th>
+              <th id="ds_<%= conf.id %>_dts_time_show_to"><%= conf.time_show_to %></th>
+              <th id="ds_<%= conf.id %>_dts_time_show_from"><%= conf.time_show_from %></th>
+              <th id="ds_<%= conf.id %>_dts_max_user"><%= conf.max_user %></th>
 
             </tr>
             <% }); %>
