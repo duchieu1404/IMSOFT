@@ -843,9 +843,9 @@ router.post('/event_racing_add_multi', async function (req, res, next) {
     });
 });
 
-router.post('/event_ft_get_leaderboard',async function (req, res, next) {
+router.post('/event_racing_get_leaderboard',async function (req, res, next) {
 
-    await req.app.UserDA.event_ft_get_leaderboard(req.body, function (err, data) {
+    await req.app.UserDA.event_racing_get_leaderboard(req.body, function (err, data) {
         if (err || !data) {
             return res.json({
                 status: 1,
@@ -861,8 +861,8 @@ router.post('/event_ft_get_leaderboard',async function (req, res, next) {
     });
 });
 
-router.post('/event_ft_get_leaderboard_final', async function (req, res, next) {
-    await req.app.UserDA.event_ft_get_leaderboard_final(req.body, function (err, data) {
+router.post('/event_racing_get_leaderboard_final', async function (req, res, next) {
+    await req.app.UserDA.event_racing_get_leaderboard_final(req.body, function (err, data) {
         if (err || !data) {
             return res.json({
                 status: 1,
