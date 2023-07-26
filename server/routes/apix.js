@@ -824,6 +824,25 @@ router.post('/event_racing_get_current',async function (req, res, next) {
     })
 });
 
+router.post('/event_racing_add_multi', async function (req, res, next) {
+    console.log("event_racing_add_multi: ", req.body);
+
+    await req.app.UserDA.event_racing_add_multi(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+                data: []
+            });
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data || "{}"
+        })
+    });
+});
+
 //Event FT
 router.post('/event_ft_get_current',async function (req, res, next) {
     console.log("event_ft_get_current: ", req.body);
