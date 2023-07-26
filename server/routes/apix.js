@@ -843,6 +843,42 @@ router.post('/event_racing_add_multi', async function (req, res, next) {
     });
 });
 
+router.post('/event_ft_get_leaderboard',async function (req, res, next) {
+
+    await req.app.UserDA.event_ft_get_leaderboard(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+                data: []
+            });
+        }
+        return res.json({
+            status: 0,
+            msg: "OK",
+            data: data
+        })
+    });
+});
+
+router.post('/event_ft_get_leaderboard_final', async function (req, res, next) {
+    await req.app.UserDA.event_ft_get_leaderboard_final(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+            });
+        }
+        return res.json({
+            status: 0,
+            msg: "OK",
+            data: data
+        })
+    });
+});
+
+
+
 //Event FT
 router.post('/event_ft_get_current',async function (req, res, next) {
     console.log("event_ft_get_current: ", req.body);

@@ -182,6 +182,7 @@ router.post('/event_racing',async function (req, res) {
         time_from: req.body.edt_time_from,
         time_to: req.body.edt_time_to,
         time_show_to:req.body.edt_time_show_to,
+        time_show_from : req.body.edt_time_show_from,
         max_user:req.body.edt_max_user
     }, function (errSave, dataSave) {
         return res.redirect('/config/event_racing');

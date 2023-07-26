@@ -127,6 +127,17 @@ UserDA.prototype.event_racing_get_current = async function (data, callback) {
 UserDA.prototype.event_racing_add_multi = async function (data, callback) {
     return await this.dbModel.query_callback_object("call event_racing_add_multi(?,?)", [data.user_id, data.list_score], callback);
 }
+UserDA.prototype.event_racing_get_leaderboard = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call event_racing_get_leaderboard(?,?)", [data.event_id, data.user_id], callback);
+}
+
+UserDA.prototype.event_racing_get_leaderboard_final = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call event_racing_get_leaderboard_final(?,?)", [data.event_id, data.user_id], callback);
+
+}
+
+
+
 UserDA.prototype.event_ft_get_current = async function (data, callback) {
     return await this.dbModel.query_callback_object("call event_ft_get_current(?)", [data.user_id], callback);
 }
