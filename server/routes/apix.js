@@ -938,7 +938,21 @@ router.post('/event_racing_get_leaderboard_final', async function (req, res, nex
     });
 });
 
-
+router.post('/event_racing_get_leaderboard', async function (req, res, next) {
+    await req.app.UserDA.event_racing_get_leaderboard(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+            });
+        }
+        return res.json({
+            status: 0,
+            msg: "OK",
+            data: data
+        })
+    });
+});
 
 //Event FT
 router.post('/event_ft_get_current',async function (req, res, next) {

@@ -774,8 +774,9 @@
       $('#delete_text_confirm').focus();
       return;
     }
-
+  
     let user_id_delete =  $('#delete_edt_Id').val();
+      alert(user_id_delete);
     $.ajax({
       type: "POST",
       url: '/users/delete_user',
