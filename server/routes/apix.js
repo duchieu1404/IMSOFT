@@ -889,7 +889,39 @@ router.post('/user_join_event_racing', async function (req, res, next) {
             data: data
         })
     });
-}); 
+});
+router.post('/event_racing_claiming_reward', async function (req, res, next) {
+    await req.app.UserDA.event_racing_claiming_reward(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+            });
+        }
+        return res.json({
+            status: 0,
+            msg: "OK",
+            data: data
+        })
+    });
+});
+
+router.post('/event_racing_get_leaderboard', async function (req, res, next) {
+    await req.app.UserDA.event_racing_get_leaderboard(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+            });
+        }
+        return res.json({
+            status: 0,
+            msg: "OK",
+            data: data
+        })
+    });
+});
+
 router.post('/event_racing_get_leaderboard_final', async function (req, res, next) {
     await req.app.UserDA.event_racing_get_leaderboard_final(req.body, function (err, data) {
         if (err || !data) {
