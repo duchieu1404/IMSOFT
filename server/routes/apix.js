@@ -782,6 +782,28 @@ router.post('/event_ct_get_current',async function (req, res, next) {
         });
     })
 });
+// end less 
+
+router.post('/event_EndlessTreasure_get_event_info_this_week',async function (req, res, next) {
+
+    console.log("event_EndlessTreasure_get_event_info_this_week:", req.body);
+
+    await req.app.UserDA.event_EndlessTreasure_get_event_info_this_week(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail"
+            });
+        }
+        return res.json({
+            status: 0,
+            msg: "OK",
+            data: data.data
+        });
+    })
+});
+
+
 
 //Event pharmacy
 

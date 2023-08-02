@@ -125,6 +125,41 @@ router.post('/delete_tester',async function (req, res) {
 });
 
 
+//event endless
+router.get('/event_EndlessTreasure',async function (req, res) {
+    await req.app.ConfigDA.admin_event_EndlessTreasure_get_all({}, function admin_event_EndlessTreasure_get_all(err, dataX) {
+        if (err || !dataX) {
+            return res.render('config/event_EndlessTreasure', { dataConfigs: [] });
+        }
+        return res.render('config/event_EndlessTreasure', { dataConfigs: dataX });
+    });
+});
+
+router.post('/event_EndlessTreasure',async function (req, res) {
+    await req.app.ConfigDA.admin_event_EndlessTreasure_save({
+        status: req.body.edt_status,
+        id: req.body.edt_id,
+        type: req.body.edt_type,
+        time_from: req.body.edt_time_from,
+        time_to: req.body.edt_time_to
+    }, function (errSave, dataSave) {
+        return res.redirect('/config/event_EndlessTreasure');
+    });
+});
+
+
+router.post('/event_EndlessTreasure_delete',async function (req, res) {
+    await req.app.ConfigDA.admin_event_EndlessTreasure_delete({}, function admin_EndlessTreasure_get_all(err, dataX) {
+        req.app.ConfigDA.admin_event_EndlessTreasure_delete({
+            event_id: req.body.delete_edt_Id
+        }, function (err, data) {
+            return res.send(data || { status: 1, msg: "err" });
+        });
+    });
+});
+
+
+/* kết thúc event enless */
 
 //event pharmacy
 

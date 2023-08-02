@@ -120,6 +120,9 @@ UserDA.prototype.user_info_get_list_facebook = async function (data, callback) {
 UserDA.prototype.event_pharmacy_get_event_info_this_week = async function (data, callback) {
     return await this.dbModel.query_callback_object("call event_pharmacy_get_event_info_this_week()", [], callback);
 }
+UserDA.prototype.event_EndlessTreasure_get_event_info_this_week = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call event_EndlessTreasure_get_event_info_this_week()", [], callback);
+}
 
 
 /**Start racing */
