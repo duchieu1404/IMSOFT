@@ -246,6 +246,13 @@ ConfigDA.prototype.event_ft_insert_test_data = async function (data, callback) {
 }
  
 
+ConfigDA.prototype.event_Racing_insert_test_data = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call event_Racing_insert_test_data(?)", [
+        data.event_id
+    ], callback);
+}
+ 
+
 ConfigDA.prototype.admin_event_bonus_data_get_all = async function (data, callback) {
     return await this.dbModel.query_callback_array("call admin_event_bonus_data_get_all()", [], callback);
 }

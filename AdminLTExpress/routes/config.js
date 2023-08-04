@@ -331,6 +331,15 @@ router.post('/event_ft_insert_test_data',async function (req, res) {
         });
     });
 });
+router.post('/event_Racing_insert_test_data',async function (req, res) {
+    await req.app.ConfigDA.event_Racing_insert_test_data({}, function event_Racing_insert_test_data(err, dataX) {
+        req.app.ConfigDA.event_Racing_insert_test_data({
+            event_id: req.body.edt_event_id
+        }, function (err, data) {
+            return res.send(data || { status: 1, msg: "err" });
+        });
+    });
+});
 //Version
 
 router.get('/version',async function (req, res) {
