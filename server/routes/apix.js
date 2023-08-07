@@ -865,23 +865,6 @@ router.post('/event_racing_add_multi', async function (req, res, next) {
     });
 });
 
-router.post('/user_join_event_racing',async function (req, res, next) {
-
-    await req.app.UserDA.user_join_event_racing(req.body, function (err, data) {
-        if (err || !data) {
-            return res.json({
-                status: 1,
-                msg: "ServerMsg/api_fail",
-                data: []
-            });
-        }
-        return res.json({
-            status: 0,
-            msg: "OK",
-            data: data
-        })
-    });
-});
 router.post('/user_get_join_event_racing', async function (req, res, next) {
     await req.app.UserDA.user_get_join_event_racing(req.body, function (err, data) {
         if (err || !data) {
@@ -906,9 +889,9 @@ router.post('/user_join_event_racing', async function (req, res, next) {
             });
         }
         return res.json({
-            status: 0,
-            msg: "OK",
-            data: data
+            status: data.status,
+            msg: data.msg,
+            data: data.data
         })
     });
 });
