@@ -145,7 +145,7 @@ UserDA.prototype.event_racing_claiming_reward = async function (data, callback) 
 
 }
 UserDA.prototype.user_get_join_event_racing = async function (data, callback) {
-    return await this.dbModel.query_callback_array("call user_get_join_event_racing(?,?)", [data.event_id, data.user_id], callback);
+    return await this.dbModel.query_callback_object("call user_get_join_event_racing(?,?)", [data.event_id, data.user_id], callback);
 }
 
 UserDA.prototype.user_join_event_racing = async function (data, callback) {
