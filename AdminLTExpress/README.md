@@ -18,3 +18,12 @@ Refactored some url's to local dir
 - http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js
 - http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic
 - http://fonts.googleapis.com/css?family=Kaushan+Script
+
+
+# Hospital 
+# Hospital Dev 
+    STEP DEPLOY CMS
+    Vào server 14.225.3.172
+    cd /data/Hospital_Dev/cooking-FV-server/AdminLTExpress
+
+- Trên server 
