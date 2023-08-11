@@ -120,6 +120,37 @@ UserDA.prototype.user_info_get_list_facebook = async function (data, callback) {
 UserDA.prototype.event_pharmacy_get_event_info_this_week = async function (data, callback) {
     return await this.dbModel.query_callback_object("call event_pharmacy_get_event_info_this_week()", [], callback);
 }
+UserDA.prototype.event_EndlessTreasure_get_event_info_this_week = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call event_EndlessTreasure_get_event_info_this_week()", [], callback);
+}
+
+
+/**Start racing */
+UserDA.prototype.event_racing_get_current = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call event_racing_get_current(?)",  [data.user_id], callback);
+}
+UserDA.prototype.event_racing_add_multi = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call event_racing_add_multi(?,?)", [data.user_id, data.list_score], callback);
+}
+UserDA.prototype.event_racing_get_leaderboard = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call event_racing_get_leaderboard(?,?)", [data.event_id, data.user_id], callback);
+}
+
+UserDA.prototype.event_racing_get_leaderboard_final = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call event_racing_get_leaderboard_final(?,?)", [data.event_id, data.user_id], callback);
+
+}
+UserDA.prototype.event_racing_claiming_reward = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call event_racing_claiming_reward(?,?)", [data.event_id, data.user_id], callback);
+
+}
+UserDA.prototype.user_get_join_event_racing = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call user_get_join_event_racing(?,?)", [data.event_id, data.user_id], callback);
+}
+
+UserDA.prototype.user_join_event_racing = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call user_join_event_racing(?,?)", [data.event_id, data.user_id], callback);
+}
 
 UserDA.prototype.event_ft_get_current = async function (data, callback) {
     return await this.dbModel.query_callback_object("call event_ft_get_current(?)", [data.user_id], callback);

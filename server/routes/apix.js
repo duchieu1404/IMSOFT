@@ -782,6 +782,28 @@ router.post('/event_ct_get_current',async function (req, res, next) {
         });
     })
 });
+// end less 
+
+router.post('/event_EndlessTreasure_get_event_info_this_week',async function (req, res, next) {
+
+    console.log("event_EndlessTreasure_get_event_info_this_week:", req.body);
+
+    await req.app.UserDA.event_EndlessTreasure_get_event_info_this_week(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail"
+            });
+        }
+        return res.json({
+            status: 0,
+            msg: "OK",
+            data: data.data
+        });
+    })
+});
+
+
 
 //Event pharmacy
 
@@ -802,6 +824,139 @@ router.post('/event_pharmacy_get_event_info_this_week',async function (req, res,
             data: data.data
         });
     })
+});
+
+
+router.post('/event_racing_get_current',async function (req, res, next) {
+
+    console.log("event_racing_get_current:", req.body);
+
+    await req.app.UserDA.event_racing_get_current(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail"
+            });
+        }
+        return res.json({
+            status: 0,
+            msg: "OK",
+            data: data.data
+        });
+    })
+});
+
+router.post('/event_racing_add_multi', async function (req, res, next) {
+    console.log("event_racing_add_multi: ", req.body);
+
+    await req.app.UserDA.event_racing_add_multi(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+                data: []
+            });
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data || "{}"
+        })
+    });
+});
+
+router.post('/user_get_join_event_racing', async function (req, res, next) {
+    await req.app.UserDA.user_get_join_event_racing(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+            });
+        }
+        return res.json({
+            status: 0,
+            msg: "OK",
+            data: data
+        })
+    });
+});
+router.post('/user_join_event_racing', async function (req, res, next) {
+    await req.app.UserDA.user_join_event_racing(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+            });
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data
+        })
+    });
+});
+router.post('/event_racing_claiming_reward', async function (req, res, next) {
+    await req.app.UserDA.event_racing_claiming_reward(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+            });
+        }
+        return res.json({
+            status: 0,
+            msg: "OK",
+            data: data
+        })
+    });
+});
+
+router.post('/event_racing_get_leaderboard', async function (req, res, next) {
+    await req.app.UserDA.event_racing_get_leaderboard(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+            });
+        }
+        return res.json({
+            status: 0,
+            msg: "OK",
+            data: data
+        })
+    });
+});
+
+router.post('/event_racing_get_leaderboard_final', async function (req, res, next) {
+    await req.app.UserDA.event_racing_get_leaderboard_final(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+            });
+        }
+        return res.json({
+            status: 0,
+            msg: "OK",
+            data: data
+        })
+    });
+});
+
+router.post('/event_racing_get_leaderboard', async function (req, res, next) {
+    await req.app.UserDA.event_racing_get_leaderboard(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+            });
+        }
+        return res.json({
+            status: 0,
+            msg: "OK",
+            data: data
+        })
+    });
 });
 
 //Event FT

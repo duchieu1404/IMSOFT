@@ -165,7 +165,7 @@
 
 
             </td>
-            <td id = "ds_<%= userInfo.id %>_dts_id"><%= userInfo.id %></td>
+            <td id = "ds_<%= userInfo.id %>_dts_id"> D_<%= userInfo.id %></td>
             <td id = "ds_<%= userInfo.id %>_dts_login_type"><%= userInfo.login_type==0?"Device":(userInfo.login_type==1?"Facebook":"Google") %></td>
             <td id = "ds_<%= userInfo.id %>_dts_fullname"><%= userInfo.fullname %></td>
             <td id = "ds_<%= userInfo.id %>_dts_whisk"><%= userInfo.gem %></td>
@@ -376,25 +376,27 @@
 
               <div class = "email_gift_value">
                 <% var list_gift = [
-  
-                  {"id":0,"name":"INFINITE HEART"},
-                  {"id":1,"name":"Supper Cook"},
-                  {"id":2,"name":"Cook Double"},
-                  {"id":3,"name":"Double Coin"},
-                  {"id":4,"name":"Fast Sever"},
-                  {"id":5,"name":"Paitience"},
-                  {"id":6,"name":"Fast Cooking"},
-                  {"id":7,"name":"NM CUS"},
-                  {"id":8,"name":"NM TIME"},
-                  {"id":9,"name":"2ndChance"},
-                  {"id":10,"name":"CupCake"},
-                  {"id":11,"name":"EasyCombo"},
-                  {"id":12,"name":"MusicPlayer"},
-                  {"id":13,"name":"Heart Normal"},
-                  <!-- {"id":14,"name":"Coin"}, -->
-                  {"id":15,"name":"Gem"},
-                  <!-- {"id":16,"name":"Key"}, -->
-                  {"id":17,"name":"Card"}
+                  {"id":-1,"name":"NO_ADS"},
+                  {"id":0,"name":"NONE"},
+                  
+                  {"id":2,"name":"GEM"},
+                  {"id":3,"name":"HEART"},
+                  {"id":4,"name":"INFINITY_HEART"},
+                  {"id":5,"name":"SPEED"},
+                  {"id":6,"name":"FREEZE"},
+                  {"id":7,"name":"FAST_SERVE"},
+                  {"id":8,"name":"NMT"},
+                  {"id":9,"name":"NMC"},
+                  {"id":10,"name":"NSC"},
+                  {"id":11,"name":"PATIENCE"},
+                  {"id":20,"name":"FASHION"},
+                  {"id":31,"name":"AVATAR"},
+                  {"id":41,"name":"FRAME"},
+                  {"id":51,"name":"DECO"},
+                  {"id":52,"name":"POINT_SSP"},
+                  {"id":53,"name":"RANK_SSP"},
+                  {"id":62,"name":"SMILE"}
+                
   
                 ];
   
@@ -433,9 +435,9 @@
                     <thead>
                     <tr>
                       <th>Map</th>
-                      <th>Unlock</th>
+                      
                       <th>Level</th>
-                      <th>Tier</th>
+                    
                       <th>Key</th>
                       <th>Coin</th>
                     </tr>
@@ -453,16 +455,10 @@
                       <tr>
                         <td>
                           <b><%= mapInfo.id %>. <%= mapInfo.name %></b>
-                        </td>
-                        <td>
-                          <input  class = "input_number_forceset"  type="text" id = "edt_email_map_unlock_<%= mapInfo.id %>" name="edt_email_map_unlock_<%= mapInfo.id %>" value="0">
-                        </td>
+                        </td> 
                         <td>
                           <input  class = "input_number_forceset"  type="text" id = "edt_email_map_level_<%= mapInfo.id %>" name="edt_email_map_level_<%= mapInfo.id %>" value="0">
-                        </td>
-                        <td>
-                          <input  class = "input_number_forceset"  type="text" id = "edt_email_map_tier_<%= mapInfo.id %>" name="edt_email_map_tier_<%= mapInfo.id %>" value="0">
-                        </td>
+                        </td> 
                         <td>
                           <input  class = "input_number_forceset"  type="text" id = "edt_email_map_key_<%= mapInfo.id %>" name="edt_email_map_key_<%= mapInfo.id %>" value="0">
                         </td>
@@ -581,7 +577,7 @@
   }
 
   var btnSendEmail = function(serverId){
-    $('#edt_Id').val($('#ds_'+serverId+'_dts_id').html());
+    $('#edt_Id').val(serverId);
     $('#edt_Fullname').val($('#ds_'+serverId+'_dts_fullname').html());
     $("#emailToNumberUser").val(1);
     $("#edt_PN").val("You have an important message waiting for you.");
@@ -612,7 +608,7 @@
 
 
   var btnDeleteUser = function(serverId){
-    $('#delete_edt_Id').val($('#ds_'+serverId+'_dts_id').html());
+    $('#delete_edt_Id').val(serverId);
     $('#delete_edt_Fullname').val($('#ds_'+serverId+'_dts_fullname').html());
   }
 
@@ -778,8 +774,9 @@
       $('#delete_text_confirm').focus();
       return;
     }
-
+  
     let user_id_delete =  $('#delete_edt_Id').val();
+      alert(user_id_delete);
     $.ajax({
       type: "POST",
       url: '/users/delete_user',

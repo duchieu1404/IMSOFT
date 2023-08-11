@@ -125,6 +125,41 @@ router.post('/delete_tester',async function (req, res) {
 });
 
 
+//event endless
+router.get('/event_EndlessTreasure',async function (req, res) {
+    await req.app.ConfigDA.admin_event_EndlessTreasure_get_all({}, function admin_event_EndlessTreasure_get_all(err, dataX) {
+        if (err || !dataX) {
+            return res.render('config/event_EndlessTreasure', { dataConfigs: [] });
+        }
+        return res.render('config/event_EndlessTreasure', { dataConfigs: dataX });
+    });
+});
+
+router.post('/event_EndlessTreasure',async function (req, res) {
+    await req.app.ConfigDA.admin_event_EndlessTreasure_save({
+        status: req.body.edt_status,
+        id: req.body.edt_id,
+        type: req.body.edt_type,
+        time_from: req.body.edt_time_from,
+        time_to: req.body.edt_time_to
+    }, function (errSave, dataSave) {
+        return res.redirect('/config/event_EndlessTreasure');
+    });
+});
+
+
+router.post('/event_EndlessTreasure_delete',async function (req, res) {
+    await req.app.ConfigDA.admin_event_EndlessTreasure_delete({}, function admin_EndlessTreasure_get_all(err, dataX) {
+        req.app.ConfigDA.admin_event_EndlessTreasure_delete({
+            event_id: req.body.delete_edt_Id
+        }, function (err, data) {
+            return res.send(data || { status: 1, msg: "err" });
+        });
+    });
+});
+
+
+/* kết thúc event enless */
 
 //event pharmacy
 
@@ -159,6 +194,47 @@ router.post('/event_pharmacy_delete',async function (req, res) {
         });
     });
 });
+
+
+
+
+// event racing
+router.get('/event_racing',async function (req, res) {
+    await req.app.ConfigDA.admin_event_racing_get_all({}, function admin_event_racing_get_all(err, dataX) {
+        if (err || !dataX) {
+            return res.render('config/event_racing', { dataConfigs: [] });
+        }
+        return res.render('config/event_racing', { dataConfigs: dataX });
+    });
+});
+
+router.post('/event_racing',async function (req, res) {
+    await req.app.ConfigDA.admin_event_racing_save({
+        status: req.body.edt_status,
+        id: req.body.edt_id,
+        id_event:req.body.edt_id_event,
+        type: req.body.edt_type,
+        time_from: req.body.edt_time_from,
+        time_to: req.body.edt_time_to,
+        time_show_to:req.body.edt_time_show_to,
+        time_show_from : req.body.edt_time_show_from,
+        max_user:req.body.edt_max_user
+    }, function (errSave, dataSave) {
+        return res.redirect('/config/event_racing');
+    });
+});
+
+
+router.post('/event_racing_delete',async function (req, res) {
+    await req.app.ConfigDA.admin_event_racing_delete({}, function admin_racing_get_all(err, dataX) {
+        req.app.ConfigDA.admin_event_racing_delete({
+            event_id: req.body.delete_edt_Id
+        }, function (err, data) {
+            return res.send(data || { status: 1, msg: "err" });
+        });
+    });
+});
+
 // Event Seson pass
 
 router.get('/event_ssp',async function (req, res) {
@@ -249,6 +325,15 @@ router.post('/event_ft_delete',async function (req, res) {
 router.post('/event_ft_insert_test_data',async function (req, res) {
     await req.app.ConfigDA.event_ft_insert_test_data({}, function event_ft_insert_test_data(err, dataX) {
         req.app.ConfigDA.event_ft_insert_test_data({
+            event_id: req.body.edt_event_id
+        }, function (err, data) {
+            return res.send(data || { status: 1, msg: "err" });
+        });
+    });
+});
+router.post('/event_Racing_insert_test_data',async function (req, res) {
+    await req.app.ConfigDA.event_Racing_insert_test_data({}, function event_Racing_insert_test_data(err, dataX) {
+        req.app.ConfigDA.event_Racing_insert_test_data({
             event_id: req.body.edt_event_id
         }, function (err, data) {
             return res.send(data || { status: 1, msg: "err" });
