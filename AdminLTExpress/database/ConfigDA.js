@@ -68,6 +68,64 @@ ConfigDA.prototype.admin_tester_delete = async function (data, callback) {
     ], callback);
 }
 
+
+// end lesss
+ConfigDA.prototype.admin_event_EndlessTreasure_get_all = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call admin_event_EndlessTreasure_get_all()", [], callback);
+}
+ConfigDA.prototype.admin_event_EndlessTreasure_delete = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call admin_event_EndlessTreasure_delete(?,?)", [
+        data.admin_id,
+        data.event_id
+    ], callback);
+}
+ConfigDA.prototype.admin_event_EndlessTreasure_save = async function (data, callback) {
+    return this.dbModel.query_callback_array("call admin_event_EndlessTreasure_save(?,?,?,?)", [
+        data.id,
+        data.status,
+        data.time_from,
+        data.time_to
+    ], callback);
+} 
+
+ConfigDA.prototype.admin_event_EndlessTreasure_get_all = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call admin_event_EndlessTreasure_get_all()", [], callback);
+}
+ConfigDA.prototype.admin_event_EndlessTreasure_delete = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call admin_event_EndlessTreasure_delete(?,?)", [
+        data.admin_id,
+        data.event_id
+    ], callback);
+}
+ConfigDA.prototype.admin_event_EndlessTreasure_save = async function (data, callback) {
+    return this.dbModel.query_callback_array("call admin_event_EndlessTreasure_save(?,?,?,?)", [
+        data.id,
+        data.status,
+        data.time_from,
+        data.time_to
+    ], callback);
+}
+
+
+// 
+ConfigDA.prototype.admin_event_pharmacy_get_all = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call admin_event_pharmacy_get_all()", [], callback);
+}
+ConfigDA.prototype.admin_event_pharmacy_delete = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call admin_event_pharmacy_delete(?,?)", [
+        data.admin_id,
+        data.event_id
+    ], callback);
+}
+ConfigDA.prototype.admin_event_pharmacy_save = async function (data, callback) {
+    return this.dbModel.query_callback_array("call admin_event_pharmacy_save(?,?,?,?)", [
+        data.id,
+        data.status,
+        data.time_from,
+        data.time_to
+    ], callback);
+} 
+
 ConfigDA.prototype.admin_event_pharmacy_get_all = async function (data, callback) {
     return await this.dbModel.query_callback_array("call admin_event_pharmacy_get_all()", [], callback);
 }
@@ -86,6 +144,29 @@ ConfigDA.prototype.admin_event_pharmacy_save = async function (data, callback) {
     ], callback);
 }
 
+// racing
+ConfigDA.prototype.admin_event_racing_get_all = async function (data, callback) {
+    return await this.dbModel.query_callback_array("call admin_event_racing_get_all()", [], callback);
+}
+ConfigDA.prototype.admin_event_racing_delete = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call admin_event_racing_delete(?,?)", [
+        data.admin_id,
+        data.event_id
+    ], callback);
+}
+ConfigDA.prototype.admin_event_racing_save = async function (data, callback) {
+    return this.dbModel.query_callback_array("call admin_event_racing_save(?,?,?,?,?,?,?,?)", [
+        data.id,
+        data.status,
+        data.time_from, 
+        data.time_to,
+        data.time_show_to,
+        data.time_show_from,
+        data.max_user,
+        data.id_event
+    ], callback);
+}
+// end racing
 
 ConfigDA.prototype.admin_event_ssp_get_all = async function (data, callback) {
     return await this.dbModel.query_callback_array("call admin_event_ssp_get_all()", [], callback);
@@ -160,6 +241,13 @@ ConfigDA.prototype.admin_event_ft_delete = async function (data, callback) {
 
 ConfigDA.prototype.event_ft_insert_test_data = async function (data, callback) {
     return await this.dbModel.query_callback_object("call event_ft_insert_test_data(?)", [
+        data.event_id
+    ], callback);
+}
+ 
+
+ConfigDA.prototype.event_Racing_insert_test_data = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call event_Racing_insert_test_data(?)", [
         data.event_id
     ], callback);
 }

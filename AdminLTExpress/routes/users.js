@@ -117,7 +117,7 @@ for (const key in dataExtention) {
         req.body["edt_email_map_key_" + key_id] != 0
       ) {
         objGift.push({
-          type: 16,
+          type: 63,
           quantity: req.body["edt_email_map_key_" + key_id],
           map_id: key_id,
         });
@@ -128,14 +128,14 @@ for (const key in dataExtention) {
         req.body["edt_email_map_coin_" + key_id] != 0
       ) {
         objGift.push({
-          type: 14,
+          type: 1,
           quantity: req.body["edt_email_map_coin_" + key_id],
           map_id: key_id,
         });
       }
     }
 
-    for (var giftId = 0; giftId < 20; giftId++) {
+    for (var giftId = -1; giftId < 64; giftId++) {
       if (
         req.body["edt_email_gift_" + giftId] != null &&
         req.body["edt_email_gift_" + giftId] != 0
@@ -189,7 +189,7 @@ for (const key in dataExtention) {
         }
       }
 
-      for (var giftId = 0; giftId < 20; giftId++) {
+      for (var giftId = -1; giftId < 64; giftId++) {
         if (
           req.body["edt_email_gift_" + giftId] != null &&
           req.body["edt_email_gift_" + giftId] != 0
