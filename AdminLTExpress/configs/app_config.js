@@ -9,9 +9,9 @@ app_config.mySQLConfig = {
 
     host: 'localhost',   //14.225.3.183
     port: 3306,
-    user: 'hospital_dev_001',
-    password: 'HospitalDev123$5',
-    database:'Hospital_Dev_001',
+    user: 'user_hospital',
+    password: 'Hospital123$5',
+    database:'hospital_001',
     charset : 'utf8mb4_general_ci',
     waitForConnections : true,  // Determines the pool's action when no connections are available and the limit has been reached. If true, the pool will queue the connection request and call it when one becomes available. If false, the pool will immediately call back with an error. (Default: true)
     queueLimit :0, //The maximum number of connection requests the pool will queue before returning an error from
