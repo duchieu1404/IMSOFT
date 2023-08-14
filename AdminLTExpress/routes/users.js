@@ -152,12 +152,10 @@ for (const key in dataExtention) {
     if (req.body.edt_MessageType == 3 || req.body.edt_MessageType == 4) {
       let map = [];
       for (var i = 1; i <= 3; i++) {
-        if (req.body["edt_email_map_unlock_" + i] != null) {
+        if (req.body["edt_email_map_level_" + i] != null) {
           let res1 = {
             id: i,
-            level: req.body["edt_email_map_level_" + i],
-            tier: req.body["edt_email_map_tier_" + i],
-            unlock: req.body["edt_email_map_unlock_" + i],
+            level: req.body["edt_email_map_level_" + i]
           };
           map.push(res1);
         }
