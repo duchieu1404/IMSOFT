@@ -1133,7 +1133,8 @@ router.post('/country', function (req, res, next) {
     console.log("country data:", req.body);
 
     var clientIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    var urlGetCountry = 'http://ip-api.com/json/' + clientIP + '?fields=status,country,city,countryCode';
+    let ip = clientIP.split(",")[0].trim();
+    var urlGetCountry = 'http://ip-api.com/json/' + ip + '?fields=status,country,city,countryCode';
     console.log("urlGetCountry " + urlGetCountry);
     var request = require('request');
     request(urlGetCountry, function (error, response, body) {
