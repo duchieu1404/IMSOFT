@@ -8,6 +8,10 @@
     "env": {
       "NODE_ENV": "production",
 	  "PORT":14000
-    }
+    },
+    "log_date_format": "YYYY-MM-DD HH:mm:ss",
+    "out_file": "/tmp/logs/Hospital_Dev/Hospital_API_Dev_14000-out.log",
+    "error_file": "/tmp/logs/Hospital_Dev/Hospital_API_Dev_14000-error.log",
+    "log_type": "json"
   }]
 }
