@@ -2,6 +2,9 @@ let express = require('express');
 let router = express.Router();
 let HVKUtil = require('./../shared_class/HVKUtils');
 let crypto = require('./../shared_class/crypt');
+const Queue = require('bull');
+const app_config = require("../config/config");
+const { json } = require('body-parser');
 /* GET users listing. */
 
 
@@ -40,25 +43,54 @@ router.post('/user_login_by_cloud_username', async function (req, res, next) {
     })
 });
 
-
+const userSyncDataQueue = new Queue('Hospital_userSyncDataQueue');
 router.post('/user_sync_data', async function (req, res, next) {
-    console.log("user_sync_data data:", req.body);
-   
-    await req.app.UserDA.user_sync_data(req.body, function (err, data) {
-        if (err || !data) {
-        console.log(err);
-            return res.json({
-                status: 1,
-                msg: "ServerMsg/api_fail"
-            });
-        }
+    console.log(HVKUtil.getDateTime," api user_sync_data data: user_id = " , req.body.user_id, " data => " , json.stringify(req.body));
+   if(app_config.userSyncDataLimiter.check(req)){
+        userSyncDataQueue.add(req.body); // Thêm dữ liệu của request vào hàng đợi
+        console.log(HVKUtil.getDateTime," add queue Hospital_userSyncDataQueue success: user_id = " , req.body.user_id, " data => " , json.stringify(req.body));
         return res.json({
-            status: data.status,
-            msg: data.msg,
-            data: data.data
+            status: 1,
+            msg:"OK",
+            data: req.body
         });
-    })
+      //  res.status(429).send('Too many requests for user_sync_data, added to queue.');
+   }else{
+        console.log(HVKUtil.getDateTime," call procedure user_sync_data: user_id = " , req.body.user_id, " data => " , json.stringify(req.body));
+        await req.app.UserDA.user_sync_data(req.body, function (err, data) {
+            if (err || !data) {
+            console.log(err);
+                return res.json({
+                    status: 1,
+                    msg: "ServerMsg/api_fail"
+                });
+            }
+            return res.json({
+                status: data.status,
+                msg: data.msg,
+                data: data.data
+            });
+        })
+   }
+   
 });
+
+// Xử lý công việc trong hàng đợi
+userSyncDataQueue.process(async (job) => {
+    console.log(HVKUtil.getDateTime,' job_id= ',job.id ,' Processing job:', json.stringify(job.data));
+    await req.app.UserDA.user_sync_data(job.data, function (err, data) {
+        if (err || !data) { 
+            onsole.log(HVKUtil.getDateTime,'Run job userSyncDataQueue sync_data to database error:', json.stringify(err));
+        }
+        console.log(HVKUtil.getDateTime,'Run job update sync_data to database OK:', json.stringify(job.data));
+    })
+    // Thực hiện xử lý công việc tại đây
+  });
+  
+  // Lắng nghe sự kiện khi có công việc hoàn thành
+  userSyncDataQueue.on('completed', (job) => {
+    console.log(`Job ${job.id} has been completed.`);
+  });
 
 router.post('/user_get_user_data', async function (req, res, next) {
 
