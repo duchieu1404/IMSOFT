@@ -1,8 +1,7 @@
 /**
  * Created by luckyman on 8/29/17.
  */
-const Queue = require('bull');
-const rateLimit = require('express-rate-limit');
+
 let app_config = {};
 app_config.mySQLConfig = {
     host: 'localhost',
@@ -34,10 +33,5 @@ app_config.mySQLConfig = {
 app_config.system_config = {
     auto_push_interval:10000
 }
-app_config.userSyncDataLimiter = rateLimit({
-    windowMs: 60 * 1000, // 1 phút
-    max: 10, // Tối đa 1 request trong 1 phút
-    message: 'Too many requests for user_sync_data, please try again later.',
-  });
-  
+
 module.exports = exports = app_config;
