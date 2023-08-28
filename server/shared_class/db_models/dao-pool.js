@@ -27,7 +27,7 @@ var createMySqlPool = function(app,mySQLConfig)
             client.end();
         },
         min:2,
-        max:30,
+        max:1000,
         idleTimeoutMillis:30000,
         log:false
     });

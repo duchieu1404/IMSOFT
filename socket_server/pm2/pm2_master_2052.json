@@ -7,6 +7,10 @@
     "merge_logs"  : true,
     "env": {
       "NODE_ENV": "production"
-    }
+    },
+    "log_date_format": "YYYY-MM-DD HH:mm:ss",
+    "out_file": "/tmp/logs/Hospital/Hospital_API_13000-out.log",
+    "error_file": "/tmp/logs/Hospital/Hospital_API_13000-error.log",
+    "log_type": "json"
   }]
 }
