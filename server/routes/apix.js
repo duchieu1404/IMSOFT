@@ -2,6 +2,9 @@ let express = require('express');
 let router = express.Router();
 let HVKUtil = require('./../shared_class/HVKUtils');
 let crypto = require('./../shared_class/crypt');
+let config = require("../config/config");
+const { json } = require('body-parser');
+const e = require('express');
 
 // const app_config = require("../config/config");
 /* GET users listing. */
@@ -859,22 +862,35 @@ router.post('/event_pharmacy_get_event_info_this_week',async function (req, res,
 
 
 router.post('/event_racing_get_current',async function (req, res, next) {
+    let cacheKey = config.ev+"event_racing_get_current";
+    const cacheResult =   req.app.RedisClient.get(cacheKey);
 
-    console.log("event_racing_get_current:", req.body);
-
-    await req.app.UserDA.event_racing_get_current(req.body, function (err, data) {
-        if (err || !data) {
-            return res.json({
-                status: 1,
-                msg: "ServerMsg/api_fail"
-            });
-        }
+    if(cacheResult){
+        console.log(HVKUtil.getDateTime + " user_id = " + req.body.user_id + " get cache event_racing_get_current result = ", cacheResult);
         return res.json({
             status: 0,
             msg: "OK",
-            data: data.data
+            data: JSON.parse(cacheResult)
         });
-    })
+    }else{
+        await req.app.UserDA.event_racing_get_current(req.body, function (err, data) {
+            if (err || !data) {
+                console.log(HVKUtil.getDateTime + " user_id = " + req.body.user_id + " error event_racing_get_current err =>", JSON.stringify(err));
+                return res.json({
+                    status: 1,
+                    msg: "ServerMsg/api_fail"
+                });
+            }
+
+            req.app.RedisClient.setex(cacheKey, data.cacheDuration, JSON.stringify(userData));
+            console.log(HVKUtil.getDateTime + " user_id = " + req.body.user_id + " set cache redis event_racing_get_current Ok data =>", JSON.stringify(data.data));
+            return res.json({
+                status: 0,
+                msg: "OK",
+                data: data.data
+            });
+        })
+    }
 });
 
 router.post('/event_racing_add_multi', async function (req, res, next) {

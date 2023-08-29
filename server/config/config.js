@@ -1,8 +1,8 @@
 /**
  * Created by luckyman on 8/29/17.
  */
-const Queue = require('bull');
 const rateLimit = require('express-rate-limit');
+const app = require('../app');
 let app_config = {};
 app_config.mySQLConfig = {
     host: 'localhost',
@@ -39,5 +39,5 @@ app_config.userSyncDataLimiter = rateLimit({
     max: 10, // Tối đa 1 request trong 1 phút
     message: 'Too many requests for user_sync_data, please try again later.',
   });
-  
+  app_config.ev = "Hospital_dev_";
 module.exports = exports = app_config;

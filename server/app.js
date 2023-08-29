@@ -45,6 +45,20 @@ let redisPool = require('redis-connection-pool')('myRedisPool', {
 });
 
 app.RedisPool = redisPool;
+// set redis
+const redis = require('redis');
+const redisClient = redis.createClient({
+  host: '127.0.0.1', // Thay bằng địa chỉ Redis server của bạn
+  port: 6379,        // Thay bằng cổng Redis server của bạn
+});
+redisClient.on('connect', () => {
+  console.log('Connected to Redis');
+});
+
+redisClient.on('error', (err) => {
+  console.error('Error:', err);
+});
+app.RedisClient = redisClient;
 
 var _PushDA = require('./database/PushDA');
 var PushDA = new _PushDA(app);
