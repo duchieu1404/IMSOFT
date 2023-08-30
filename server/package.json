@@ -21,7 +21,7 @@
     "nodemailer": "^6.4.10",
     "onesignal-node": "^1.1.2",
     "promise": "7.0.4",
-    "redis": "^4.6.8",
+    "redis": "^2.8.0",
     "redis-connection-pool": "^1.7.2",
     "request": "^2.88.2",
     "requestify": "0.2.5"

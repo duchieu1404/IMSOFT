@@ -3,8 +3,6 @@ let router = express.Router();
 let HVKUtil = require('./../shared_class/HVKUtils');
 let crypto = require('./../shared_class/crypt');
 let config = require("../config/config");
-const { json } = require('body-parser');
-const e = require('express');
 
 // const app_config = require("../config/config");
 /* GET users listing. */
@@ -862,36 +860,81 @@ router.post('/event_pharmacy_get_event_info_this_week',async function (req, res,
 
 
 router.post('/event_racing_get_current',async function (req, res, next) {
-    let cacheKey = config.ev+"event_racing_get_current";
-    const cacheResult =   req.app.RedisClient.get(cacheKey);
-
-    if(cacheResult){
-        console.log(HVKUtil.getDateTime + " user_id = " + req.body.user_id + " get cache event_racing_get_current result = ", cacheResult);
-        return res.json({
+        let cacheKey = config.ev+"event_racing_get_current";
+    const cacheResult =   req.app.RedisClient.get(cacheKey,function(error,results){
+      if(!error && results != null){
+        console.log(" user_id = " + req.body.user_id + " get cache event_racing_get_current  = ", results);
+          return res.json({
             status: 0,
             msg: "OK",
-            data: JSON.parse(cacheResult)
+            data: JSON.parse(results)
         });
-    }else{
-        await req.app.UserDA.event_racing_get_current(req.body, function (err, data) {
+      }else{
+       req.app.UserDA.event_racing_get_current(req.body, function (err, data) {
             if (err || !data) {
-                console.log(HVKUtil.getDateTime + " user_id = " + req.body.user_id + " error event_racing_get_current err =>", JSON.stringify(err));
+                console.log( " user_id = " + req.body.user_id + " error event_racing_get_current err =>", JSON.stringify(err));
                 return res.json({
                     status: 1,
                     msg: "ServerMsg/api_fail"
                 });
             }
-
-            req.app.RedisClient.setex(cacheKey, data.cacheDuration, JSON.stringify(userData));
-            console.log(HVKUtil.getDateTime + " user_id = " + req.body.user_id + " set cache redis event_racing_get_current Ok data =>", JSON.stringify(data.data));
+          
+           
+          
+           req.app.RedisClient.setex(cacheKey, data.cacheDuration, JSON.stringify(data.data));
+            console.log(" user_id = " + req.body.user_id + " set cache redis key="+ cacheKey + " expried time = " + data.cacheDuration + " Ok data =>", JSON.stringify(data.data));
             return res.json({
                 status: 0,
                 msg: "OK",
                 data: data.data
             });
         })
-    }
+  
+      }
+       });
+      
+   
+ 
 });
+
+router.post('/hospital_del_redis_key', async function (req, res, next) {
+      let key =  req.body.cacheKey;
+      let keyApp =  req.body.keyApp;
+      if(key && keyApp == "6gnb^QM3uRC8B"){
+        req.app.RedisClient.del(key,function(err,reply){
+        
+        if (err) {
+        console.error('Error deleting key:', err);
+        return res.json({
+                status: 0,
+                msg: "Error delete key error = "+JSON.stringfy(err),
+                data: null
+            });
+      } else {
+          if (reply === 1) {
+          console.log('Key deleted successfully.key redis='+key);
+              return res.json({
+                status: 0,
+                msg: 'Key deleted successfully.key redis='+key,
+                data: null
+            });
+              
+          } else {
+          console.log('Key redis='+key + ' not found');
+            return res.json({
+                status: 0,
+                msg:'Key redis='+key + ' not found',
+                data: null
+            });
+              
+          }
+      }
+           // sole.log("Delete key redis ="+ key);
+        })
+      }
+});
+
+
 
 router.post('/event_racing_add_multi', async function (req, res, next) {
     console.log("event_racing_add_multi: ", req.body);

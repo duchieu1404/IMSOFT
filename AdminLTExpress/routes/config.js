@@ -4,6 +4,8 @@ var router = express.Router();
 const fs = require('fs')
 const fsex = require('fs-extra');
 const { render } = require('../../server/app');
+const request = require('request');
+var app_configs = require('../configs/app_config');
 
 /* GET home page. */
 router.get('/', function (req, res) {
@@ -220,6 +222,19 @@ router.post('/event_racing',async function (req, res) {
         time_show_from : req.body.edt_time_show_from,
         max_user:req.body.edt_max_user
     }, function (errSave, dataSave) {
+         let option =  app_configs.option_clearCache;
+         option.body =  {
+            keyApp : "6gnb^QM3uRC8B",
+            cacheKey : "Hospital_dev_event_racing_get_current"
+            // Thêm các tham số khác tại đây nếu cần
+          };
+         request.post(option, (err, res, body) => {
+            if (err) {
+              return console.log(err)
+            }
+            console.log(`Clear cache all successfully for request event_ct in CMS Status: key = Hospital_dev_event_racing_get_current ` );
+          })
+        
         return res.redirect('/config/event_racing');
     });
 });
@@ -230,6 +245,19 @@ router.post('/event_racing_delete',async function (req, res) {
         req.app.ConfigDA.admin_event_racing_delete({
             event_id: req.body.delete_edt_Id
         }, function (err, data) {
+             let option =  app_configs.option_clearCache;
+         option.body =  {
+            keyApp : "6gnb^QM3uRC8B",
+            cacheKey : "Hospital_dev_event_racing_get_current"
+           
+          };
+         request.post(option, (err, res, body) => {
+            if (err) {
+              return console.log(err)
+            }
+            console.log(`Clear cache all successfully for request event_ct in CMS Status: key = Hospital_dev_event_racing_get_current ` );
+          })
+        
             return res.send(data || { status: 1, msg: "err" });
         });
     });

@@ -27,5 +27,10 @@ app_config.onesignal_config =  {
 app_config.system_config = {
     auto_push_interval:10000
 }
+app_config.option_clearCache = {
+    url: 'https://apihospitaldevgame.colorgamejsc.com/apix/hospital_del_redis_key',
+    json: true,
+    method :'POST'
+}
 
 module.exports = exports = app_config;
