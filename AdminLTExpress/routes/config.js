@@ -145,6 +145,23 @@ router.post('/event_EndlessTreasure',async function (req, res) {
         time_from: req.body.edt_time_from,
         time_to: req.body.edt_time_to
     }, function (errSave, dataSave) {
+        
+         /** clear cache key redis */
+         let option =  app_configs.option_clearCache;
+         let cache_key = app_configs.ev + "event_EndlessTreasure_get_event_info_this_week";
+         option.body =  {
+            keyApp : "6gnb^QM3uRC8B",
+            cacheKey : cache_key 
+          };
+         request.post(option, (err, res, body) => {
+            if (err) {
+              return console.log(err)
+            }
+            console.log(`Clear cache all successfully for request event_ct in CMS Status: key = ${cache_key} ` );
+          })
+      
+
+
         return res.redirect('/config/event_EndlessTreasure');
     });
 });
@@ -155,6 +172,22 @@ router.post('/event_EndlessTreasure_delete',async function (req, res) {
         req.app.ConfigDA.admin_event_EndlessTreasure_delete({
             event_id: req.body.delete_edt_Id
         }, function (err, data) {
+   
+         /** clear cache key redis */
+         let option =  app_configs.option_clearCache;
+         let cache_key = app_configs.ev + "event_EndlessTreasure_get_event_info_this_week";
+         option.body =  {
+            keyApp : "6gnb^QM3uRC8B",
+            cacheKey : cache_key 
+          };
+         request.post(option, (err, res, body) => {
+            if (err) {
+              return console.log(err)
+            }
+            console.log(`Clear cache all successfully for request event_ct in CMS Status: key = ${cache_key} ` );
+          })
+      
+
             return res.send(data || { status: 1, msg: "err" });
         });
     });
@@ -182,6 +215,21 @@ router.post('/event_pharmacy',async function (req, res) {
         time_from: req.body.edt_time_from,
         time_to: req.body.edt_time_to
     }, function (errSave, dataSave) {
+
+        let option =  app_configs.option_clearCache;
+        let cache_key = app_configs.ev + "event_pharmacy_get_event_info_this_week";
+        option.body =  {
+           keyApp : "6gnb^QM3uRC8B",
+           cacheKey : cache_key
+         };
+        request.post(option, (err, res, body) => {
+           if (err) {
+             return console.log(err)
+           }
+           console.log(`Clear cache all successfully for request event_ct in CMS Status: key =  ${cache_key}` );
+         })
+       
+
         return res.redirect('/config/event_pharmacy');
     });
 });
@@ -192,6 +240,20 @@ router.post('/event_pharmacy_delete',async function (req, res) {
         req.app.ConfigDA.admin_event_pharmacy_delete({
             event_id: req.body.delete_edt_Id
         }, function (err, data) {
+            let option =  app_configs.option_clearCache;
+            let cache_key = app_configs.ev + "event_pharmacy_get_event_info_this_week";
+            option.body =  {
+            keyApp : "6gnb^QM3uRC8B",
+            cacheKey : cache_key
+            // Thêm các tham số khác tại đây nếu cần
+            };
+            request.post(option, (err, res, body) => {
+            if (err) {
+                return console.log(err)
+            }
+            console.log(`Clear cache all successfully for request event_ct in CMS Status: key =  ${cache_key}` );
+            })
+        
             return res.send(data || { status: 1, msg: "err" });
         });
     });
@@ -223,16 +285,16 @@ router.post('/event_racing',async function (req, res) {
         max_user:req.body.edt_max_user
     }, function (errSave, dataSave) {
          let option =  app_configs.option_clearCache;
+         let cache_key = app_configs.ev + "event_racing_get_current";
          option.body =  {
             keyApp : "6gnb^QM3uRC8B",
-            cacheKey : "Hospital_dev_event_racing_get_current"
-            // Thêm các tham số khác tại đây nếu cần
+            cacheKey : cache_key 
           };
          request.post(option, (err, res, body) => {
             if (err) {
               return console.log(err)
             }
-            console.log(`Clear cache all successfully for request event_ct in CMS Status: key = Hospital_dev_event_racing_get_current ` );
+            console.log(`Clear cache all successfully for request event_ct in CMS Status: key = ${cache_key} ` );
           })
         
         return res.redirect('/config/event_racing');
@@ -245,18 +307,19 @@ router.post('/event_racing_delete',async function (req, res) {
         req.app.ConfigDA.admin_event_racing_delete({
             event_id: req.body.delete_edt_Id
         }, function (err, data) {
-             let option =  app_configs.option_clearCache;
-         option.body =  {
-            keyApp : "6gnb^QM3uRC8B",
-            cacheKey : "Hospital_dev_event_racing_get_current"
-           
-          };
-         request.post(option, (err, res, body) => {
-            if (err) {
-              return console.log(err)
-            }
-            console.log(`Clear cache all successfully for request event_ct in CMS Status: key = Hospital_dev_event_racing_get_current ` );
-          })
+            /** clear cache key redis */
+            let option =  app_configs.option_clearCache;
+            let cache_key = app_configs.ev + "event_racing_get_current";
+            option.body =  {
+               keyApp : "6gnb^QM3uRC8B",
+               cacheKey : cache_key 
+             };
+            request.post(option, (err, res, body) => {
+               if (err) {
+                 return console.log(err)
+               }
+               console.log(`Clear cache all successfully for request event_ct in CMS Status: key = ${cache_key} ` );
+             })
         
             return res.send(data || { status: 1, msg: "err" });
         });
@@ -287,6 +350,7 @@ router.post('/event_ssp',async function (req, res) {
         data_ssp : req.body.edt_data_ssp,
         level_x3 : req.body.edt_levelX3
     }, function (errSave, dataSave) {
+
         return res.redirect('/config/event_ssp');
     });
 });

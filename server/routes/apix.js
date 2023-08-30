@@ -817,22 +817,35 @@ router.post('/event_ct_get_current',async function (req, res, next) {
 // end less 
 
 router.post('/event_EndlessTreasure_get_event_info_this_week',async function (req, res, next) {
-
-    console.log("event_EndlessTreasure_get_event_info_this_week:", req.body);
-
-    await req.app.UserDA.event_EndlessTreasure_get_event_info_this_week(req.body, function (err, data) {
-        if (err || !data) {
+    let cacheKey = config.ev+"event_EndlessTreasure_get_event_info_this_week";
+    req.app.RedisClient.get(cacheKey,function(error,results){
+        if(!error && results != null){
+            console.log(" user_id = " + req.body.user_id + " get cache event_racing_get_current  = ", results);
             return res.json({
-                status: 1,
-                msg: "ServerMsg/api_fail"
+                status: 0,
+                msg: "OK",
+                data: JSON.parse(results)
             });
-        }
-        return res.json({
-            status: 0,
-            msg: "OK",
-            data: data.data
-        });
-    })
+        }else{
+             req.app.UserDA.event_EndlessTreasure_get_event_info_this_week(req.body, function (err, data) {
+                if (err || !data) {
+                    console.log( " user_id = " + req.body.user_id + " call procedure error " + cacheKey +"  err =>", JSON.stringify(err));
+                    return res.json({
+                        status: 1,
+                        msg: "ServerMsg/api_fail"
+                    });
+                }
+                req.app.RedisClient.setex(cacheKey, data.cacheDuration, JSON.stringify(data.data));
+                console.log(" user_id = " + req.body.user_id + " set cache redis key="+ cacheKey + " expried time = " + data.cacheDuration + " Ok data =>", JSON.stringify(data.data));
+                return res.json({
+                    status: 0,
+                    msg: "OK",
+                    data: data.data
+                });
+            })
+    }
+    });
+ 
 });
 
 
@@ -840,61 +853,69 @@ router.post('/event_EndlessTreasure_get_event_info_this_week',async function (re
 //Event pharmacy
 
 router.post('/event_pharmacy_get_event_info_this_week',async function (req, res, next) {
-
-    console.log("event_pharmacy_get_event_info_this_week:", req.body);
-
-    await req.app.UserDA.event_pharmacy_get_event_info_this_week(req.body, function (err, data) {
-        if (err || !data) {
+ 
+    let cacheKey = config.ev+"event_pharmacy_get_event_info_this_week";
+    req.app.RedisClient.get(cacheKey,function(error,results){
+        if(!error && results != null){
+            console.log(" user_id = " + req.body.user_id + " get cache event_racing_get_current  = ", results);
             return res.json({
-                status: 1,
-                msg: "ServerMsg/api_fail"
+                status: 0,
+                msg: "OK",
+                data: JSON.parse(results)
             });
-        }
-        return res.json({
-            status: 0,
-            msg: "OK",
-            data: data.data
-        });
-    })
+        }else{
+             req.app.UserDA.event_pharmacy_get_event_info_this_week(req.body, function (err, data) {
+                if (err || !data) {
+                    console.log( " user_id = " + req.body.user_id + " call procedure error event_pharmacy_get_event_info_this_week err =>", JSON.stringify(err));
+                    return res.json({
+                        status: 1,
+                        msg: "ServerMsg/api_fail"
+                    });
+                }
+                req.app.RedisClient.setex(cacheKey, data.cacheDuration, JSON.stringify(data.data));
+                console.log(" user_id = " + req.body.user_id + " set cache redis key="+ cacheKey + " expried time = " + data.cacheDuration + " Ok data =>", JSON.stringify(data.data));
+                return res.json({
+                    status: 0,
+                    msg: "OK",
+                    data: data.data
+                });
+            })
+    }
+    });
 });
 
 
 router.post('/event_racing_get_current',async function (req, res, next) {
-        let cacheKey = config.ev+"event_racing_get_current";
-    const cacheResult =   req.app.RedisClient.get(cacheKey,function(error,results){
-      if(!error && results != null){
-        console.log(" user_id = " + req.body.user_id + " get cache event_racing_get_current  = ", results);
-          return res.json({
-            status: 0,
-            msg: "OK",
-            data: JSON.parse(results)
-        });
-      }else{
-       req.app.UserDA.event_racing_get_current(req.body, function (err, data) {
-            if (err || !data) {
-                console.log( " user_id = " + req.body.user_id + " error event_racing_get_current err =>", JSON.stringify(err));
-                return res.json({
-                    status: 1,
-                    msg: "ServerMsg/api_fail"
-                });
-            }
-          
-           
-          
-           req.app.RedisClient.setex(cacheKey, data.cacheDuration, JSON.stringify(data.data));
-            console.log(" user_id = " + req.body.user_id + " set cache redis key="+ cacheKey + " expried time = " + data.cacheDuration + " Ok data =>", JSON.stringify(data.data));
+    let cacheKey = config.ev+"event_racing_get_current";
+    req.app.RedisClient.get(cacheKey,function(error,results){
+        if(!error && results != null){
+            console.log(" user_id = " + req.body.user_id + " get cache event_racing_get_current  = ", results);
             return res.json({
                 status: 0,
                 msg: "OK",
-                data: data.data
+                data: JSON.parse(results)
             });
-        })
-  
-      }
-       });
-      
-   
- 
+        }else{
+        req.app.UserDA.event_racing_get_current(req.body, function (err, data) {
+                if (err || !data) {
+                    console.log( " user_id = " + req.body.user_id + " error event_racing_get_current err =>", JSON.stringify(err));
+                    return res.json({
+                        status: 1,
+                        msg: "ServerMsg/api_fail"
+                    });
+                }
+            
+            req.app.RedisClient.setex(cacheKey, data.cacheDuration, JSON.stringify(data.data));
+                console.log(" user_id = " + req.body.user_id + " set cache redis key="+ cacheKey + " expried time = " + data.cacheDuration + " Ok data =>", JSON.stringify(data.data));
+                return res.json({
+                    status: 0,
+                    msg: "OK",
+                    data: data.data
+                });
+            })
+    
+        }
+    });
 });
 
 router.post('/hospital_del_redis_key', async function (req, res, next) {
@@ -956,13 +977,22 @@ router.post('/event_racing_add_multi', async function (req, res, next) {
 });
 
 router.post('/user_get_join_event_racing', async function (req, res, next) {
+    if(req.body.user_id && req.body.user_id > 0){
+        console.log("user_id = " + req.body.user_id + " don't get join  user_get_join_event_racing");
+        return res.json({
+            status: 1,
+            msg: "ServerMsg/api_fail",
+        });
+    }
     await req.app.UserDA.user_get_join_event_racing(req.body, function (err, data) {
         if (err || !data) {
+            console.log("user_id = " + req.body.user_id + " join  user_get_join_event_racing error =>", JSON.stringify(err));
             return res.json({
                 status: 1,
                 msg: "ServerMsg/api_fail",
             });
         }
+        console.log("user_id = " + req.body.user_id + " join  user_get_join_event_racing sucess data =>", JSON.stringify(data));
         return res.json({
             status: 0,
             msg: "OK",
@@ -971,13 +1001,22 @@ router.post('/user_get_join_event_racing', async function (req, res, next) {
     });
 });
 router.post('/user_join_event_racing', async function (req, res, next) {
+    if(req.body.user_id && req.body.user_id > 0){
+        console.log("user_id = " + req.body.user_id + " don't  join  user_get_join_event_racing");
+        return res.json({
+            status: 1,
+            msg: "ServerMsg/api_fail",
+        });
+    }
     await req.app.UserDA.user_join_event_racing(req.body, function (err, data) {
         if (err || !data) {
+            console.log( "user_id = " + req.body.user_id + " join  user_join_event_racing err =>", JSON.stringify(err));
             return res.json({
                 status: 1,
                 msg: "ServerMsg/api_fail",
             });
         }
+        console.log("user_id = " + req.body.user_id + " join  user_join_event_racing sucess data =>", JSON.stringify(data));
         return res.json({
             status: data.status,
             msg: data.msg,

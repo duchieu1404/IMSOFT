@@ -32,5 +32,6 @@ app_config.option_clearCache = {
     json: true,
     method :'POST'
 }
+app_config.ev = "Hospital_dev_";
 
 module.exports = exports = app_config;
