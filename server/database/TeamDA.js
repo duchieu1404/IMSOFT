@@ -43,6 +43,14 @@ TeamDA.prototype.team_get_info = function(data,callback){
     return this.dbModel.query_callback_object("call team_get_info(?,?,?,?,?)", [data.user_id, data.username,data.login_type, data.device_id,data.team_id], callback);
 }
 
+TeamDA.prototype.user_top_country = function(data,callback){
+    return this.dbModel.query_callback_object("call user_top_country(?,?,?,?,?,?)", [data.user_id, data.username,data.login_type, data.device_id,data.country, data.page ||0], callback);
+}
+TeamDA.prototype.user_top_global = function(data,callback){
+    return this.dbModel.query_callback_object("call user_top_global(?,?,?,?,?)", [data.user_id, data.username,data.login_type, data.device_id, data.page ||0], callback);
+}
+
+
 TeamDA.prototype.team_top_country = function(data,callback){
     return this.dbModel.query_callback_object("call team_top_country(?,?,?,?,?,?)", [data.user_id, data.username,data.login_type, data.device_id,data.country, data.page ||0], callback);
 }

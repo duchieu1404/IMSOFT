@@ -491,6 +491,46 @@ router.post('/team_top_country',async function (req, res, next) {
         });
     })
 });
+router.post('/user_top_global',async function (req, res, next) {
+
+    console.log("user_top_global data:", req.body);
+
+    await req.app.TeamDA.user_top_global(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+                data: "{}"
+            });
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data
+        });
+    })
+});
+
+
+router.post('/user_top_country',async function (req, res, next) {
+
+    console.log("user_top_country data:", req.body);
+
+    await req.app.TeamDA.user_top_country(req.body, function (err, data) {
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail",
+                data: "{}"
+            });
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data
+        });
+    })
+});
 
 router.post('/team_me',async function (req, res, next) {
 
