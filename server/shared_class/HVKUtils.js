@@ -254,5 +254,11 @@ HVKUtils.jsonToQueryString = function(json) {
                 encodeURIComponent(json[key]);
         }).join('&');
 }
+HVKUtils.logDetails = function(apiName,reqBody,time){
+    console.log(`${HVKUtils.getDateTime()} , API = ${apiName} request_body =${reqBody} time==>${time} `);
+    if(time > 5000){
+        console.log(`${HVKUtils.getDateTime()} , API = ${apiName} time_out time==>${time} `);
+    }
+}
 
 module.exports = HVKUtils;
