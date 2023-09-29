@@ -47,7 +47,7 @@ NND.query = function(sql,args,cb)
                 ) {
                     console.log('Re-connecting lost connection: ' + err.stack);
                     _pool.release(client);
-                    _pool.delete(client);
+                   //  _pool.delete(client);
                     
                     throw err;
                 }
