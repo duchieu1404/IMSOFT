@@ -7,9 +7,9 @@ let app_config = {};
 app_config.mySQLConfig = {
     host: 'localhost',
     port: 3306,
-    user: 'hospital_dev_001',
-    password: 'HospitalDev123$5',
-    database:'Hospital_Dev_001',
+    user: 'root',
+    password: 'passDBims2023!@',
+    database:'Happy_Doctor_dev',
     charset : 'utf8mb4_general_ci',
     waitForConnections : true,  // Determines the pool's action when no connections are available and the limit has been reached. If true, the pool will queue the connection request and call it when one becomes available. If false, the pool will immediately call back with an error. (Default: true)
     queueLimit :0, //The maximum number of connection requests the pool will queue before returning an error from
@@ -39,5 +39,5 @@ app_config.userSyncDataLimiter = rateLimit({
     max: 10, // Tối đa 1 request trong 1 phút
     message: 'Too many requests for user_sync_data, please try again later.',
   });
-  app_config.ev = "Hospital_dev_";
+  app_config.ev = "Happy_doctor_dev_";
 module.exports = exports = app_config;

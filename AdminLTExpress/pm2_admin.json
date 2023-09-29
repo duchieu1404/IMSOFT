@@ -1,13 +1,13 @@
 {
   "apps" : [{
-    "name"        : "Hospital_live_Admin_14003",
+    "name"        : "Happy_Doctor_CMS_Dev_15003",
     "script"      : "bin/www",
     "args"        : [],
     "node_args"   : "--harmony --nouse-idle-notification --expose-gc",
     "merge_logs"  : true,
     "env": {
-      "NODE_ENV": "production",
-	  "PORT":14003
+      "NODE_ENV": "development",
+	  "PORT":15003
     }
   }]
 }
