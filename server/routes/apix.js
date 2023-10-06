@@ -1142,13 +1142,7 @@ router.post('/user_get_join_event_racing', async function (req, res, next) {
 });
 router.post('/user_join_event_racing', async function (req, res, next) {
     const startTime = Date.now(); 
-    if(req.body.user_id && req.body.user_id > 0){
-        console.log("user_id = " + req.body.user_id + " don't  join  user_get_join_event_racing");
-        return res.json({
-            status: 1,
-            msg: "ServerMsg/api_fail",
-        });
-    }
+  
     await req.app.UserDA.user_join_event_racing(req.body, function (err, data) {
         const endTime = Date.now(); 
         HVKUtil.logDetails("user_join_event_racing",JSON.stringify(req.body), endTime - startTime);
