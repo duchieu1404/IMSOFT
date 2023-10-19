@@ -1,17 +1,17 @@
 {
   "apps" : [{
-    "name"        : "Happy_Doctor_API_Dev_15000",
+    "name"        : "Happy_Doctor_API_Dev_16000",
     "script"      : "bin/www",
     "args"        : [],
     "node_args"   : "--max-old-space-size=8192 --max_old_space_size=8192 --harmony --nouse-idle-notification --expose-gc",
     "merge_logs"  : true,
     "env": {
       "NODE_ENV": "development",
-	  "PORT":15000
+	  "PORT":16000
     },
     "log_date_format": "YYYY-MM-DD HH:mm:ss",
-    "out_file": "/tmp/logs/Happy_doctor_dev/Happy_Doctor_API_Dev_15000-out.log",
-    "error_file": "/tmp/logs/Happy_doctor_dev/Happy_Doctor_API_Dev_15000-error.log",
+    "out_file": "/tmp/logs/Happy_doctor_dev/Happy_Doctor_API_Dev_16000-out.log",
+    "error_file": "/tmp/logs/Happy_doctor_dev/Happy_Doctor_API_Dev_16000-error.log",
     "log_type": "json"
   }]
 }
