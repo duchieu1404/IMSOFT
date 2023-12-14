@@ -186,7 +186,7 @@ ConfigDA.prototype.admin_event_ssp_save = async function (data, callback) {
         data.id_ssp,
         data.id_bundle,
         data.link_download,
-        data.data_pass,
+        data.version,
         data.levelX3
     ], callback);
 }
@@ -272,7 +272,7 @@ ConfigDA.prototype.admin_event_bonus_data_save = async function (data, callback)
         data.id_bundle,
         data.link_download,
         
-        data.data_pass,
+        data.version,
         data.key_download,
         data.point_plus,
         data.level_x3
