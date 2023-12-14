@@ -338,6 +338,7 @@ router.get('/event_ssp',async function (req, res) {
 });
 
 router.post('/event_ssp',async function (req, res) {
+    console.log( "event_ssp",req.body);
     await req.app.ConfigDA.admin_event_ssp_save({
         status: req.body.edt_status,
         id: req.body.edt_id,
