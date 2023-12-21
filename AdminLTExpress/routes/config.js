@@ -346,10 +346,10 @@ router.post('/event_ssp',async function (req, res) {
         time_from: req.body.edt_time_from,
         time_to: req.body.edt_time_to,
         id_ssp : req.body.edt_id_ssp,
-        id_bundle : req.body.edt_id_bundle,
-        link_download : req.body.edt_link_download,
-        version : req.body.edt_version,
-        level_x3 : req.body.edt_levelX3
+        // id_bundle : req.body.edt_id_bundle,
+        // link_download : req.body.edt_link_download,
+        version : req.body.edt_version || "",
+        // level_x3 : req.body.edt_levelX3
     }, function (errSave, dataSave) {
 
         return res.redirect('/config/event_ssp');
