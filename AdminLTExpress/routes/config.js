@@ -349,6 +349,7 @@ router.post('/event_ssp',async function (req, res) {
         // id_bundle : req.body.edt_id_bundle,
         // link_download : req.body.edt_link_download,
         version : req.body.edt_version || "",
+        platform : req.body.edt_platform
         // level_x3 : req.body.edt_levelX3
     }, function (errSave, dataSave) {
 
