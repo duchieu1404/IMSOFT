@@ -81,7 +81,7 @@
               <th id="ds_<%= conf.id %>_dts_time_to"><%= conf.time_to %></th>
               <th id="ds_<%= conf.id %>_dts_version"><%= conf.version %></th>
               <th id="ds_<%= conf.id %>_dts_platform" style="display: none;" ><%= conf.platform %></th>
-              <th id="ds_<%= conf.id %>_dts_platform_text"   ><%=  if(conf.platform == 0) "All" else if(conf.platform == 1) "Android" else "IOS"   %></th>
+              <th id="ds_<%= conf.id %>_dts_platform_text"   ><%=  conf.platform_text  %></th>
               <!-- <th id="ds_<%= conf.id %>_dts_levelX3"><%= conf.levelX3 %></th> -->
             </tr>
             <% }); %>
