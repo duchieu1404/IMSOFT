@@ -1938,6 +1938,27 @@ router.post('/event_getall_config_ssp',async function (req, res, next) {
         });
     })
 });
+router.post('/event_getall_config_ssp_ios',async function (req, res, next) {
+
+    const startTime = Date.now(); 
+
+    await req.app.UserDA.event_getall_config_ssp_ios(req.body, function (err, data) {
+        const endTime = Date.now(); 
+        HVKUtil.logDetails("event_getall_config_ssp_ios",JSON.stringify(req.body), endTime - startTime);
+        if (err || !data) {
+            console.log(Date.now(),"error event_getall_config_ssp_ios");
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail"
+            });
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data
+        });
+    })
+});
 
 router.post('/event_getall_config_ssp_v2',async function (req, res, next) {
 
