@@ -165,6 +165,23 @@
               >Delete</button>
 
 
+              <button type="button"
+              class="btn btn-danger"
+              data-toggle="modal"
+              data-target=".test_button-modal-lg"
+              style = "display:<%= (userInfo.is_test_button  == null || userInfo.is_test_button == 1) ? 'none;': 'block;' %>"
+              onclick="btnUnTestButton(<%= userInfo.id %>)"
+              id="btn_ban_<%= userInfo.id %>">Un Test Button</button>
+              
+              <button type="button"
+              class="btn btn-danger"
+              data-toggle="modal"
+              data-target=".test_button-modal-lg"
+              style = "display:<%=userInfo.is_test_button == 0 || userInfo.is_test_button == null ? 'none;': 'block;' %>"
+              onclick="btnTestButton(<%= userInfo.id %>)"
+              id ="btn_unban_<%= userInfo.id %>">Test Button</button>
+
+
             </td>
             <td id = "ds_<%= userInfo.id %>_dts_id"> D_<%= userInfo.id %></td>
             <td id = "ds_<%= userInfo.id %>_dts_login_type"><%= userInfo.login_type==0?"Device":(userInfo.login_type==1?"Facebook":"Google") %></td>
@@ -182,6 +199,7 @@
             <td id = "ds_<%= userInfo.id %>_dts_damm_ratio"><%= userInfo.os %></td>
             <td id="ds_<%= userInfo.id %>_dts_onesignal_user_id"><%= userInfo.onesignal_user_id %></td>
             <td id="ds_<%= userInfo.id %>_dts_onesignal_token"><%= userInfo.onesignal_token %></td>
+            
           </tr>
           <% }); %>
           </tbody>
@@ -270,6 +288,45 @@
             <div class="modal-footer">
               <input type="button" class="btn btn-default" data-dismiss="modal" value="Close" id = "modalBanFT">
               <input type="button" class="btn btn-danger" value="Ban" onclick="btnDoBanUserFT()">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade test_button-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Do you want to test button this user (Event HD)?</h4>
+        </div>
+        <div class="modal-body">
+
+          <form action="/users/test_button_user_event" method="post" id="test_button_user_event" data-parsley-validate class="form-horizontal form-label-left">
+
+            <!-- === -->
+
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">User Id </label>
+
+              <div class="col-md-4 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Version Id" id = "test_button_edt_Id" name="test_button_edt_Id" value="" readonly="readonly">
+              </div>
+                <input type="hidden" id="inp_is_test_button" name="inp_is_test_button" >
+              <label class="control-label col-md-2 col-sm-3 col-xs-4">Fullname</label>
+
+              <div class="col-md-3 col-sm-9 col-xs-12">
+                <input type="text" class="form-control" placeholder="Money Type" id = "test_button_edt_Fullname" name="test_button_edt_Fullname" value = "0" readonly="readonly">
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <input type="button" class="btn btn-default" data-dismiss="modal" value="Close" id = "modalBanFT">
+              <input type="button" class="btn btn-danger" value="Ban" onclick="btnDoTestButton()">
             </div>
           </form>
         </div>
@@ -623,7 +680,20 @@
     $('#ban_ft_edt_Id').val($('#ds_'+serverId+'_dts_id').html());
     $('#ban_ft_edt_Fullname').val($('#ds_'+serverId+'_dts_fullname').html());
   }
+  var btnTestButton = function(serverId)
+  {
+    $('#test_button_edt_Id').val($('#ds_'+serverId+'_dts_id').html());
+    $('#test_button_edt_Fullname').val($('#ds_'+serverId+'_dts_fullname').html());
+    $('#inp_is_test_button').val(1);
 
+  }
+  var btnUnTestButton = function(serverId)
+  {
+    $('#test_button_edt_Id').val($('#ds_'+serverId+'_dts_id').html());
+    $('#test_button_edt_Fullname').val($('#ds_'+serverId+'_dts_fullname').html());
+    $('#inp_is_test_button').val(0);
+
+  }
   var reset_add_gift_value= function(){
     $("#edt_email_Gem").val(0);
    
@@ -804,6 +874,20 @@
     $.ajax({
       type:"POST",
       url:'/users/ban_user_ft',
+      data:$("#ban_userft-form2").serialize(),
+      success: function(dataResult,textStatus,jqXHR){
+        console.log(dataResult);
+        if(dataResult.status == 0 ){
+          $(".ban_userFT-modal-lg .close").click()
+          alert("Ban success")
+        }
+      }
+    })
+  }
+  var btnTestButton = function(){
+    $.ajax({
+      type:"POST",
+      url:'/users/btn_test_button',
       data:$("#ban_userft-form2").serialize(),
       success: function(dataResult,textStatus,jqXHR){
         console.log(dataResult);
