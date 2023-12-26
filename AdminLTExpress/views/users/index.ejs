@@ -169,17 +169,17 @@
               class="btn btn-warning"
               data-toggle="modal"
               data-target=".test_button-modal-lg"
-              style = "display:<%= (userInfo.is_test_button  == null || userInfo.is_test_button == 1) ? 'none;': 'block;' %>"
+              style = "display:<%= (userInfo.is_test_button == 1) ? 'block;': 'none;' %>"
               onclick="btnUnTestButton(<%= userInfo.id %>)"
-              id="btn_ban_<%= userInfo.id %>">Un Test Button</button>
+              id="btn_untest_button_<%= userInfo.id %>">Un Test Button</button>
               
               <button type="button"
               class="btn btn-info"
               data-toggle="modal"
               data-target=".test_button-modal-lg"
-              style = "display:<%=userInfo.is_test_button == 0 || userInfo.is_test_button == null ? 'none;': 'block;' %>"
+              style = "display:<%=userInfo.is_test_button == 0 || userInfo.is_test_button == null ? 'block;': 'none;' %>"
               onclick="btnTestButton(<%= userInfo.id %>)"
-              id ="btn_unban_<%= userInfo.id %>">Test Button</button>
+              id ="btn_test_button_<%= userInfo.id %>">Test Button</button>
 
 
             </td>
@@ -326,7 +326,7 @@
 
             <div class="modal-footer">
               <input type="button" class="btn btn-default" data-dismiss="modal" value="Close" id = "modalBanFT">
-              <input type="button" class="btn btn-danger" value="Test button" onclick="btnDoTestButton()">
+              <input type="button" class="btn btn-danger" onclick="doTestButton()" value="Test button" ">
             </div>
           </form>
         </div>
@@ -687,14 +687,14 @@
   }
   var btnTestButton = function(serverId)
   {
-    $('#test_button_edt_Id').val($('#ds_'+serverId+'_dts_id').html());
+    $('#test_button_edt_Id').val(serverId);
     $('#test_button_edt_Fullname').val($('#ds_'+serverId+'_dts_fullname').html());
     $('#inp_is_test_button').val(1);
 
   }
   var btnUnTestButton = function(serverId)
   {
-    $('#test_button_edt_Id').val($('#ds_'+serverId+'_dts_id').html());
+    $('#test_button_edt_Id').val(serverId);
     $('#test_button_edt_Fullname').val($('#ds_'+serverId+'_dts_fullname').html());
     $('#inp_is_test_button').val(0);
 
@@ -889,7 +889,7 @@
       }
     })
   }
-  var btnTestButton = function(){
+  var doTestButton = function(){
     $.ajax({
       type:"POST",
       url:'/users/test_button_user_event',
@@ -897,8 +897,18 @@
       success: function(dataResult,textStatus,jqXHR){
         console.log(dataResult);
         if(dataResult.status == 0 ){
-          $(".ban_userFT-modal-lg .close").click()
-          alert("Ban success")
+          $(".test_button-modal-lg .close").click()
+          let user_id = $("#test_button_edt_Id").val();
+          let is_test = $("#inp_is_test_button").val();
+          if(is_test == 1){
+            $("#btn_test_button_" +user_id).hide()
+            $("#btn_untest_button_"+user_id).show()
+          }else{
+            $("#btn_test_button_" +user_id).show()
+            $("#btn_untest_button_"+user_id).hide()
+          }
+         
+          alert(dataResult.msg)
         }
       }
     })
