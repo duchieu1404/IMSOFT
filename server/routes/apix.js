@@ -67,12 +67,15 @@ router.post('/user_sync_data', async function (req, res, next) {
 //       //  res.status(429).send('Too many requests for user_sync_data, added to queue.');
 //    }else{
 //         console.log(HVKUtil.getDateTime," call procedure user_sync_data: user_id = " , req.body.user_id, " data => " , json.stringify(req.body));
-        await req.app.UserDA.user_sync_data(req.body, function (err, data) {
+
+      try{
+      await req.app.UserDA.user_sync_data(req.body, function (err, data) {
             
             const endTime = Date.now(); 
             HVKUtil.logDetails("user_sync_data",JSON.stringify(req.body), endTime - startTime);
+          //  HVKUtil.logDetails("user_sync_data",JSON.stringify(req.body), endTime - startTime);
             if (err || !data) {
-            console.log(err);
+            console.log("user_sync_data_error=",JSON.stringify(err), " data=",req.body, " time==>",endTime - startTime);
                 return res.json({
                     status: 1,
                     msg: "ServerMsg/api_fail"
@@ -84,6 +87,14 @@ router.post('/user_sync_data', async function (req, res, next) {
                 data: data.data
             });
         })
+      }catch(ex){
+        console.error("user_sync_data_error=",JSON.stringify(ex));
+         return res.json({
+                    status: 1,
+                    msg: "ServerMsg/api_fail"
+                });
+      }
+        
 //    }
    
 });
@@ -1900,7 +1911,27 @@ router.post('/event_getall_config_ssp_v3',async function (req, res, next) {
     })
 });
 
+router.post('/event_getall_config_ssp_v4',async function (req, res, next) {
 
+    const startTime = Date.now(); 
+
+    await req.app.UserDA.event_getall_config_ssp_v4(req.body, function (err, data) {
+        const endTime = Date.now(); 
+        HVKUtil.logDetails("event_getall_config_ssp_v4",JSON.stringify(req.body), endTime - startTime);
+        if (err || !data) {
+            console.log(Date.now(),"error event_getall_config_ssp_v4");
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail"
+            });
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data
+        });
+    })
+});
 
 
 router.post('/event_getall_bonus_pass',async function (req, res, next) {
