@@ -338,6 +338,7 @@ router.get('/event_ssp',async function (req, res) {
 });
 
 router.post('/event_ssp',async function (req, res) {
+    console.log( "event_ssp",req.body);
     await req.app.ConfigDA.admin_event_ssp_save({
         status: req.body.edt_status,
         id: req.body.edt_id,
@@ -345,10 +346,11 @@ router.post('/event_ssp',async function (req, res) {
         time_from: req.body.edt_time_from,
         time_to: req.body.edt_time_to,
         id_ssp : req.body.edt_id_ssp,
-        id_bundle : req.body.edt_id_bundle,
-        link_download : req.body.edt_link_download,
-        data_ssp : req.body.edt_data_ssp,
-        level_x3 : req.body.edt_levelX3
+        // id_bundle : req.body.edt_id_bundle,
+        // link_download : req.body.edt_link_download,
+        version : req.body.edt_version || "",
+        platform : req.body.edt_platform
+        // level_x3 : req.body.edt_levelX3
     }, function (errSave, dataSave) {
 
         return res.redirect('/config/event_ssp');

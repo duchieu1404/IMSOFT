@@ -5,7 +5,8 @@ const rateLimit = require('express-rate-limit');
 const app = require('../app');
 let app_config = {};
 app_config.mySQLConfig = {
-    host: 'localhost',
+
+    host: 'localhost',   //14.225.3.183
     port: 3306,
     user: 'root',
     password: 'passDBims2023!@',

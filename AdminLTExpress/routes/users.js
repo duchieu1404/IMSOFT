@@ -50,6 +50,22 @@ router.post("/ban_user_ft", async function (req, res) {
     }
   );
 });
+router.post("/test_button_user_event", async function (req, res) {
+  console.log(req.body.test_button_edt_Id);
+  await req.app.UserDA.admin_test_button_user(
+    {
+      user_id: req.body.test_button_edt_Id,
+      is_test_button:req.body.inp_is_test_button
+    },
+    function (err, data) {
+      if(req.body.inp_is_test_button == 1){
+        return res.send({status:0,msg:"test button success",data} || { status: 1, msg: "err" });
+
+      }else
+        return res.send({status:0,msg:"Un test button success",data} || { status: 1, msg: "err" });
+    }
+  );
+});
 
 router.post("/get_all_user_data", async function (req, res) {
   console.log(req.body.user_id);

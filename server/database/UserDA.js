@@ -242,12 +242,18 @@ UserDA.prototype.config_get_time_server = async function (data, callback) {
 UserDA.prototype.event_getall_config_ssp = async function (data, callback) {
     return await this.dbModel.query_callback_object("call event_getall_config_ssp()", [], callback);
 }
+UserDA.prototype.event_getall_config_ssp_ios = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call event_getall_config_ssp_ios()", [], callback);
+}
 
 UserDA.prototype.event_getall_config_ssp_v2 = async function (data, callback) {
     return await this.dbModel.query_callback_object("call event_getall_config_ssp_v2()", [], callback);
 }
 UserDA.prototype.event_getall_config_ssp_v3 = async function (data, callback) {
     return await this.dbModel.query_callback_object("call event_getall_config_ssp_v3()", [], callback);
+}
+UserDA.prototype.event_getall_config_ssp_v4 = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call event_getall_config_ssp_v4()", [], callback);
 }
 UserDA.prototype.event_getall_bonus_pass = async function (data, callback) {
     return await this.dbModel.query_callback_object("call event_getall_bonus_pass()", [], callback);

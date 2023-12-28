@@ -37,6 +37,12 @@ UserDA.prototype.admin_ban_user_ft = async function(data,callback){
         data.user_id
     ], callback);
 }
+UserDA.prototype.admin_test_button_user = async function(data,callback){
+    return await this.dbModel.query_callback_object("call admin_test_button_user(?,?)", [
+        data.user_id,
+        data.is_test_button
+    ], callback);
+}
 
 
 
