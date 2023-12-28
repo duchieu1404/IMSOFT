@@ -166,7 +166,7 @@
 
 
             </td>
-            <td id = "ds_<%= userInfo.id %>_dts_id"> L_<%= userInfo.id %></td>
+            <td id = "ds_<%= userInfo.id %>_dts_id"> D_<%= userInfo.id %></td>
             <td id = "ds_<%= userInfo.id %>_dts_login_type"><%= userInfo.login_type==0?"Device":(userInfo.login_type==1?"Facebook":"Google") %></td>
             <td id = "ds_<%= userInfo.id %>_dts_fullname"><%= userInfo.fullname %></td>
             <td id = "ds_<%= userInfo.id %>_dts_whisk"><%= userInfo.gem %></td>
@@ -357,7 +357,7 @@
               <label class="control-label col-md-2 col-sm-3 col-xs-4">Send With Name</label>
 
               <div class="col-md-4 col-sm-9 col-xs-12">
-                <input  class="form-control col-md-5 col-xs-10" required="required" type="text" id = "edt_email_send_name" name="edt_email_send_name" value="Happy Doctor live">
+                <input  class="form-control col-md-5 col-xs-10" required="required" type="text" id = "edt_email_send_name" name="edt_email_send_name" value="Happy Doctor Dev">
               </div>
             </div>
 
@@ -387,18 +387,28 @@
                   {"id":5,"name":"SPEED"},
                   {"id":6,"name":"FREEZE"},
                   {"id":7,"name":"FAST_SERVE"},
-                  {"id":8,"name":"NMT"},
-                  {"id":9,"name":"NMC"},
-                  {"id":10,"name":"NSC"},
-                  {"id":11,"name":"PATIENCE"},
+                  {"id":16,"name":"NMT"},
+                  {"id":17,"name":"NMC"},
+                  {"id":19,"name":"NSC"},
+                  {"id":18,"name":"PATIENCE"},
                   {"id":20,"name":"FASHION"},
                   {"id":31,"name":"AVATAR"},
                   {"id":41,"name":"FRAME"},
                   {"id":51,"name":"DECO"},
                   {"id":52,"name":"POINT_SSP"},
                   {"id":53,"name":"RANK_SSP"},
-                  {"id":62,"name":"SMILE"}
-                
+                  {"id":62,"name":"SMILE"} ,
+                  {"id":12,"name":"SUPERMACHINE"} ,
+                  {"id":13,"name":"DOUBLEREVENUE"} ,
+                  {"id":14,"name":"CLEANMACHINE"} ,
+                  {"id":15,"name":"DOCTORSKILL"} ,
+
+                  {"id":21,"name":"SUPPERMACHINE INFI"} ,
+                  {"id":22,"name":"DOUBLEREVENUE INFI"} ,
+                  {"id":23,"name":"CLEANMACHINE INFI"} ,
+                  {"id":24,"name":"DOCTORSKIL INFI"} ,
+                  {"id":26,"name":"ROCKET INFI" } 
+               
   
                 ];
   
@@ -408,7 +418,7 @@
                     if(gift0!=null){
                 %>
                   <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-3 col-xs-4"><%=gift0.name%></label>
+                    <label class="control-label col-md-3 col-sm-4 col-xs-4"><%=gift0.name%></label>
   
                     <div class="col-md-3 col-sm-9 col-xs-12">
                       <input  class="form-control col-md-5 col-xs-10"  type="text" id = "edt_email_gift_<%=gift0.id%>" name="edt_email_gift_<%=gift0.id%>" value="0">
@@ -417,7 +427,7 @@
                     if(gift1!=null){
                     %>
   
-                    <label class="control-label col-md-2 col-sm-3 col-xs-4"><%=gift1.name%></label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-4"><%=gift1.name%></label>
   
                     <div class="col-md-3 col-sm-9 col-xs-12">
                       <input  class="form-control col-md-5 col-xs-10"  type="text" id = "edt_email_gift_<%=gift1.id%>" name="edt_email_gift_<%=gift1.id%>" value="0">
