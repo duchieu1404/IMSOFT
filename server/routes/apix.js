@@ -52,52 +52,95 @@ router.post('/user_login_by_cloud_username', async function (req, res, next) {
     })
 });
 
-// const userSyncDataQueue = new Queue('Hospital_userSyncDataQueue');
-router.post('/user_sync_data', async function (req, res, next) { 
-    const startTime = Date.now(); 
-//     console.log(HVKUtil.getDateTime," api user_sync_data data: user_id = " , req.body.user_id, " data => " , json.stringify(req.body));
-//    if(app_config.userSyncDataLimiter.check(req)){
-//         userSyncDataQueue.add(req.body); // Thêm dữ liệu của request vào hàng đợi
-//         console.log(HVKUtil.getDateTime," add queue Hospital_userSyncDataQueue success: user_id = " , req.body.user_id, " data => " , json.stringify(req.body));
-//         return res.json({
-//             status: 1,
-//             msg:"OK",
-//             data: req.body
-//         });
-//       //  res.status(429).send('Too many requests for user_sync_data, added to queue.');
-//    }else{
-//         console.log(HVKUtil.getDateTime," call procedure user_sync_data: user_id = " , req.body.user_id, " data => " , json.stringify(req.body));
+ router.post('/user_sync_data', async function (req, res, next) { // new 
+    const startTime = Date.now();
+    let endTime = Date.now();
+    let timeout; 
+    try {
+        timeout = setTimeout(() => {
+         endTime = Date.now();
+        // console.error("timeout_user_sync_data user_id==>", req.body.user_id, " time ==>",endTime - startTime);
+           HVKUtil.logDetails("timeout_user_sync_data", JSON.stringify(req.body), endTime - startTime);
+             
+            return res.json({
+                    status: 1,
+                    msg: "ServerMsg/api_fail_timeout"
+                });
+             
+               
+        }, 10);
+ 
 
-      try{
-      await req.app.UserDA.user_sync_data(req.body, function (err, data) {
-            
-            const endTime = Date.now(); 
-            HVKUtil.logDetails("user_sync_data",JSON.stringify(req.body), endTime - startTime);
-          //  HVKUtil.logDetails("user_sync_data",JSON.stringify(req.body), endTime - startTime);
+        await req.app.UserDA.user_sync_data(req.body, function (err, data) {
+            clearTimeout(timeout); // Clear the timeout if the function is executed before the timeout
+             endTime = Date.now();
+           // HVKUtil.logDetails("user_sync_data", JSON.stringify(req.body), endTime - startTime);
+          console.log("user_sync_data success, user_id=",req.body.user_id)
             if (err || !data) {
-            console.log("user_sync_data_error=",JSON.stringify(err), " data=",req.body, " time==>",endTime - startTime);
+                console.error("user_sync_data error=>", JSON.stringify(req.body), "errorinfo=>", ex.toString(), "time==>", endTime - startTime);
                 return res.json({
                     status: 1,
                     msg: "ServerMsg/api_fail"
                 });
             }
+
             return res.json({
                 status: data.status,
                 msg: data.msg,
                 data: data.data
             });
-        })
-      }catch(ex){
-        console.error("user_sync_data_error=",JSON.stringify(ex));
-         return res.json({
-                    status: 1,
-                    msg: "ServerMsg/api_fail"
-                });
-      }
-        
-//    }
-   
+        });
+    } catch (ex) {
+        console.error("user_sync_data error=>", JSON.stringify(req.body), "errorinfo=>", ex.toString(), "time==>", Date.now() - startTime);
+    } finally {
+        clearTimeout(timeout); // Clear the timeout if the function is executed before the timeout
+    }
 });
+router.post('/user_sync_data3', async function (req, res, next) {
+    const timeoutDuration = 1; // 3 seconds
+    let timeout;
+
+    const timeoutPromise = new Promise((resolve) => {
+        timeout = setTimeout(() => {
+            console.error('Request timeout user_sync_data user_id=',req.body.user_id);
+            resolve({
+                status: 1,
+                msg: "ServerMsg/api_fail_timeout"
+            });
+        }, timeoutDuration);
+    });
+
+    try {
+        const userDataPromise = new Promise((resolve, reject) => {
+            req.app.UserDA.user_sync_data(req.body, function (err, data) {
+                clearTimeout(timeout); // Clear the timeout if the function is executed before the timeout
+                if (err || !data) {
+                    console.error("user_sync_data error=>", JSON.stringify(req.body), "errorinfo=>", err.toString());
+                    reject({
+                        status: 1,
+                        msg: "ServerMsg/api_fail"
+                    });
+                }
+                resolve({
+                    status: data.status,
+                    msg: data.msg,
+                    data: data.data
+                });
+            });
+        });
+
+        const result = await Promise.race([timeoutPromise, userDataPromise]);
+
+        return res.json(result);
+    } catch (ex) {
+        console.error("user_sync_data error=>", JSON.stringify(req.body), "errorinfo=>", ex.toString());
+        return res.json({
+            status: 1,
+            msg: "ServerMsg/api_fail"
+        });
+    }
+});
+
 
 // // Xử lý công việc trong hàng đợi
 // userSyncDataQueue.process(async (job) => {
@@ -1868,6 +1911,27 @@ router.post('/event_getall_config_ssp',async function (req, res, next) {
         });
     })
 });
+router.post('/event_getall_config_ssp_ios',async function (req, res, next) {
+
+    const startTime = Date.now(); 
+
+    await req.app.UserDA.event_getall_config_ssp_ios(req.body, function (err, data) {
+        const endTime = Date.now(); 
+        HVKUtil.logDetails("event_getall_config_ssp_ios",JSON.stringify(req.body), endTime - startTime);
+        if (err || !data) {
+            console.log(Date.now(),"error event_getall_config_ssp_ios");
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail"
+            });
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data
+        });
+    })
+});
 
 router.post('/event_getall_config_ssp_v2',async function (req, res, next) {
 
@@ -1912,9 +1976,15 @@ router.post('/event_getall_config_ssp_v3',async function (req, res, next) {
 });
 
 router.post('/event_getall_config_ssp_v4',async function (req, res, next) {
+<<<<<<< HEAD
 
     const startTime = Date.now(); 
 
+=======
+
+    const startTime = Date.now(); 
+
+>>>>>>> a8e97e85b4632930810583658cceae195747cd94
     await req.app.UserDA.event_getall_config_ssp_v4(req.body, function (err, data) {
         const endTime = Date.now(); 
         HVKUtil.logDetails("event_getall_config_ssp_v4",JSON.stringify(req.body), endTime - startTime);
