@@ -8,8 +8,8 @@ app_config.mySQLConfig = {
 
     host: 'localhost',   //14.225.3.183
     port: 3306,
-    user: 'root',
-    password: 'passDBims2023!@',
+    user:'happy_doctor',
+    password: 'Bq7r2(a/6Rtz',
     database:'Happy_Doctor_dev',
     charset : 'utf8mb4_general_ci',
     waitForConnections : true,  // Determines the pool's action when no connections are available and the limit has been reached. If true, the pool will queue the connection request and call it when one becomes available. If false, the pool will immediately call back with an error. (Default: true)
