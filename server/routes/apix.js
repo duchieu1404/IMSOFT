@@ -180,6 +180,27 @@ router.post('/user_get_user_data', async function (req, res, next) {
     })
 });
 
+router.post('/user_delete_data', async function (req, res, next) {
+
+    const startTime = Date.now(); 
+
+    await req.app.UserDA.user_delete_data(req.body, function (err, data) {
+        const endTime = Date.now(); 
+        HVKUtil.logDetails("user_delete_data",JSON.stringify(req.body), endTime - startTime);
+        if (err || !data) {
+            return res.json({
+                status: 1,
+                msg: "ServerMsg/api_fail"
+            });
+        }
+        return res.json({
+            status: data.status,
+            msg: data.msg,
+            data: data.data
+        });
+    })
+});
+
 
 router.post('/user_gem_change_log', async function (req, res, next) {
 

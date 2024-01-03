@@ -24,6 +24,9 @@ UserDA.prototype.user_sync_data = async function (data, callback) {
 UserDA.prototype.user_get_user_data = async function (data, callback) {
     return await this.dbModel.query_callback_object("call user_get_user_data(?,?)", [data.user_id, data.cates], callback);
 }
+UserDA.prototype.user_delete_data = async function (data, callback) {
+    return await this.dbModel.query_callback_object("call user_delete_data(?)", [data.user_id], callback);
+}
 UserDA.prototype.user_gem_change_log = async function (data, callback) {
     return await this.dbModel.query_callback_object("call user_gem_change_log (?,?,?,?,?,?,?,?,?,?,?)", [data.user_id, data.username, data.login_type, data.device_id, data.change_type || 0, data.value, data.value_after, data.level, data.desc, data.detail, data.local_time], callback);
 }
