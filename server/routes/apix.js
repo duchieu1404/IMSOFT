@@ -1997,15 +1997,9 @@ router.post('/event_getall_config_ssp_v3',async function (req, res, next) {
 });
 
 router.post('/event_getall_config_ssp_v4',async function (req, res, next) {
-<<<<<<< HEAD
 
     const startTime = Date.now(); 
 
-=======
-
-    const startTime = Date.now(); 
-
->>>>>>> a8e97e85b4632930810583658cceae195747cd94
     await req.app.UserDA.event_getall_config_ssp_v4(req.body, function (err, data) {
         const endTime = Date.now(); 
         HVKUtil.logDetails("event_getall_config_ssp_v4",JSON.stringify(req.body), endTime - startTime);
