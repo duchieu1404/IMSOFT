@@ -179,7 +179,7 @@ ConfigDA.prototype.admin_event_ssp_delete = async function (data, callback) {
 }
 ConfigDA.prototype.admin_event_ssp_save = async function (data, callback) {
     console.log(data);
-    return this.dbModel.query_callback_array("call admin_event_ssp_save(?,?,?,?,?,?,?,?,?,?)", [
+    return this.dbModel.query_callback_array("call admin_event_ssp_save(?,?,?,?,?,?,?,?,?,?,?)", [
         data.id,
         data.status,
         data.time_from,
@@ -187,6 +187,7 @@ ConfigDA.prototype.admin_event_ssp_save = async function (data, callback) {
         data.id_ssp,
         data.id_bundle,
         data.link_download,
+        data.link_ios_download,
         data.flag_download,
         data.version,
         data.platform

@@ -348,6 +348,7 @@ router.post('/event_ssp',async function (req, res) {
         id_ssp : req.body.edt_id_ssp,
         id_bundle : req.body.edt_id_bundle,
         link_download : req.body.edt_link_download,
+        link_ios_download : req.body.edt_link_ios_download,
         flag_download : req.body.edt_flag_download,
         version : req.body.edt_version || "",
         platform : req.body.edt_platform

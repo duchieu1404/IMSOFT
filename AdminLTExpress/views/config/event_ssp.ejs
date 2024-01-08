@@ -51,6 +51,7 @@
               <th>Id season pass</th>
               <th>Id Bundle</th>
               <th>Link dowload</th>
+              <th>Link Ios dowload</th>
               <th>Flag dowload</th>
               <th>Time From</th>
               <th>Time To</th>
@@ -77,6 +78,7 @@
               <th id="ds_<%= conf.id %>_dts_id_ssp"><%= conf.id_ssp %></th>
               <th id="ds_<%= conf.id %>_dts_id_bundle"><%= conf.id_bundle %></th>
               <th id="ds_<%= conf.id %>_dts_link_download"><%= conf.link_download %></th>
+              <th id="ds_<%= conf.id %>_dts_link_download"><%= conf.link_ios_download %></th>
               <th id="ds_<%= conf.id %>_dts_flag_download"><%= conf.flag_download %></th>
               
               <th id="ds_<%= conf.id %>_dts_time_from"><%= conf.time_from %></th>
@@ -158,6 +160,12 @@
                 <label class="control-label col-md-2 col-sm-2 col-xs-2">Link download</label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
                   <input type="text" class="form-control" id="edt_link_download" name ="edt_link_download">
+                </div>
+            </div>
+           <div class="form-group">
+                <label class="control-label col-md-2 col-sm-2 col-xs-2">Link ios download</label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <input type="text" class="form-control" id="edt_link_ios_download" name ="edt_link_ios_download">
                 </div>
             </div>
            <div class="form-group">
@@ -314,6 +322,7 @@
 
     $('#edt_status').prop('readonly', status == 2);
     $(`#edt_link_download`).val($('#ds_' + serverId + '_dts_link_download').html());
+    $(`#edt_link_ios_download`).val($('#ds_' + serverId + '_dts_link_ios_download').html());
     $(`#edt_flag_download`).val($('#ds_' + serverId + '_dts_flag_download').html());
     $(`#edt_id_ssp`).val($('#ds_' + serverId + '_dts_id_ssp').html());
     $(`#edt_id_bundle`).val($('#ds_' + serverId + '_dts_id_bundle').html());
