@@ -621,10 +621,34 @@
 <script type="text/javascript">
 
   $(document).ready(function(){
+
     $('#expiretime').datetimepicker({
       format: 'YYYY/MM/DD HH:mm:ss',
-      defaultDate: new Date()
+      defaultDate:  addOneMonth(new Date())
     });
+
+    function addOneMonth(date) {
+    // Get the current month and year
+        let currentMonth = date.getMonth();
+        let currentYear = date.getFullYear();
+
+        // Calculate the next month
+        let nextMonth = currentMonth + 1;
+        let nextYear = currentYear;
+
+        // Check if the next month exceeds December
+        if (nextMonth > 11) {
+            nextMonth = 0; // January
+            nextYear++;
+        }
+
+        // Set the date to the first day of the next month
+        let resultDate = new Date(nextYear, nextMonth, 1);
+
+        return resultDate;
+      }
+    //console.log(newDate);
+  
   });
   var container = document.getElementById("jsoneditor");
   var options ={
