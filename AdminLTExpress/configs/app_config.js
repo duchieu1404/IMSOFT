@@ -11,7 +11,7 @@ app_config.mySQLConfig = {
     port: 3306,
     user:'happy_cooking',
     password: 'K;NC7#5h-ZwV?)<9cbpA',
-    database:'Happy_Cooking_Dev',
+    database:'Happy_Cooking_Live',
     charset : 'utf8mb4_general_ci',
     waitForConnections : true,  // Determines the pool's action when no connections are available and the limit has been reached. If true, the pool will queue the connection request and call it when one becomes available. If false, the pool will immediately call back with an error. (Default: true)
     queueLimit :0, //The maximum number of connection requests the pool will queue before returning an error from
