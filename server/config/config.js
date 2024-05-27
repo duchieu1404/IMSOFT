@@ -40,5 +40,5 @@ app_config.userSyncDataLimiter = rateLimit({
     max: 10, // Tối đa 1 request trong 1 phút
     message: 'Too many requests for user_sync_data, please try again later.',
   });
-  app_config.ev = "Happy_cooking_dev_";
+  app_config.ev = "Happy_cooking_live_";
 module.exports = exports = app_config;
